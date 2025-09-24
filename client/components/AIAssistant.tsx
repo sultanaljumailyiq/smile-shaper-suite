@@ -857,7 +857,7 @@ const AIAssistant = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => handleSendMessage()}
+                  onClick={handleSendMessage}
                   disabled={!inputValue.trim() || !isConnected}
                   className={cn(
                     "bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-2xl",

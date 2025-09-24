@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
 
 interface AuthProps {
   mode?: "signin" | "signup";
-  userType?: "dentist" | "provider" | "admin" | "patient" | "supplier";
+  userType?: "dentist" | "provider" | "admin";
 }
 
 export default function Auth({

@@ -13,8 +13,6 @@ import {
   Calculator,
   Wallet,
   Building,
-  Plus,
-  Minus,
   Target,
   AlertTriangle,
   CheckCircle,
@@ -22,6 +20,7 @@ import {
   Star,
   ArrowUpRight,
   ArrowDownLeft,
+  Plus,
   Filter,
   Search,
 } from "lucide-react";
@@ -415,7 +414,7 @@ export function FinancialSystem({ className }: FinancialSystemProps) {
                       </div>
                       <ProgressBar
                         progress={(mockReport.growthRate / 20) * 100}
-                        color="blue"
+                        color="purple"
                         showPercentage={false}
                       />
                     </div>

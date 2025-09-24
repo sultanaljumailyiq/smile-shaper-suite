@@ -95,18 +95,18 @@ export default function CompactOfferCard({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            addToCart({...product, id: product.id.toString()});
+            addToCart(product);
           }}
           className={cn(
             "w-full p-1.5 rounded text-xs font-medium transition-all duration-300",
-            isInCart(product.id.toString())
+            isInCart(product.id)
               ? "bg-green-500 text-white"
               : "bg-blue-600 text-white hover:bg-blue-700",
           )}
         >
           <div className="flex items-center justify-center gap-1">
             <ShoppingCart className="w-3 h-3" />
-            {isInCart(product.id.toString()) ? "في السلة" : "أضف"}
+            {isInCart(product.id) ? "في السلة" : "أضف"}
           </div>
         </button>
       </div>

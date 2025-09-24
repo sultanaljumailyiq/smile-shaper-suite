@@ -101,11 +101,11 @@ export default function HorizontalProductScroll({
           <button
             onClick={(e) => {
               e.preventDefault();
-              toggleFavorite({...product, id: product.id.toString(), addedDate: new Date().toISOString()});
+              toggleFavorite(product);
             }}
             className={cn(
               "w-8 h-8 shadow-md rounded-full flex items-center justify-center transition-colors",
-              isFavorite(product.id.toString())
+              isFavorite(product.id)
                 ? "bg-red-500 text-white"
                 : "bg-white text-gray-600 hover:bg-red-50 hover:text-red-500",
             )}
@@ -185,18 +185,18 @@ export default function HorizontalProductScroll({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                addToCart({...product, id: product.id.toString()});
+                addToCart(product);
               }}
               className={cn(
                 "p-2 rounded-full transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105",
-                isInCart(product.id.toString())
+                isInCart(product.id)
                   ? "bg-green-500 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700",
               )}
             >
-              {isInCart(product.id.toString()) ? (
+              {isInCart(product.id) ? (
                 <span className="text-xs font-bold px-1">
-                  {getItemQuantity(product.id.toString())}
+                  {getItemQuantity(product.id)}
                 </span>
               ) : (
                 <ShoppingCart className="w-4 h-4" />
