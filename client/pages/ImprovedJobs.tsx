@@ -373,7 +373,13 @@ export default function ImprovedJobs() {
         {showMap && (
           <div className="p-4">
             <InteractiveJobsMap
-              jobs={jobListings}
+              jobs={jobListings.map(job => ({
+                ...job,
+                nearbyLandmarks: [],
+                requirements: job.description ? [job.description] : [],
+                benefits: [],
+                commute_time: "غير محدد"
+              }))}
               selectedJob={selectedJob}
               onJobSelect={setSelectedJob}
               onJobApply={(jobId) => {

@@ -224,7 +224,6 @@ export default function JobsNew() {
   const [showMessage, setShowMessage] = useState(false);
   const [profileDoctor, setProfileDoctor] = useState<any>(null);
   const [messageDoctor, setMessageDoctor] = useState<any>(null);
-  const [profileDoctor, setProfileDoctor] = useState<any>(null);
 
   // مزامنة التبويب مع الهاش في الرابط
   useEffect(() => {

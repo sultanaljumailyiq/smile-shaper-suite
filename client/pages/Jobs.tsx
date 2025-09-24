@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InteractiveJobsMap from "@/components/InteractiveJobsMap";
+import UnifiedHeader from "@/components/UnifiedHeader";
 import {
   Search,
   MapPin,
@@ -38,6 +39,7 @@ import {
   ZoomOut,
   Layers,
   Route,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
@@ -864,9 +866,7 @@ export default function Jobs() {
     >
       {/* Unified Header */}
       <UnifiedHeader
-        hidden={true}
         currentSection="jobs"
-        searchPlaceholder="ابحث عن الوظائف والفرص المهنية..."
         customActions={
           <>
             <button

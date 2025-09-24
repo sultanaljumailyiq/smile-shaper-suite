@@ -34,7 +34,6 @@ import {
   Info,
   ExternalLink,
   BadgeCheck,
-  Clock24,
   Headphones,
   Filter,
   ChevronRight,
