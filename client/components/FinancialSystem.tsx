@@ -23,6 +23,7 @@ import {
   Plus,
   Filter,
   Search,
+  Minus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ProgressBar } from "./LoadingIndicators";
@@ -414,7 +415,7 @@ export function FinancialSystem({ className }: FinancialSystemProps) {
                       </div>
                       <ProgressBar
                         progress={(mockReport.growthRate / 20) * 100}
-                        color="purple"
+                        color="blue"
                         showPercentage={false}
                       />
                     </div>

@@ -209,7 +209,7 @@ export default function FixedBottomNavigation({
       </div>
 
       {/* مؤشر أمان للمنطقة السفلية للهواتف الحديثة */}
-      <style jsx>{`
+      <style>{`
         .safe-area-bottom {
           padding-bottom: env(safe-area-inset-bottom, 0px);
         }

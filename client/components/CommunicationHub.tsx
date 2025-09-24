@@ -21,6 +21,7 @@ import {
   Mic,
   MicOff,
   VideoOff,
+  Plus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 

@@ -324,7 +324,7 @@ export function AdvancedAnalytics({ className }: AdvancedAnalyticsProps) {
               <span className="text-gray-600">الثقة في التنبؤ</span>
               <span className="font-medium">89%</span>
             </div>
-            <ProgressBar progress={89} color="purple" showPercentage={false} />
+            <ProgressBar progress={89} color="blue" showPercentage={false} />
           </div>
         </div>
 
