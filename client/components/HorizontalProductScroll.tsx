@@ -194,9 +194,9 @@ export default function HorizontalProductScroll({
                   : "bg-blue-600 text-white hover:bg-blue-700",
               )}
             >
-              {isInCart(product.id) ? (
+              {isInCart(product.id.toString()) ? (
                 <span className="text-xs font-bold px-1">
-                  {getItemQuantity(product.id)}
+                  {getItemQuantity(product.id.toString())}
                 </span>
               ) : (
                 <ShoppingCart className="w-4 h-4" />

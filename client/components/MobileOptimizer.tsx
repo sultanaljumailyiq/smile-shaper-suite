@@ -23,7 +23,7 @@ export default function MobileOptimizer({ children }: MobileOptimizerProps) {
       document.documentElement.style.scrollBehavior = 'smooth';
       
       // تحسين touch scrolling
-      document.body.style.webkitOverflowScrolling = 'touch';
+      (document.body.style as any).webkitOverflowScrolling = 'touch';
       
       // منع الـ zoom عند التركيز على input
       const viewport = document.querySelector('meta[name="viewport"]');

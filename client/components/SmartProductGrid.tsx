@@ -135,11 +135,11 @@ export default function SmartProductGrid({
           <button
             onClick={(e) => {
               e.preventDefault();
-              toggleFavorite(product);
+              toggleFavorite({...product, id: product.id.toString(), addedDate: new Date().toISOString()});
             }}
             className={cn(
               "w-6 h-6 rounded-full flex items-center justify-center transition-colors",
-              isFavorite(product.id)
+              isFavorite(product.id.toString())
                 ? "bg-red-500 text-white"
                 : "bg-white/90 text-gray-600 hover:bg-red-50 hover:text-red-500",
             )}
@@ -219,11 +219,11 @@ export default function SmartProductGrid({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                addToCart(product);
+                addToCart({...product, id: product.id.toString()});
               }}
               className={cn(
                 "p-1.5 rounded-full transition-colors",
-                isInCart(product.id)
+                isInCart(product.id.toString())
                   ? "bg-green-500 text-white"
                   : "bg-blue-600 text-white hover:bg-blue-700",
               )}

@@ -20,6 +20,8 @@ import {
   MoreVertical,
   Copy,
   Share2,
+  CreditCard,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner, ProgressBar } from "./LoadingIndicators";

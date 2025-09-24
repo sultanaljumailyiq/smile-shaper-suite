@@ -188,13 +188,13 @@ export default function FinalUnifiedBottomNav({
     return Object.values(BOTTOM_NAV_ITEMS)
       .filter((item) => {
         // إذا كان العنصر عام
-        if (item.isPublic) return true;
+        if ('isPublic' in item && item.isPublic) return true;
 
         // إذا لم يكن هناك مستخدم مسجل ولا يتطلب صلاحيات
-        if (!userRole && !item.permissions) return true;
+        if (!userRole && !('permissions' in item)) return true;
 
         // إذا كان يتطلب صلاحيات محددة
-        if (item.permissions) {
+        if ('permissions' in item && item.permissions) {
           return userRole && item.permissions.includes(userRole);
         }
 
@@ -266,13 +266,13 @@ export default function FinalUnifiedBottomNav({
       >
         {availableItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = isItemActive(item);
+          const isActive = isItemActive(item as any);
           const colors = SECTION_COLORS[item.color] || SECTION_COLORS.blue;
 
           return (
             <button
               key={item.id}
-              onClick={() => handleItemClick(item)}
+              onClick={() => handleItemClick(item as any)}
               className={cn(
                 "flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-200",
                 "min-w-0 flex-1 max-w-[80px]",

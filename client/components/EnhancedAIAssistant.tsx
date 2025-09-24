@@ -377,7 +377,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
                         onClick={action.action}
                         className="w-full px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 transition-colors flex items-center gap-1"
                       >
-                        {action.icon && <action.icon className="w-3 h-3" />}
+                        {/* {action.icon && <action.icon className="w-3 h-3" />} */}
                         {action.label}
                       </button>
                     ))}
