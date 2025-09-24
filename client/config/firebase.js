@@ -1,35 +1,60 @@
-// Firebase Configuration - Temporarily Disabled
-// import { initializeApp } from 'firebase/app';
-// import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-// import { getAuth, connectAuthEmulator } from 'firebase/auth';
-// import { getStorage, connectStorageEmulator } from 'firebase/storage';
-// import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
-
+// Firebase Configuration - Temporarily Disabled for Development
 console.log("Firebase is temporarily disabled. Please use Supabase integration for backend functionality.");
 
-// Mock Firebase services to prevent crashes
+// Mock Firebase Firestore functions to prevent crashes
+export const collection = () => ({ 
+  id: 'mock-collection',
+  add: () => Promise.resolve({ id: 'mock-doc-id' }),
+  get: () => Promise.resolve({ docs: [], empty: true })
+});
+
+export const doc = () => ({ 
+  id: 'mock-doc',
+  get: () => Promise.resolve({ exists: false, data: () => null }),
+  set: () => Promise.resolve(),
+  update: () => Promise.resolve(),
+  delete: () => Promise.resolve()
+});
+
+export const addDoc = () => Promise.resolve({ id: 'mock-doc-id' });
+export const getDoc = () => Promise.resolve({ exists: false, data: () => null });
+export const getDocs = () => Promise.resolve({ docs: [], empty: true });
+export const updateDoc = () => Promise.resolve();
+export const deleteDoc = () => Promise.resolve();
+export const query = (...args) => args;
+export const where = (...args) => args;
+export const orderBy = (...args) => args;
+export const onSnapshot = () => () => {}; // Return unsubscribe function
+export const serverTimestamp = () => new Date();
+export const GeoPoint = class { constructor(lat, lng) { this.latitude = lat; this.longitude = lng; } };
+
+// Mock Firebase services
 export const db = {
-  collection: () => ({ add: () => Promise.resolve(), get: () => Promise.resolve({ docs: [] }) }),
-  doc: () => ({ get: () => Promise.resolve({ exists: false }), set: () => Promise.resolve() })
+  collection: collection,
+  doc: doc,
+  _isMock: true
 };
 
 export const auth = {
   currentUser: null,
   signInWithEmailAndPassword: () => Promise.reject(new Error("Please use Supabase integration")),
   createUserWithEmailAndPassword: () => Promise.reject(new Error("Please use Supabase integration")),
-  signOut: () => Promise.resolve()
+  signOut: () => Promise.resolve(),
+  _isMock: true
 };
 
 export const storage = {
-  ref: () => ({ put: () => Promise.reject(new Error("Please use Supabase integration")) })
+  ref: () => ({ put: () => Promise.reject(new Error("Please use Supabase integration")) }),
+  _isMock: true
 };
 
 export const functions = {
-  httpsCallable: () => () => Promise.reject(new Error("Please use Supabase integration"))
+  httpsCallable: () => () => Promise.reject(new Error("Please use Supabase integration")),
+  _isMock: true
 };
 
-// Firebase emulators are disabled since we're using mock services
-console.log("Firebase services mocked. For full backend functionality, please use Supabase integration.");
-
 // Mock app export
-export default { name: "mock-firebase-app" };
+export default { 
+  name: "mock-firebase-app",
+  _isMock: true 
+};

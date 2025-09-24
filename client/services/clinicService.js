@@ -1,3 +1,4 @@
+// Mock Firebase Firestore imports - these will work with our mock Firebase config
 import { 
   collection, 
   doc, 
@@ -12,12 +13,20 @@ import {
   onSnapshot,
   serverTimestamp,
   GeoPoint
-} from 'firebase/firestore';
+} from '../config/firebase';
 import { db } from '../config/firebase';
 
-// مرجع مجموعة العيادات
-const clinicsRef = collection(db, 'clinics');
-const appointmentsRef = collection(db, 'appointments');
+// Initialize collection references safely with mock handling
+let clinicsRef, appointmentsRef;
+
+try {
+  clinicsRef = collection(db, 'clinics');
+  appointmentsRef = collection(db, 'appointments');
+} catch (error) {
+  console.log('Using mock Firebase services. For full functionality, please connect Supabase.');
+  clinicsRef = { _isMock: true };
+  appointmentsRef = { _isMock: true };
+}
 
 /**
  * خدمة إدارة العيادات
