@@ -20,12 +20,12 @@ import type {
 
 export const colors = {
   // Primary color utilities
-  primary: (scale: ColorScale = "500") => tokens.colors.primary[scale],
-  secondary: (scale: ColorScale = "500") => tokens.colors.secondary[scale],
-  success: (scale: ColorScale = "500") => tokens.colors.success[scale],
-  warning: (scale: ColorScale = "500") => tokens.colors.warning[scale],
-  error: (scale: ColorScale = "500") => tokens.colors.error[scale],
-  neutral: (scale: ColorScale = "500") => tokens.colors.neutral[scale],
+  primary: (scale: any = 500) => tokens.colors.primary[scale as keyof typeof tokens.colors.primary],
+  secondary: (scale: any = 500) => tokens.colors.secondary[scale as keyof typeof tokens.colors.secondary],
+  success: (scale: any = 500) => tokens.colors.success[scale as keyof typeof tokens.colors.success],
+  warning: (scale: any = 500) => tokens.colors.warning[scale as keyof typeof tokens.colors.warning],
+  error: (scale: any = 500) => tokens.colors.error[scale as keyof typeof tokens.colors.error],
+  neutral: (scale: any = 500) => tokens.colors.neutral[scale as keyof typeof tokens.colors.neutral],
 
   // Semantic color utilities
   background: {

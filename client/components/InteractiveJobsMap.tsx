@@ -250,10 +250,10 @@ export default function InteractiveJobsMap({
       ? selectedJob.benefits
       : [];
 
-    // Determine visibility: if parent controls, don't show local overlay
-    if (typeof onShowJobDetails === "function") return null;
-
-    if (!localShowJobDetails) return null;
+    // Show only if parent doesn't control or if local state is true
+    const shouldShow = typeof onShowJobDetails === "function" ? false : localShowJobDetails;
+    
+    if (!shouldShow) return null;
 
     return (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end justify-center p-4 lg:items-center">
@@ -288,13 +288,12 @@ export default function InteractiveJobsMap({
               </div>
 
               <button
-                onClick={() => {
-                  if (typeof onShowJobDetails === "function") {
-                    onShowJobDetails(false);
-                  } else {
-                    setLocalShowJobDetails(false);
-                  }
-                }}
+              onClick={() => {
+                if (typeof onShowJobDetails === "function") {
+                  onShowJobDetails(false);
+                }
+                setLocalShowJobDetails(false);
+              }}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5" />

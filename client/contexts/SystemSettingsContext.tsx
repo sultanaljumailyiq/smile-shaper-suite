@@ -9,6 +9,7 @@ export interface SystemSettings {
   aiDiagnosis: boolean;
   education: boolean;
   articles: boolean;
+  cart: boolean;
 }
 
 interface SystemSettingsContextType {
@@ -27,6 +28,7 @@ const defaultSettings: SystemSettings = {
   aiDiagnosis: true,
   education: true,
   articles: true,
+  cart: true,
 };
 
 const SystemSettingsContext = createContext<

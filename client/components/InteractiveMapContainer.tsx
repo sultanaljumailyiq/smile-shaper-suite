@@ -348,7 +348,7 @@ function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
-function touchDist(a: Touch, b: Touch) {
+function touchDist(a: React.Touch, b: React.Touch) {
   const dx = a.clientX - b.clientX;
   const dy = a.clientY - b.clientY;
   return Math.hypot(dx, dy);

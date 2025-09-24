@@ -12,6 +12,7 @@ export type Theme = "light" | "dark";
 interface I18nContextType {
   language: Language;
   theme: Theme;
+  isRTL: boolean;
   setLanguage: (lang: Language) => void;
   setTheme: (theme: Theme) => void;
   t: (key: string) => string;
@@ -424,6 +425,7 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({ children }) => {
       value: {
         language,
         theme,
+        isRTL: language === "ar",
         setLanguage,
         setTheme,
         t,
