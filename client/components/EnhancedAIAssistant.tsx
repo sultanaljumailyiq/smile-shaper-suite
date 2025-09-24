@@ -294,7 +294,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
     <div
       className={cn(
         "fixed z-40 bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all duration-300",
-        "w-96 h-96",
+        "w-80 h-80",
         position === "bottom-right" ? "bottom-24 right-6" : "bottom-24 left-6",
         isOpen
           ? "opacity-100 scale-100"
@@ -331,7 +331,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
       </div>
 
       {/* Messages */}
-      <div className="flex-1 p-4 h-64 overflow-y-auto">
+      <div className="flex-1 p-3 h-48 overflow-y-auto">
         <div className="space-y-4">
           {messages.map((message) => (
             <div
@@ -403,7 +403,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
       </div>
 
       {/* Input */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-3 border-t border-gray-200">
         <div className="flex items-center gap-2">
           <div className="flex-1 relative">
             <input
@@ -442,7 +442,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
 
       {/* Quick Actions */}
       {quickActions && (
-        <div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
+        <div className="p-3 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
           <div className="grid grid-cols-2 gap-2">
             {quickActionButtons.slice(0, 4).map((action, index) => (
               <button

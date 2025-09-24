@@ -231,7 +231,7 @@ export function LaboratoriesSection({ laboratories }: LaboratoriesSectionProps) 
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {laboratories.map((lab) => (
-          <div key={lab.id} className="bg-white rounded-xl border p-6">
+          <div key={lab.id} className="bg-white rounded-xl border p-4">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <Building2 className="w-6 h-6 text-blue-600" />
@@ -291,102 +291,102 @@ export function LabStatsSection({ stats }: LabStatsSectionProps) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <Package className="w-6 h-6 text-purple-600" />
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <Package className="w-5 h-5 text-purple-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              <p className="text-gray-600">إجمالي الطلبات</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-sm text-gray-600">إجمالي الطلبات</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-orange-100 rounded-lg">
-              <Clock className="w-6 h-6 text-orange-600" />
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <Clock className="w-5 h-5 text-orange-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
-              <p className="text-gray-600">قيد التحضير</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.pending}</p>
+              <p className="text-sm text-gray-600">قيد التحضير</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-green-100 rounded-lg">
-              <CheckCircle className="w-6 h-6 text-green-600" />
+            <div className="p-2 bg-green-100 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-green-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.ready}</p>
-              <p className="text-gray-600">جاهز</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.ready}</p>
+              <p className="text-sm text-gray-600">جاهز</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-red-100 rounded-lg">
-              <AlertTriangle className="w-6 h-6 text-red-600" />
+            <div className="p-2 bg-red-100 rounded-lg">
+              <AlertTriangle className="w-5 h-5 text-red-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.overdue}</p>
-              <p className="text-gray-600">متأخر</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.overdue}</p>
+              <p className="text-sm text-gray-600">متأخر</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <Calendar className="w-6 h-6 text-blue-600" />
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <Calendar className="w-5 h-5 text-blue-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.thisMonth}</p>
-              <p className="text-gray-600">هذا الشهر</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.thisMonth}</p>
+              <p className="text-sm text-gray-600">هذا الشهر</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-emerald-100 rounded-lg">
-              <DollarSign className="w-6 h-6 text-emerald-600" />
+            <div className="p-2 bg-emerald-100 rounded-lg">
+              <DollarSign className="w-5 h-5 text-emerald-600" />
             </div>
-            <div className="mr-4">
+            <div className="mr-3">
               <p className="text-lg font-bold text-gray-900">
                 {(stats.totalCost / 1000000).toFixed(1)}M
               </p>
-              <p className="text-gray-600">إجمالي التكلفة</p>
+              <p className="text-sm text-gray-600">إجمالي التكلفة</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-yellow-100 rounded-lg">
-              <CreditCard className="w-6 h-6 text-yellow-600" />
+            <div className="p-2 bg-yellow-100 rounded-lg">
+              <CreditCard className="w-5 h-5 text-yellow-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">{stats.unpaid}</p>
-              <p className="text-gray-600">غير مدفوع</p>
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">{stats.unpaid}</p>
+              <p className="text-sm text-gray-600">غير مدفوع</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border p-6">
+        <div className="bg-white rounded-xl border p-4">
           <div className="flex items-center">
-            <div className="p-3 bg-indigo-100 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-indigo-600" />
+            <div className="p-2 bg-indigo-100 rounded-lg">
+              <TrendingUp className="w-5 h-5 text-indigo-600" />
             </div>
-            <div className="mr-4">
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="mr-3">
+              <p className="text-xl font-bold text-gray-900">
                 {((stats.ready / stats.total) * 100).toFixed(0)}%
               </p>
-              <p className="text-gray-600">معدل الإنجاز</p>
+              <p className="text-sm text-gray-600">معدل الإنجاز</p>
             </div>
           </div>
         </div>
