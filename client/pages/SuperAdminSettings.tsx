@@ -218,11 +218,11 @@ export default function SuperAdminSettings() {
     },
   ]);
 
-  const [userRoles, setUserRoles] = useState<UserRole[]>([
+  const [userRoles, setUserRoles] = useState<any[]>([
     {
       id: "super_admin",
       name: "مدير عام",
-      nameEn: "Super Admin",
+      nameAr: "مدير عام",
       permissions: permissions.map((p) => p.id),
       userCount: 1,
       color: "bg-red-500",
@@ -230,7 +230,7 @@ export default function SuperAdminSettings() {
     {
       id: "admin",
       name: "مدير",
-      nameEn: "Admin",
+      nameAr: "مدير",
       permissions: permissions
         .filter((p) => !p.id.includes("platform") && !p.id.includes("settings"))
         .map((p) => p.id),
@@ -240,7 +240,7 @@ export default function SuperAdminSettings() {
     {
       id: "dentist",
       name: "طبيب أسنان",
-      nameEn: "Dentist",
+      nameAr: "طبيب أسنان",
       permissions: permissions
         .filter((p) => p.category === "clinic" || p.category === "community")
         .map((p) => p.id),
@@ -250,7 +250,7 @@ export default function SuperAdminSettings() {
     {
       id: "staff",
       name: "موظف",
-      nameEn: "Staff",
+      nameAr: "موظف",
       permissions: permissions
         .filter((p) => p.id.includes("patient") || p.id.includes("appointment"))
         .map((p) => p.id),
@@ -757,7 +757,7 @@ export default function SuperAdminSettings() {
                     <div className={cn("w-3 h-3 rounded-full", role.color)} />
                     <div>
                       <div className="font-medium text-gray-900">
-                        {language === "ar" ? role.name : role.nameEn}
+                        {language === "ar" ? role.name : role.nameAr}
                       </div>
                       <div className="text-sm text-gray-500">
                         {role.userCount}{" "}

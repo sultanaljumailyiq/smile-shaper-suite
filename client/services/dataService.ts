@@ -5,6 +5,7 @@ import {
   Product,
   Order,
   User,
+  UserStatus,
   Category,
   Brand,
   Supplier,
@@ -537,7 +538,7 @@ class UserService extends BaseDataService<User> {
   // Verify supplier
   verifySupplier(userId: string): User | undefined {
     return this.update(userId, {
-      status: "active",
+      status: UserStatus.ACTIVE,
       updatedAt: new Date(),
     });
   }

@@ -452,7 +452,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalOrders}
+                {(currentUser.stats as any)?.totalOrders || 0}
               </div>
               <div className="text-sm text-gray-600">إجمالي الطلبات</div>
             </div>
@@ -466,7 +466,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalSpent}
+                {(currentUser.stats as any)?.totalSpent || "0"}
               </div>
               <div className="text-sm text-gray-600">إجمالي المشتريات</div>
             </div>
@@ -480,7 +480,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.savedAmount}
+                {(currentUser.stats as any)?.savedAmount || "0"}
               </div>
               <div className="text-sm text-gray-600">المبلغ المُوفر</div>
             </div>
@@ -494,7 +494,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.favoriteProducts}
+                {(currentUser.stats as any)?.favoriteProducts || 0}
               </div>
               <div className="text-sm text-gray-600">المنتجات المفضل��</div>
             </div>
@@ -559,7 +559,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalProducts}
+                {(currentUser.stats as any)?.totalProducts || 0}
               </div>
               <div className="text-sm text-gray-600">إجمالي المنتجات</div>
             </div>
@@ -573,7 +573,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalSales}
+                {(currentUser.stats as any)?.totalSales || "0"}
               </div>
               <div className="text-sm text-gray-600">إجمالي المبيعات</div>
             </div>
@@ -587,7 +587,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.activeOrders}
+                {(currentUser.stats as any)?.activeOrders || 0}
               </div>
               <div className="text-sm text-gray-600">الطلبات النشطة</div>
             </div>
@@ -601,7 +601,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.customerRating}
+                {(currentUser.stats as any)?.customerRating || 0}
               </div>
               <div className="text-sm text-gray-600">تقييم العملاء</div>
             </div>
@@ -695,7 +695,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalUsers}
+                {(currentUser.stats as any)?.totalUsers || 0}
               </div>
               <div className="text-sm text-gray-600">إجمالي المستخدمين</div>
             </div>
@@ -709,7 +709,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalSuppliers}
+                {(currentUser.stats as any)?.totalSuppliers || 0}
               </div>
               <div className="text-sm text-gray-600">إجمالي الموردين</div>
             </div>
@@ -723,7 +723,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.totalOrders}
+                {(currentUser.stats as any)?.totalOrders || 0}
               </div>
               <div className="text-sm text-gray-600">إجمالي الطلبات</div>
             </div>
@@ -737,7 +737,7 @@ export default function UserDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {currentUser.stats.platformRevenue}
+                {(currentUser.stats as any)?.platformRevenue || "0"}
               </div>
               <div className="text-sm text-gray-600">إيرادات المنصة</div>
             </div>
@@ -1065,7 +1065,7 @@ export default function UserDashboard() {
                           </label>
                           <input
                             type="text"
-                            value={currentUser.clinicName}
+                            value={(currentUser as any)?.clinicName || ""}
                             className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                             readOnly
                           />
@@ -1076,7 +1076,7 @@ export default function UserDashboard() {
                           </label>
                           <input
                             type="text"
-                            value={currentUser.specialization}
+                            value={(currentUser as any)?.specialization || ""}
                             className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                             readOnly
                           />

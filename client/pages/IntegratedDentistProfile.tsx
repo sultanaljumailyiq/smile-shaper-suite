@@ -486,7 +486,7 @@ const buildDashboardSections = (
     });
 
     // إدارة العيادة (حسب الصلاحيات)
-    if ((permissions as any)?.canManageClinic || userRole === "platform_admin" || userRole === "dentist") {
+    if ((permissions as any)?.canManageClinic || userRole.includes("admin") || userRole.includes("dentist")) {
       sections.push({
         id: "clinic-management",
         title: "إدارة العيادة",
@@ -524,7 +524,7 @@ const buildDashboardSections = (
     });
 
     // إدارة النظام للمديرين فقط
-    if (userRole === "platform_admin" || userRole === "admin") {
+    if (userRole.includes("admin")) {
       sections.push({
         id: "system-admin",
         title: "إدارة النظام",
@@ -645,7 +645,7 @@ const buildSidebarItems = (userRole: UserRole): SidebarItem[] => {
     ];
 
     // إضافة إدارة العيادة حسب الصلاحيات
-    if (permissions.canManageClinic) {
+    if ((permissions as any)?.canManageClinic || userRole.includes("admin") || userRole.includes("dentist")) {
       items.push({
         id: "clinic",
         label: "إدارة العيادة",
@@ -749,7 +749,7 @@ const buildSidebarItems = (userRole: UserRole): SidebarItem[] => {
     });
 
     // إدارة النظام للمديرين فقط
-    if (userRole === "admin") {
+    if (userRole.includes("admin")) {
       items.push({
         id: "system-admin",
         label: "إدارة النظام",
@@ -2175,7 +2175,7 @@ export default function IntegratedDentistProfile() {
           </div>
 
           {/* إدارة النظام للمديرين */}
-          {currentUser.role === "admin" && (
+          {currentUser.role.includes("admin") && (
             <div className="border-t border-gray-200 pt-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 إ��ارة النظام
@@ -2482,7 +2482,7 @@ export default function IntegratedDentistProfile() {
         </>
       )}
       {(navMode === "bottom" || navMode === "fab") && (
-        <FinalUnifiedBottomNav userRole={currentUser.role} />
+        <FinalUnifiedBottomNav userRole="patient" />
       )}
     </div>
   );

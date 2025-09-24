@@ -699,7 +699,18 @@ const Reservations = () => {
       <InteractiveCalendar
         isOpen={isCalendarOpen}
         onClose={() => setIsCalendarOpen(false)}
-        appointments={appointments}
+        appointments={appointments.map(apt => ({
+          ...apt,
+          status: ["pending", "confirmed", "finished", "in-progress"].includes(apt.status) 
+            ? apt.status as "pending" | "confirmed" | "finished" | "in-progress"
+            : "pending",
+          treatmentPlan: {
+            ...apt.treatmentPlan,
+            stepType: ["consultation", "examination", "treatment", "follow-up"].includes(apt.treatmentPlan.stepType)
+              ? apt.treatmentPlan.stepType as "consultation" | "examination" | "treatment" | "follow-up"
+              : "consultation"
+          }
+        }))}
       />
 
       {/* Modern Medical Checkup Modal */}
