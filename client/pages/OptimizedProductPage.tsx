@@ -60,8 +60,22 @@ export default function OptimizedProductPage() {
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleAddToCart = () => {
+    const cartItem = {
+      id: productData.id.toString(),
+      name: productData.name,
+      arabicName: productData.arabicName,
+      price: productData.price,
+      originalPrice: productData.originalPrice,
+      image: productData.images[0],
+      category: productData.category,
+      brand: productData.brand,
+      supplier: productData.brand,
+      inStock: productData.inStock || true,
+      maxQuantity: 99,
+    };
+    
     for (let i = 0; i < quantity; i++) {
-      addToCart(productData);
+      addToCart(cartItem);
     }
   };
 
@@ -263,14 +277,26 @@ export default function OptimizedProductPage() {
                   className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  {isInCart(productData.id) ? "في السلة" : "أضف للسلة"}
+                  {isInCart(productData.id.toString()) ? "في السلة" : "أضف للسلة"}
                 </button>
 
                 <button
-                  onClick={() => toggleFavorite(productData)}
+                  onClick={() => toggleFavorite({
+                    id: productData.id.toString(),
+                    name: productData.name,
+                    arabicName: productData.arabicName,
+                    price: productData.price,
+                    originalPrice: productData.originalPrice,
+                    image: productData.images[0],
+                    category: productData.category,
+                    brand: productData.brand,
+                    rating: productData.rating,
+                    supplier: productData.brand,
+                    addedDate: new Date().toISOString(),
+                  })}
                   className={cn(
                     "p-3 rounded-xl transition-colors flex items-center justify-center",
-                    isFavorite(productData.id)
+                    isFavorite(productData.id.toString())
                       ? "bg-red-100 text-red-600"
                       : "bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-500",
                   )}

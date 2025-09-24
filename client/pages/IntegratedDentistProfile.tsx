@@ -1,3 +1,4 @@
+// Import other dependencies
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabaseEnabled } from "@/config/supabase";
@@ -485,7 +486,7 @@ const buildDashboardSections = (
     });
 
     // إدارة العيادة (حسب الصلاحيات)
-    if (permissions.canManageClinic) {
+    if ((permissions as any)?.canManageClinic || userRole === "platform_admin" || userRole === "dentist") {
       sections.push({
         id: "clinic-management",
         title: "إدارة العيادة",
@@ -523,7 +524,7 @@ const buildDashboardSections = (
     });
 
     // إدارة النظام للمديرين فقط
-    if (userRole === "admin") {
+    if (userRole === "platform_admin" || userRole === "admin") {
       sections.push({
         id: "system-admin",
         title: "إدارة النظام",
@@ -532,7 +533,7 @@ const buildDashboardSections = (
         path: "/dentist-hub?section=system-admin",
         color: "red",
         gradient: "from-red-600 to-rose-600",
-        category: "admin",
+        category: "settings",
         data: {
           platforms: 5,
           support_tickets: 12,

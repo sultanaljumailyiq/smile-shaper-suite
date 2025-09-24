@@ -154,8 +154,22 @@ export default function ProductDetail() {
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleAddToCart = () => {
+    const cartItem = {
+      id: productDetails.id.toString(),
+      name: productDetails.name,
+      arabicName: productDetails.arabicName,
+      price: productDetails.price,
+      originalPrice: productDetails.originalPrice,
+      image: productDetails.images[0],
+      category: productDetails.category,
+      brand: productDetails.brand,
+      supplier: productDetails.seller?.name || '',
+      inStock: productDetails.inStock,
+      maxQuantity: 99,
+    };
+    
     for (let i = 0; i < quantity; i++) {
-      addToCart(productDetails);
+      addToCart(cartItem);
     }
   };
 
@@ -367,10 +381,22 @@ export default function ProductDetail() {
               </button>
 
               <button
-                onClick={() => toggleFavorite(productDetails)}
+                onClick={() => toggleFavorite({
+                  id: productDetails.id.toString(),
+                  name: productDetails.name,
+                  arabicName: productDetails.arabicName,
+                  price: productDetails.price,
+                  originalPrice: productDetails.originalPrice,
+                  image: productDetails.images[0],
+                  category: productDetails.category,
+                  brand: productDetails.brand,
+                  rating: productDetails.rating,
+                  supplier: productDetails.seller?.name || '',
+                  addedDate: new Date().toISOString(),
+                })}
                 className={cn(
                   "p-3 rounded-lg border transition-colors",
-                  isFavorite(productDetails.id)
+                  isFavorite(productDetails.id.toString())
                     ? "bg-red-50 border-red-200 text-red-600"
                     : "bg-white border-gray-200 text-gray-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600",
                 )}

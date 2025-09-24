@@ -168,7 +168,7 @@ const mockDoctors: Doctor[] = [
 ];
 
 const mockRooms: Room[] = [
-  { id: "room1", name: "غرفة العلاج 1", type: "treatment", isAvailable: true },
+  { id: "room1", name: "غرفة العلاج 1", type: "consultation" as const, isAvailable: true },
   {
     id: "room2",
     name: "غرفة الفحص 1",

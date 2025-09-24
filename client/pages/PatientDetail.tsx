@@ -362,7 +362,7 @@ const PatientDetail = () => {
                     )}
                     onClick={() => setSelectedTooth(selectedTooth === tooth.number ? null : tooth.number)}
                   >
-                    {tooth.needsTreatment && <AlertTriangle className="w-6 h-6 text-red-600" />}
+                    {(tooth.status !== "سليم" && tooth.condition !== "طبيعي") && <AlertTriangle className="w-6 h-6 text-red-600" />}
                     {tooth.status === "healthy" && <CheckCircle className="w-6 h-6 text-emerald-600" />}
                     {tooth.status === "filled" && <Shield className="w-6 h-6 text-blue-600" />}
                     {tooth.status === "crown" && <Award className="w-6 h-6 text-yellow-600" />}
@@ -394,7 +394,7 @@ const PatientDetail = () => {
                     )}
                     onClick={() => setSelectedTooth(selectedTooth === tooth.number ? null : tooth.number)}
                   >
-                    {tooth.needsTreatment && <AlertTriangle className="w-6 h-6 text-red-600" />}
+                    {(tooth.status !== "سليم" && tooth.condition !== "طبيعي") && <AlertTriangle className="w-6 h-6 text-red-600" />}
                     {tooth.status === "healthy" && <CheckCircle className="w-6 h-6 text-emerald-600" />}
                     {tooth.status === "filled" && <Shield className="w-6 h-6 text-blue-600" />}
                     {tooth.status === "crown" && <Award className="w-6 h-6 text-yellow-600" />}
