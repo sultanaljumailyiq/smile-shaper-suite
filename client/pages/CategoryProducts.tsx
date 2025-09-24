@@ -96,7 +96,6 @@ export default function CategoryProducts() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" dir="rtl">
       {/* Unified Header */}
       <UnifiedHeader
-        currentSection="marketplace"
         showSidebar={false} // Hide menu button since sidebar is always visible
       />
 

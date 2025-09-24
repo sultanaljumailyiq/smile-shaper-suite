@@ -374,7 +374,7 @@ export default function CategoriesNew() {
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
       {/* Unified Header */}
-      <UnifiedHeader currentSection="marketplace" />
+      <UnifiedHeader />
 
       <div className="flex pt-16">
         {/* Sidebar */}

@@ -56,6 +56,7 @@ interface UnifiedHeaderProps {
   onMenuToggle?: () => void;
   showSidebar?: boolean;
   variant?: "default" | "minimal" | "expanded";
+  currentSection?: string;
 }
 
 // Mock user data

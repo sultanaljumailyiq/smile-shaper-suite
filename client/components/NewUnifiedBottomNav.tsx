@@ -288,8 +288,8 @@ export const AdvancedBottomNav: React.FC<AdvancedBottomNavProps> = ({
             }
 
             const Icon = item.icon;
-            const isActive = navigation.isItemActive(item);
-            const badge = navigation.getItemBadge(item);
+            const isActive = navigation.isItemActive(item as any);
+            const badge = navigation.getItemBadge(item as any);
 
             const handleClick = () => {
               if ("action" in item) {

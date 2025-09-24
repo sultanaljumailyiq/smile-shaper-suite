@@ -28,6 +28,7 @@ import {
   Shield,
   Key,
   Server,
+  Star,
   Activity,
   TrendingUp,
   Users,
@@ -554,7 +555,7 @@ export default function CommunitySourcesAdmin() {
   return (
     <div className="min-h-screen bg-gray-50" dir={language === "ar" ? "rtl" : "ltr"}>
       {/* Header */}
-      <UnifiedHeader currentSection="community" />
+      <UnifiedHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
         {/* Page Header */}

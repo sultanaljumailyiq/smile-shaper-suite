@@ -180,7 +180,7 @@ export default function UnifiedNotificationPopup({
 
   // Filter data based on active tab and filters
   const filteredData = mockData
-    .filter((item) => item.type === activeTab)
+    .filter((item) => item.type === (activeTab as any))
     .filter((item) => {
       if (filterRead === "unread") return !item.isRead;
       if (filterRead === "read") return item.isRead;
@@ -197,7 +197,7 @@ export default function UnifiedNotificationPopup({
     return tabs.reduce(
       (acc, tab) => {
         acc[tab.id] = mockData.filter(
-          (item) => item.type === tab.id && !item.isRead,
+          (item) => item.type === (tab.id as any) && !item.isRead,
         ).length;
         return acc;
       },

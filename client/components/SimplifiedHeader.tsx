@@ -476,10 +476,10 @@ export default function SimplifiedHeader({
                             <Heart className="w-4 h-4 text-red-500 fill-current" />
                             <div className="flex-1">
                               <div className="text-sm font-medium text-gray-900">
-                                {item.title}
+                                {item.name}
                               </div>
                               <div className="text-xs text-gray-500">
-                                {item.type}
+                                {item.category}
                               </div>
                             </div>
                           </div>

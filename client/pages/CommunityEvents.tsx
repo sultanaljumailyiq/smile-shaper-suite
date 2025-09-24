@@ -28,6 +28,8 @@ import {
   X,
   CheckCircle,
   AlertCircle,
+  Phone,
+  Mail,
   Info,
   ExternalLink,
   Download,
@@ -878,7 +880,7 @@ export default function CommunityEvents() {
                         href={`tel:${selectedEvent.phone}`}
                         className="flex items-center gap-2 text-blue-600 hover:text-blue-700"
                       >
-                        <Phone className="w-4 h-4" />
+                      <Phone className="w-4 h-4" />
                         {selectedEvent.phone}
                       </a>
                     )}
@@ -887,7 +889,7 @@ export default function CommunityEvents() {
                         href={`mailto:${selectedEvent.email}`}
                         className="flex items-center gap-2 text-blue-600 hover:text-blue-700"
                       >
-                        <Mail className="w-4 h-4" />
+                      <Mail className="w-4 h-4" />
                         {selectedEvent.email}
                       </a>
                     )}

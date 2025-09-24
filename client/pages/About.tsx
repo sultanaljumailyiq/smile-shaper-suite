@@ -14,6 +14,7 @@ import {
   ArrowLeft,
   Star,
   CheckCircle,
+  MessageCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ModernUnifiedHeader from "@/components/ModernUnifiedHeader";
@@ -264,7 +265,7 @@ export default function About() {
                 {
                   title: "خدمة 24/7",
                   description: "خدمة عملاء متاحة على مدار الساعة",
-                  icon: Clock,
+                  icon: MessageCircle,
                 },
                 {
                   title: "أمان عالي",
