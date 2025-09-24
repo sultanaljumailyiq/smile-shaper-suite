@@ -276,7 +276,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
         "fixed z-50 w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:scale-110",
         "bg-gradient-to-r from-blue-600 to-purple-600 text-white",
         "flex items-center justify-center",
-        position === "bottom-right" ? "bottom-6 left-6" : "bottom-6 right-6",
+        position === "bottom-right" ? "bottom-6 right-6" : "bottom-6 left-6",
       )}
     >
       {isOpen ? (
@@ -295,7 +295,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
       className={cn(
         "fixed z-40 bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all duration-300",
         "w-96 h-96",
-        position === "bottom-right" ? "bottom-24 left-6" : "bottom-24 right-6",
+        position === "bottom-right" ? "bottom-24 right-6" : "bottom-24 left-6",
         isOpen
           ? "opacity-100 scale-100"
           : "opacity-0 scale-95 pointer-events-none",

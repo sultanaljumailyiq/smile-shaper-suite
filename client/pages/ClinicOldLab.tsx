@@ -31,6 +31,7 @@ import {
   Printer,
   Mail,
   MoreHorizontal,
+  BarChart3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +42,8 @@ import {
   LabOrder,
   TreatmentPlan,
 } from "@/services/sharedClinicData";
+import { LabOrdersSection, LaboratoriesSection, LabStatsSection } from "@/components/LabSections";
+import EnhancedAIAssistantIntegration from "@/components/EnhancedAIAssistantIntegration";
 
 const ClinicOldLab: React.FC = () => {
   const navigate = useNavigate();
@@ -50,7 +53,7 @@ const ClinicOldLab: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedLab, setSelectedLab] = useState<string>("all");
-  const [viewMode, setViewMode] = useState<"table" | "cards">("table");
+  const [tab, setTab] = useState<"orders" | "labs" | "stats">("orders");
 
   useEffect(() => {
     loadData();
@@ -164,517 +167,90 @@ const ClinicOldLab: React.FC = () => {
     unpaid: labOrders.filter((o) => !o.isPaid).length,
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link
-                to="/clinic_old"
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ArrowLeft className="w-5 h-5 text-gray-600" />
-              </Link>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  إدارة المختبر
-                </h1>
-                <p className="text-gray-600">
-                  إدارة شاملة لطلبات المختبر والتركيبات
-                </p>
-              </div>
-            </div>
+  const tabs = [
+    { id: "orders" as const, label: "الطلبات", icon: Package },
+    { id: "labs" as const, label: "المختبرات", icon: Building2 },
+    { id: "stats" as const, label: "الإحصائيات", icon: BarChart3 },
+  ];
 
-            <div className="flex items-center gap-3">
-              <Button variant="outline">
-                <Download className="w-4 h-4 mr-2" />
-                تصدير
-              </Button>
-              <Button variant="outline">
-                <Printer className="w-4 h-4 mr-2" />
-                طباعة
-              </Button>
-              <Button>
-                <Plus className="w-4 h-4 mr-2" />
-                طلب جديد
-              </Button>
-            </div>
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <Link
+            to="/clinic_old"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 text-gray-600" />
+          </Link>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">إدارة المختبر</h1>
+            <p className="text-gray-600">إدارة شاملة لطلبات المختبر والتركيبات</p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="sm">
+            <Download className="w-4 h-4 mr-2" />
+            تصدير
+          </Button>
+          <Button variant="outline" size="sm">
+            <Printer className="w-4 h-4 mr-2" />
+            طباعة
+          </Button>
+          <Button size="sm">
+            <Plus className="w-4 h-4 mr-2" />
+            طلب جديد
+          </Button>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Package className="w-6 h-6 text-purple-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.total}
-                </p>
-                <p className="text-gray-600">إجمالي الطلبات</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <Clock className="w-6 h-6 text-orange-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.pending}
-                </p>
-                <p className="text-gray-600">قيد التحضير</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-green-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.ready}
-                </p>
-                <p className="text-gray-600">جاهز</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <AlertTriangle className="w-6 h-6 text-red-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.overdue}
-                </p>
-                <p className="text-gray-600">متأخر</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Calendar className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.thisMonth}
-                </p>
-                <p className="text-gray-600">هذا الشهر</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-emerald-100 rounded-lg">
-                <DollarSign className="w-6 h-6 text-emerald-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-lg font-bold text-gray-900">
-                  {(stats.totalCost / 1000000).toFixed(1)}M
-                </p>
-                <p className="text-gray-600">إجمالي التكلفة</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-yellow-100 rounded-lg">
-                <CreditCard className="w-6 h-6 text-yellow-600" />
-              </div>
-              <div className="mr-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {stats.unpaid}
-                </p>
-                <p className="text-gray-600">غير مدفوع</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Filters and Search */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="ابحث ف�� الطلبات..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-              >
-                <option value="all">جميع الحالات</option>
-                <option value="ordered">مطلوب</option>
-                <option value="in_progress">قيد التحضير</option>
-                <option value="ready">جاهز</option>
-                <option value="delivered">مستلم</option>
-              </select>
-
-              <select
-                value={selectedLab}
-                onChange={(e) => setSelectedLab(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-              >
-                <option value="all">��م��ع المختبرات</option>
-                {laboratories.map((lab) => (
-                  <option key={lab.id} value={lab.id}>
-                    {lab.name}
-                  </option>
-                ))}
-              </select>
-
-              <div className="flex border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setViewMode("table")}
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium rounded-r-lg",
-                    viewMode === "table"
-                      ? "bg-purple-100 text-purple-700"
-                      : "text-gray-500 hover:text-gray-700",
-                  )}
-                >
-                  جدول
-                </button>
-                <button
-                  onClick={() => setViewMode("cards")}
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium rounded-l-lg border-r border-gray-300",
-                    viewMode === "cards"
-                      ? "bg-purple-100 text-purple-700"
-                      : "text-gray-500 hover:text-gray-700",
-                  )}
-                >
-                  بطاقات
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Lab Orders Table/Cards */}
-        {viewMode === "table" ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      المريض
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      نوع الطلب
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      المختبر
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      الحالة
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      تاريخ التسليم
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      التكلفة
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      الدفع
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      إجراءات
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredOrders.map((order) => (
-                    <tr
-                      key={order.id}
-                      className={cn(
-                        "hover:bg-gray-50",
-                        isOverdue(order) && "bg-red-50",
-                      )}
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                            <User className="w-4 h-4 text-blue-600" />
-                          </div>
-                          <div className="mr-3">
-                            <div className="text-sm font-medium text-gray-900">
-                              {order.patientName}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {getOrderTypeText(order.orderType)}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {order.description}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {order.laboratoryName}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <Badge className={getStatusColor(order.status)}>
-                          {getStatusText(order.status)}
-                        </Badge>
-                        {isOverdue(order) && (
-                          <Badge className="bg-red-100 text-red-800 mr-2">
-                            متأخر
-                          </Badge>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {new Date(
-                          order.expectedDeliveryDate,
-                        ).toLocaleDateString("ar-IQ")}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {order.cost.toLocaleString()} د.ع
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <Badge
-                          className={
-                            order.isPaid
-                              ? "bg-green-100 text-green-800"
-                              : "bg-red-100 text-red-800"
-                          }
-                        >
-                          {order.isPaid ? "مدفوع" : "غير مدفوع"}
-                        </Badge>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline">
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                          <Button size="sm" variant="outline">
-                            <Edit className="w-4 h-4" />
-                          </Button>
-                          <Link
-                            to={`/clinic_old/patient/${order.patientId}`}
-                            className="inline-flex"
-                          >
-                            <Button size="sm" variant="outline">
-                              <FileText className="w-4 h-4" />
-                            </Button>
-                          </Link>
-                          <Button size="sm" variant="outline">
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredOrders.map((order) => (
-              <div
-                key={order.id}
+      {/* Tabs */}
+      <div className="bg-white border rounded-xl p-2">
+        <div className="flex gap-2 overflow-x-auto">
+          {tabs.map((t) => {
+            const Icon = t.icon;
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
                 className={cn(
-                  "bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow",
-                  isOverdue(order)
-                    ? "border-red-200 bg-red-50"
-                    : "border-gray-200",
+                  "inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm whitespace-nowrap",
+                  active
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-50 hover:bg-gray-100 text-gray-700 border",
                 )}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">
-                      {order.patientName}
-                    </h3>
-                    <p className="text-gray-600">
-                      {getOrderTypeText(order.orderType)}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Badge className={getStatusColor(order.status)}>
-                      {getStatusText(order.status)}
-                    </Badge>
-                    {isOverdue(order) && (
-                      <Badge className="bg-red-100 text-red-800">متأخر</Badge>
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Building2 className="w-4 h-4" />
-                    {order.laboratoryName}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Calendar className="w-4 h-4" />
-                    التسليم:{" "}
-                    {new Date(order.expectedDeliveryDate).toLocaleDateString(
-                      "ar-IQ",
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <DollarSign className="w-4 h-4" />
-                    {order.cost.toLocaleString()} د.ع
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <CreditCard className="w-4 h-4" />
-                    <span
-                      className={
-                        order.isPaid ? "text-green-600" : "text-red-600"
-                      }
-                    >
-                      {order.isPaid ? "مدفوع" : "غير مدفوع"}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Eye className="w-4 h-4 mr-2" />
-                    عرض
-                  </Button>
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Edit className="w-4 h-4 mr-2" />
-                    تعديل
-                  </Button>
-                  <Link
-                    to={`/clinic_old/patient/${order.patientId}`}
-                    className="flex-1"
-                  >
-                    <Button size="sm" variant="outline" className="w-full">
-                      <FileText className="w-4 h-4 mr-2" />
-                      خطة العلاج
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {filteredOrders.length === 0 && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-            <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              لا توجد طلبات
-            </h3>
-            <p className="text-gray-600 mb-4">
-              لا توجد طلبات مختبر مطابقة للبحث
-            </p>
-            <Button>
-              <Plus className="w-4 h-4 mr-2" />
-              إضافة طلب جديد
-            </Button>
-          </div>
-        )}
-
-        {/* Laboratory Partners */}
-        <div className="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-gray-900">
-              المختبرات الشريكة
-            </h2>
-            <Button variant="outline">
-              <Plus className="w-4 h-4 mr-2" />
-              إضافة مختبر
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {laboratories.map((lab) => (
-              <div
-                key={lab.id}
-                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">
-                      {lab.name}
-                    </h3>
-                    <div className="flex items-center gap-1 mt-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={cn(
-                            "w-4 h-4",
-                            i < Math.floor(lab.qualityRating)
-                              ? "text-yellow-500 fill-current"
-                              : "text-gray-300",
-                          )}
-                        />
-                      ))}
-                      <span className="text-sm text-gray-600 mr-2">
-                        {lab.qualityRating}
-                      </span>
-                    </div>
-                  </div>
-                  <Badge variant={lab.isActive ? "default" : "secondary"}>
-                    {lab.isActive ? "نشط" : "غير نشط"}
-                  </Badge>
-                </div>
-
-                <div className="space-y-3 text-sm text-gray-600 mb-4">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    {lab.address}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    {lab.phone}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    {lab.workingHours}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Truck className="w-4 h-4" />
-                    {lab.averageDeliveryTime} أيام توصيل
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Phone className="w-4 h-4 mr-2" />
-                    اتصال
-                  </Button>
-                  <Button size="sm" className="flex-1">
-                    طلب جديد
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+                <Icon className="w-4 h-4" /> {t.label}
+              </button>
+            );
+          })}
         </div>
       </div>
+
+      <div>
+        {tab === "orders" && <LabOrdersSection 
+          labOrders={filteredOrders} 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
+          selectedLab={selectedLab}
+          setSelectedLab={setSelectedLab}
+          laboratories={laboratories}
+          getStatusColor={getStatusColor}
+          getStatusText={getStatusText}
+          getOrderTypeText={getOrderTypeText}
+          isOverdue={isOverdue}
+        />}
+        {tab === "labs" && <LaboratoriesSection laboratories={laboratories} />}
+        {tab === "stats" && <LabStatsSection stats={stats} />}
+      </div>
+      
+      {/* AI Assistant Integration for Old Clinic System */}
+      <EnhancedAIAssistantIntegration systemType="old" currentPage="lab" />
     </div>
   );
 };
