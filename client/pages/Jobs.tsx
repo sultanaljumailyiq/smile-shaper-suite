@@ -863,7 +863,7 @@ export default function Jobs() {
       dir={language === "ar" ? "rtl" : "ltr"}
     >
       {/* Unified Header */}
-      <ModernUnifiedHeader
+      <UnifiedHeader
         hidden={true}
         currentSection="jobs"
         searchPlaceholder="ابحث عن الوظائف والفرص المهنية..."

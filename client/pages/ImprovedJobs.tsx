@@ -599,7 +599,7 @@ export default function ImprovedJobs() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* الشريط العلوي الثابت */}
-      <UnifiedNavigationHeader userRole="dentist" userName="د. أحمد محمد" />
+      <UnifiedNavigationHeader userRole="clinic_owner" userName="د. أحمد محمد" />
 
       {/* المحتوى الرئيسي */}
       <div className="pt-16 pb-20 px-4 sm:px-6 lg:px-8">
@@ -641,7 +641,7 @@ export default function ImprovedJobs() {
       </div>
 
       {/* الشريط السفلي الثابت */}
-      <FixedBottomNavigation userRole="dentist" notificationCount={3} />
+      <FixedBottomNavigation userRole="clinic_owner" notificationCount={3} />
     </div>
   );
 }

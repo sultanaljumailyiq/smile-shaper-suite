@@ -142,7 +142,7 @@ export default function Emergency() {
   return (
     <>
       <ModernUnifiedHeader
-        currentSection="emergency"
+        currentSection="home"
         searchPlaceholder="ابحث عن خدمات الطوارئ..."
         hidden={true}
       />

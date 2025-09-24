@@ -267,8 +267,10 @@ export default function CommunityEducationHub() {
       addBookmark({
         id: postId,
         title: post.title,
-        url: `/community/post/${postId}`,
         type: "post",
+        posted: new Date().toISOString().split('T')[0],
+        addedDate: new Date().toISOString().split('T')[0],
+        section: "community",
       });
     }
   };

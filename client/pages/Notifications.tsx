@@ -346,7 +346,7 @@ export default function Notifications() {
   >(
     isComingFromSection("community")
       ? "messages"
-      : isComingFromSection("clinic-admin")
+      : isComingFromSection("admin")
         ? "reminders"
         : "notifications",
   );
@@ -820,7 +820,7 @@ export default function Notifications() {
                       ? "المجتمع"
                       : navState.previousSection === "jobs"
                         ? "الوظائف"
-                        : navState.previousSection === "clinic-admin"
+                        : navState.previousSection === "admin"
                           ? "إدارة العيادة"
                           : "الصفحة السابقة"
                 }`}

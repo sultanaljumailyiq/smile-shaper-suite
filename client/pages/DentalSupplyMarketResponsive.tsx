@@ -321,7 +321,7 @@ export default function DentalSupplyMarketResponsive() {
         <SmartProductsGrid
           title="المنتجات المميزة ⭐"
           subtitle="أفضل المنتجات المختارة بعناية"
-          products={enhancedProducts.slice(0, 20)}
+          products={enhancedProducts.slice(0, 20).map(p => ({ ...p, id: String(p.id) }))}
           viewAllLink="/dental-supply/featured"
           gridType="featured"
           className="mb-4 md:mb-6"
@@ -344,7 +344,7 @@ export default function DentalSupplyMarketResponsive() {
           subtitle="عروض محدودة الوقت - لا تفوتها!"
           products={flashDealsProducts.slice(0, 20).map((product, index) => ({
             ...product,
-            id: product.id || `flash-${index}`,
+            id: String(product.id || `flash-${index}`),
             discount: 25 + Math.floor(Math.random() * 25),
             originalPrice: product.price * 1.4,
           }))}
@@ -359,7 +359,7 @@ export default function DentalSupplyMarketResponsive() {
           subtitle="أحدث المنتجات في السوق"
           products={newArrivals.slice(0, 20).map((product, index) => ({
             ...product,
-            id: product.id || `new-${index}`,
+            id: String(product.id || `new-${index}`),
             isNew: true,
             rating: 4.3 + Math.random() * 0.7,
           }))}
@@ -385,7 +385,7 @@ export default function DentalSupplyMarketResponsive() {
           subtitle="المنتجات الأكثر مبيعاً هذا الشهر"
           products={mostDemanded.slice(0, 20).map((product, index) => ({
             ...product,
-            id: product.id || `trending-${index}`,
+            id: String(product.id || `trending-${index}`),
             isFeatured: index < 3,
             reviewsCount: 50 + Math.floor(Math.random() * 150),
           }))}
@@ -401,31 +401,37 @@ export default function DentalSupplyMarketResponsive() {
             {
               name: "3M ESPE",
               logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
               productsCount: 120,
             },
             {
               name: "Dentsply",
               logo: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=100&h=100&fit=crop",
               productsCount: 89,
             },
             {
               name: "Ivoclar",
               logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop",
               productsCount: 75,
             },
             {
               name: "Straumann",
               logo: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=100&h=100&fit=crop",
               productsCount: 45,
             },
             {
               name: "Zimmer",
               logo: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=100&h=100&fit=crop",
               productsCount: 65,
             },
             {
               name: "Nobel",
               logo: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=100&h=100&fit=crop",
+              image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=100&h=100&fit=crop",
               productsCount: 92,
             },
           ]}

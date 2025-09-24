@@ -484,7 +484,9 @@ const AIAssistantPage: React.FC = () => {
                           getColorClasses(action.color),
                         )}
                       >
-                        {action.icon && React.createElement(action.icon, { className: "w-5 h-5" })}
+                        <div className="w-5 h-5 flex items-center justify-center">
+                          {action.icon && React.createElement(action.icon)}
+                        </div>
                       </div>
                       <div className="flex-1">
                         <h3 className="font-medium text-gray-900 text-sm">
@@ -606,7 +608,9 @@ const AIAssistantPage: React.FC = () => {
                                     : "bg-blue-600 text-white hover:bg-blue-700",
                                 )}
                               >
-                                {action.icon && React.createElement(action.icon, { className: "w-3 h-3" })}
+                                <div className="w-3 h-3 flex items-center justify-center mr-1">
+                                  {action.icon && React.createElement(action.icon)}
+                                </div>
                                 {action.label}
                               </button>
                             ))}

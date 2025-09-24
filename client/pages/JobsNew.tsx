@@ -221,6 +221,9 @@ export default function JobsNew() {
   const [showJobDetails, setShowJobDetails] = useState(false);
   const [mapMode, setMapMode] = useState<'jobs' | 'dentists'>('jobs');
   const [showDoctorProfile, setShowDoctorProfile] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [profileDoctor, setProfileDoctor] = useState<any>(null);
+  const [messageDoctor, setMessageDoctor] = useState<any>(null);
   const [profileDoctor, setProfileDoctor] = useState<any>(null);
 
   // مزامنة التبويب مع الهاش في الرابط

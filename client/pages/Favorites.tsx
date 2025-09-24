@@ -292,8 +292,8 @@ export default function Favorites() {
         ? "community"
         : isComingFromSection("jobs")
           ? "jobs"
-          : isComingFromSection("education")
-            ? "education"
+          : isComingFromSection("community")
+            ? "community"
             : "all",
   );
   const [searchTerm, setSearchTerm] = useState("");
@@ -343,10 +343,14 @@ export default function Favorites() {
 
     if (searchTerm) {
       items = items.filter(
-        (item) =>
-          item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.arabicName?.toLowerCase().includes(searchTerm.toLowerCase()),
+        (item) => {
+          const title = 'title' in item ? item.title : 'name' in item ? item.name : '';
+          const name = 'name' in item ? item.name : 'company' in item ? item.company : '';
+          const arabicName = 'arabicName' in item ? item.arabicName : '';
+          return title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                 name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                 arabicName?.toLowerCase().includes(searchTerm.toLowerCase());
+        },
       );
     }
 
@@ -742,12 +746,12 @@ export default function Favorites() {
                     <span className="text-sm font-medium">
                       {navState.previousSection === "marketplace"
                         ? "المتجر"
-                        : navState.previousSection === "community"
-                          ? "المجتمع"
+                            : navState.previousSection === "home"
+                              ? "الرئيسية"
                           : navState.previousSection === "jobs"
                             ? "الوظائف"
-                            : navState.previousSection === "education"
-                              ? "التعليم"
+                            : navState.previousSection === "community"
+                              ? "المجتمع"
                               : "رجوع"}
                     </span>
                   </button>
