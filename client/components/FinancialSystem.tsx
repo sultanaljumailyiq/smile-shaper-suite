@@ -415,7 +415,7 @@ export function FinancialSystem({ className }: FinancialSystemProps) {
                       </div>
                       <ProgressBar
                         progress={(mockReport.growthRate / 20) * 100}
-                        color="purple"
+                        color="blue"
                         showPercentage={false}
                       />
                     </div>

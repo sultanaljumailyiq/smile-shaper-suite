@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { MapPin, Crosshair, Plus, Minus, Navigation, Star, Phone } from "lucide-react";
+import { MapPin, Crosshair, Plus, Minus, Navigation, Star, Phone, Stethoscope } from "lucide-react";
 
 export interface MapMarkerData {
   id: string;

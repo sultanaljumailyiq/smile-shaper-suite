@@ -13,6 +13,7 @@ import {
   Star,
   ChevronRight,
   Bell,
+  FileText,
   User,
   CheckCircle,
   AlertCircle,
@@ -645,11 +646,4 @@ export default function MobileDentalWidgets() {
   );
 }
 
-// Export individual widget components for use in other parts of the app
-export {
-  QuickStatsGrid,
-  CompactCardsGrid,
-  TimelineWidget,
-  NotificationWidget,
-  QuickActionsWidget,
-} from "./MobileDentalWidgets";
+// Note: Individual widget components are defined above in this file

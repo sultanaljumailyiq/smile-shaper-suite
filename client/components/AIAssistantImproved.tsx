@@ -810,7 +810,7 @@ const AIAssistantImproved = () => {
                     {/* Right Side Send Button */}
                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
                       <button
-                        onClick={handleSendMessage}
+                        onClick={() => handleSendMessage()}
                         disabled={!inputValue.trim() || !isConnected}
                         className={cn(
                           "bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-2xl",
