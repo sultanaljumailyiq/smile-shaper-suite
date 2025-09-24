@@ -31,7 +31,7 @@ import {
   type Treatment,
   type TreatmentPlan,
 } from "@/services/sharedClinicData";
-import CompactAIAssistant, { FloatingAIButton, useAIAssistant } from "@/components/CompactAIAssistant";
+import EnhancedAIAssistantIntegration from "@/components/EnhancedAIAssistantIntegration";
 
 function SectionCard({ title, icon: Icon, children, action }: { title: string; icon: React.ComponentType<any>; children: React.ReactNode; action?: React.ReactNode }) {
   return (
@@ -237,7 +237,7 @@ export default function SmartClinic(){
     { key:"knowledge", label:"مكتبة المعرفة", to:`${base}/knowledge` },
   ];
 
-  const { isOpen: isAIOpen, openAssistant, closeAssistant } = useAIAssistant();
+  // المساعد الذكي المحسن متاح الآن
 
   return (
     <div className="space-y-4" dir="rtl">
@@ -253,7 +253,7 @@ export default function SmartClinic(){
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={openAssistant} className="px-3 py-1.5 rounded-xl text-xs bg-blue-600 text-white">فتح المساعد الذكي</button>
+            <span className="px-3 py-1.5 rounded-xl text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white">المساعد الذكي متاح</span>
           </div>
         </div>
       </div>
@@ -411,7 +411,7 @@ export default function SmartClinic(){
               <label className="text-[12px] text-gray-700">وصف الحالة</label>
               <textarea className="w-full p-2 border rounded-xl text-sm" rows={4} placeholder="اكتب الأعراض، نتائج الفحص، ملاحظات الأشعة..." />
               <div className="flex items-center gap-2">
-                <button onClick={openAssistant} className="px-3 py-1.5 rounded-xl text-xs bg-blue-600 text-white flex items-center gap-1"><Sparkles className="w-3.5 h-3.5"/>توليد خطة علاجية</button>
+                <span className="px-3 py-1.5 rounded-xl text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center gap-1"><Sparkles className="w-3.5 h-3.5"/>استخدم المساعد الذكي</span>
                 <Link to="/clinic/reservations" className="px-3 py-1.5 rounded-xl text-xs border">جدولة المواعيد</Link>
                 <Link to="/clinic/accounts" className="px-3 py-1.5 rounded-xl text-xs border">ربط بالفواتير</Link>
               </div>
@@ -443,8 +443,11 @@ export default function SmartClinic(){
         </div>
       )}
 
-      <FloatingAIButton onClick={openAssistant} />
-      <CompactAIAssistant isOpen={isAIOpen} onClose={closeAssistant} position="bottom-right" />
+      {/* المساعد الذكي المحسن - متوافق مع نظام إدارة العيادة */}
+      <EnhancedAIAssistantIntegration
+        systemType="new"
+        currentPage="smart-clinic"
+      />
     </div>
   );
 }
