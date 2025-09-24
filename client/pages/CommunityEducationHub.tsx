@@ -268,7 +268,7 @@ export default function CommunityEducationHub() {
         id: postId,
         title: post.title,
         url: `/community/post/${postId}`,
-        type: "community_post",
+        type: "post",
       });
     }
   };

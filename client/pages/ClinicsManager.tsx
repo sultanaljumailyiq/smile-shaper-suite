@@ -677,7 +677,7 @@ export default function ClinicsManager() {
           </div>
         )}
 
-        {activeTab === "permissions" && (
+        {activeTab === "staff" && (
           <div className="bg-white rounded-2xl border p-4">
             <h3 className="text-lg font-bold text-gray-900 mb-4">
               إدارة الصلاحيات

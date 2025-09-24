@@ -25,6 +25,8 @@ export interface DentalProduct {
   isFeatured?: boolean;
   isExclusive?: boolean;
   discount?: number;
+  timeLeft?: string;
+  stockLeft?: number;
   tags: string[];
   arabicTags: string[];
   weight?: string;

@@ -185,7 +185,7 @@ const Input: React.FC<InputProps> = ({
     borderRadius: dt.radius.md,
     fontSize: dt.text.base,
     backgroundColor: disabled ? dt.color.bg.secondary : dt.color.bg.primary,
-    color: disabled ? dt.color.text.disabled : dt.color.text.primary,
+    color: disabled ? dt.color.text.secondary : dt.color.text.primary,
     transition: "all 150ms ease",
     border: `1px solid ${error ? dt.color.error : dt.color.border.primary}`,
     outline: "none",
