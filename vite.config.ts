@@ -1,18 +1,36 @@
-import { defineConfig } from "vite";
+import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
+import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
-    port: 8080,
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  build: {
+    outDir: "dist/spa",
+  },
+  plugins: [react(), expressPlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./client"),
+      "@shared": path.resolve(__dirname, "./shared"),
     },
   },
 }));
+
+function expressPlugin(): Plugin {
+  return {
+    name: "express-plugin",
+    apply: "serve", // Only apply during development (serve mode)
+    configureServer(server) {
+      const app = createServer();
+
+      // Mount Express app and let it pass through non-API routes to Vite
+      server.middlewares.use(app);
+    },
+  };
+}
