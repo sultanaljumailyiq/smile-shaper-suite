@@ -32,6 +32,7 @@ import {
   Search,
   X,
   Sparkles,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -646,10 +647,4 @@ export default function MobileDentalWidgets() {
 }
 
 // Export individual widget components for use in other parts of the app
-export {
-  QuickStatsGrid,
-  CompactCardsGrid,
-  TimelineWidget,
-  NotificationWidget,
-  QuickActionsWidget,
-} from "./MobileDentalWidgets";
+// Export components
