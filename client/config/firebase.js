@@ -1,55 +1,35 @@
-// Firebase Configuration
-import { initializeApp } from 'firebase/app';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getStorage, connectStorageEmulator } from 'firebase/storage';
-import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
+// Firebase Configuration - Temporarily Disabled
+// import { initializeApp } from 'firebase/app';
+// import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+// import { getAuth, connectAuthEmulator } from 'firebase/auth';
+// import { getStorage, connectStorageEmulator } from 'firebase/storage';
+// import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 
-// إعدادات Firebase - يجب استبدالها بالإعدادات الحقيقية
-const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "zindenta-project.firebaseapp.com",
-  projectId: "zindenta-project",
-  storageBucket: "zindenta-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+console.log("Firebase is temporarily disabled. Please use Supabase integration for backend functionality.");
+
+// Mock Firebase services to prevent crashes
+export const db = {
+  collection: () => ({ add: () => Promise.resolve(), get: () => Promise.resolve({ docs: [] }) }),
+  doc: () => ({ get: () => Promise.resolve({ exists: false }), set: () => Promise.resolve() })
 };
 
-// تهيئة Firebase
-const app = initializeApp(firebaseConfig);
+export const auth = {
+  currentUser: null,
+  signInWithEmailAndPassword: () => Promise.reject(new Error("Please use Supabase integration")),
+  createUserWithEmailAndPassword: () => Promise.reject(new Error("Please use Supabase integration")),
+  signOut: () => Promise.resolve()
+};
 
-// الخدمات الأساسية
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
-export const functions = getFunctions(app);
+export const storage = {
+  ref: () => ({ put: () => Promise.reject(new Error("Please use Supabase integration")) })
+};
 
-// تهيئة المحاكيات في بيئة التطوير
-if (process.env.NODE_ENV === 'development') {
-  // توصيل المحاكيات إذا لم تكن متصلة بالفعل
-  try {
-    // محاكي Firestore
-    if (!db._delegate._databaseId.projectId.includes('localhost')) {
-      connectFirestoreEmulator(db, 'localhost', 8080);
-    }
-    
-    // محاكي Authentication
-    if (!auth.config.emulator) {
-      connectAuthEmulator(auth, 'http://localhost:9099');
-    }
-    
-    // محاكي Storage
-    if (!storage._delegate._bucket.includes('localhost')) {
-      connectStorageEmulator(storage, 'localhost', 9199);
-    }
-    
-    // محاكي Functions
-    if (!functions._delegate._url.includes('localhost')) {
-      connectFunctionsEmulator(functions, 'localhost', 5001);
-    }
-  } catch (error) {
-    console.log('Emulators already connected or not needed:', error.message);
-  }
-}
+export const functions = {
+  httpsCallable: () => () => Promise.reject(new Error("Please use Supabase integration"))
+};
 
-export default app;
+// Firebase emulators are disabled since we're using mock services
+console.log("Firebase services mocked. For full backend functionality, please use Supabase integration.");
+
+// Mock app export
+export default { name: "mock-firebase-app" };
