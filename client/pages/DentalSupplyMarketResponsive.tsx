@@ -259,9 +259,9 @@ export default function DentalSupplyMarketResponsive() {
 
   return (
     <div className="min-h-screen" dir="rtl">
-      <main className="p-2 md:p-4 lg:p-8">
+      <main className="p-2 md:p-4 lg:p-6">
         {/* Hero/Promotional Banner - Compact for Mobile */}
-        <div className="relative mb-4 md:mb-6 h-24 md:h-32 lg:h-40 rounded-xl md:rounded-2xl overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600">
+        <div className="relative mb-3 md:mb-6 h-20 md:h-28 lg:h-36 rounded-lg md:rounded-2xl overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600">
           <div className="absolute inset-0">
             <img
               src={promoSlides[currentSlide].image}
@@ -276,33 +276,33 @@ export default function DentalSupplyMarketResponsive() {
             />
           </div>
 
-          <div className="relative z-10 h-full flex items-center p-6 lg:p-12">
+          <div className="relative z-10 h-full flex items-center p-3 md:p-6 lg:p-12">
             <div className="max-w-lg">
               <div className="mb-3">
                 <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold">
                   {promoSlides[currentSlide].badge}
                 </span>
               </div>
-              <h1 className="text-2xl lg:text-4xl font-bold text-white mb-3 leading-tight">
+              <h1 className="text-lg md:text-2xl lg:text-4xl font-bold text-white mb-2 md:mb-3 leading-tight">
                 {promoSlides[currentSlide].title}
               </h1>
-              <p className="text-white/90 text-sm lg:text-base mb-6 leading-relaxed">
+              <p className="text-white/90 text-xs md:text-sm lg:text-base mb-3 md:mb-6 leading-relaxed hidden sm:block">
                 {promoSlides[currentSlide].subtitle}
               </p>
-              <button className="bg-white text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <button className="bg-white text-purple-600 px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-xl text-sm md:text-base font-bold hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
                 {promoSlides[currentSlide].buttonText}
               </button>
             </div>
           </div>
 
           {/* Slide indicators */}
-          <div className="absolute bottom-4 left-6 flex gap-2">
+          <div className="absolute bottom-2 md:bottom-4 left-3 md:left-6 flex gap-2">
             {promoSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300",
+                  "w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300",
                   currentSlide === index ? "bg-white" : "bg-white/50",
                 )}
               />

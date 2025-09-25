@@ -64,7 +64,7 @@ export default function UnifiedProductCard({
       )}
     >
       {/* Product Image */}
-      <div className="aspect-square bg-gray-50 relative overflow-hidden">
+      <div className="aspect-[4/3] sm:aspect-square bg-gray-50 relative overflow-hidden">
         <Link to={`/dental-supply/product/${product.id}`}>
           <img
             src={product.image}
@@ -133,7 +133,7 @@ export default function UnifiedProductCard({
       </div>
 
       {/* Product Info */}
-      <div className={cn("p-3", compact ? "sm:p-3" : "sm:p-4 lg:p-4")}>
+      <div className={cn("p-2.5 sm:p-3", compact ? "sm:p-3" : "sm:p-4 lg:p-4")}>
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-medium text-gray-600 truncate">
             {product.brand}

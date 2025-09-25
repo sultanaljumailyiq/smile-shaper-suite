@@ -76,7 +76,7 @@ export default function SmartProductsGrid({
 
   const getGridClasses = () => {
     // Horizontal scroller: 3 visible on mobile, 6 on md+ by sizing auto columns
-    return `grid grid-flow-col auto-cols-[calc(100%/4)] md:auto-cols-[calc(100%/8)] gap-2 md:gap-3 overflow-x-auto scroll-smooth px-1 pb-2`;
+    return `grid grid-flow-col auto-cols-[calc(100%/3.2)] sm:auto-cols-[calc(100%/4)] md:auto-cols-[calc(100%/6)] lg:auto-cols-[calc(100%/8)] gap-2 md:gap-3 overflow-x-auto scroll-smooth px-1 pb-2`;
   };
 
   const getCardClasses = () => {

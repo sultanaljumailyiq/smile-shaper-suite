@@ -34,14 +34,14 @@ export default function PromoCard({
   return (
     <div
       className={cn(
-        "relative rounded-lg md:rounded-xl overflow-hidden h-16 md:h-20 lg:h-24",
+        "relative rounded-lg md:rounded-xl overflow-hidden h-14 md:h-18 lg:h-20",
         className,
       )}
     >
       <div className={cn("absolute inset-0 bg-gradient-to-r", gradient)} />
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 h-full flex items-center justify-between p-3 md:p-4 lg:p-6">
+      <div className="relative z-10 h-full flex items-center justify-between p-2.5 md:p-4 lg:p-5">
         <div className="flex items-center gap-2 md:gap-3">
           <div className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-sm rounded-lg md:rounded-xl flex items-center justify-center">
             <IconComponent className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" />
