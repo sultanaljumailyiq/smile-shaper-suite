@@ -1,4 +1,4 @@
-{{
+{
   "name": "fusion-starter",
   "private": true,
   "type": "module",
@@ -10,7 +10,13 @@
       "dist/server/**/*.js"
     ]
   },
-
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:dev": "vite build --mode development",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
     "express": "^4.18.2",
