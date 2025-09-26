@@ -130,6 +130,7 @@ import ClinicNewLab from "./pages/clinic/ClinicNewLab";
 import ClinicOldLab from "./pages/ClinicOldLab";
 import AIAssistantPage from "./pages/AIAssistantPage";
 import SmartClinicAIAssistant from "./pages/SmartClinicAIAssistant";
+import SmartClinicKnowledge from "./pages/SmartClinicKnowledge";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FinanceUnified from "./pages/clinic_old/FinanceUnified";
 import AssetsUnified from "./pages/clinic_old/AssetsUnified";
@@ -347,6 +348,10 @@ const App = () => (
                             <Route
                               path="/dentist-hub/smart-clinic/ai-assistant"
                               element={<SmartClinicAIAssistant />}
+                            />
+                            <Route
+                              path="/dentist-hub/smart-clinic/knowledge"
+                              element={<SmartClinicKnowledge />}
                             />
                             <Route path="/about" element={<About />} />
                             <Route

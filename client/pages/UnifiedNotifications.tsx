@@ -1236,7 +1236,7 @@ export default function UnifiedNotifications() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
         {activeTab === "reminders" ? (
           // قسم التذكيرات
           <div className="space-y-6">
