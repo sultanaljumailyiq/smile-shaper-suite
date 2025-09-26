@@ -129,6 +129,7 @@ import ClinicNewReservations from "./pages/clinic/ClinicNewReservations";
 import ClinicNewLab from "./pages/clinic/ClinicNewLab";
 import ClinicOldLab from "./pages/ClinicOldLab";
 import AIAssistantPage from "./pages/AIAssistantPage";
+import SmartClinicAIAssistant from "./pages/SmartClinicAIAssistant";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FinanceUnified from "./pages/clinic_old/FinanceUnified";
 import AssetsUnified from "./pages/clinic_old/AssetsUnified";
@@ -342,6 +343,10 @@ const App = () => (
                             <Route
                               path="/ai-assistant"
                               element={<AIAssistantPage />}
+                            />
+                            <Route
+                              path="/dentist-hub/smart-clinic/ai-assistant"
+                              element={<SmartClinicAIAssistant />}
                             />
                             <Route path="/about" element={<About />} />
                             <Route

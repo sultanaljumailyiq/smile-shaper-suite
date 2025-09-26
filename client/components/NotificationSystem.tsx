@@ -211,8 +211,8 @@ export function NotificationSystem({ className }: NotificationSystemProps) {
           <div
             className={cn(
               "fixed bg-white rounded-3xl shadow-2xl border border-gray-200 z-[9999] max-h-[85vh] flex flex-col",
-              "w-[420px] max-w-[95vw]",
-              "top-[10vh] left-1/2 -translate-x-1/2",
+              "w-[420px] max-w-[95vw] max-sm:w-[90vw] max-sm:mx-4",
+              "top-16 right-4 md:top-[10vh] md:left-1/2 md:-translate-x-1/2 md:right-auto",
               "backdrop-blur-xl bg-white/95 border-2",
               "transform transition-all duration-300 ease-out",
               "animate-in fade-in-0 zoom-in-95 slide-in-from-top-4",

@@ -266,7 +266,7 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
   };
 
   const handleExpand = () => {
-    navigate("/ai-assistant");
+    navigate("/dentist-hub/smart-clinic/ai-assistant");
   };
 
   const FloatingButton = () => (
@@ -294,8 +294,10 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
     <div
       className={cn(
         "fixed z-40 bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all duration-300",
-        "w-80 h-80",
-        position === "bottom-right" ? "bottom-24 right-6" : "bottom-24 left-6",
+        "w-80 h-80 max-sm:w-[90vw] max-sm:h-[70vh] max-sm:max-w-sm",
+        position === "bottom-right" 
+          ? "bottom-24 right-6 max-sm:bottom-20 max-sm:right-4" 
+          : "bottom-24 left-6 max-sm:bottom-20 max-sm:left-4",
         isOpen
           ? "opacity-100 scale-100"
           : "opacity-0 scale-95 pointer-events-none",
@@ -443,15 +445,15 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
       {/* Quick Actions */}
       {quickActions && (
         <div className="p-3 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 max-sm:grid-cols-1">
             {quickActionButtons.slice(0, 4).map((action, index) => (
               <button
                 key={index}
                 onClick={action.action}
-                className="flex items-center gap-2 p-2 bg-white rounded-lg hover:bg-gray-100 transition-colors text-xs"
+                className="flex items-center gap-2 p-2 bg-white rounded-lg hover:bg-gray-100 transition-colors text-xs max-sm:text-[10px] max-sm:p-1.5"
               >
-                <action.icon className="w-3 h-3" />
-                {action.label}
+                <action.icon className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5 flex-shrink-0" />
+                <span className="truncate">{action.label}</span>
               </button>
             ))}
           </div>
