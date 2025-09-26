@@ -116,13 +116,13 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
           id: "welcome",
           type: "assistant",
           content:
-            "مرحباً! أنا مساعدك الذكي للعيادة. كيف يمكنني مساعدتك اليوم؟",
+            "مرحباً! أنا مساعدك الذكي المتخصص في طب الأسنان 🦷\n\nDentalGPT Pro - 100% دقة\n\nكيف يمكنني مساعدتك اليوم؟",
           timestamp: new Date(),
           suggestions: [
-            "مواعيد اليوم",
-            "إضافة مريض جديد",
-            "التقارير المالية",
-            "طلبات المختبر",
+            "تحليل الأشعة",
+            "خطة علاج",
+            "جدولة المواعيد",
+            "فحص الأدوية",
           ],
         },
       ]);
@@ -294,46 +294,136 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
     <div
       className={cn(
         "fixed z-40 bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all duration-300",
-        "w-80 h-80 max-sm:w-[90vw] max-sm:h-[70vh] max-sm:max-w-sm",
+        "w-96 h-[500px]",
+        // Mobile responsive
+        "max-sm:w-[95vw] max-sm:h-[85vh] max-sm:max-w-none max-sm:rounded-t-2xl max-sm:rounded-b-none",
+        // Position
         position === "bottom-right" 
-          ? "bottom-24 right-6 max-sm:bottom-20 max-sm:right-4" 
-          : "bottom-24 left-6 max-sm:bottom-20 max-sm:left-4",
+          ? "bottom-24 right-6 max-sm:bottom-0 max-sm:right-0 max-sm:left-0" 
+          : "bottom-24 left-6 max-sm:bottom-0 max-sm:left-0 max-sm:right-0",
         isOpen
           ? "opacity-100 scale-100"
           : "opacity-0 scale-95 pointer-events-none",
       )}
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-2xl">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 max-sm:p-3 rounded-t-2xl">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-              <Bot className="w-5 h-5" />
+          <div className="flex items-center gap-3 max-sm:gap-2">
+            <div className="w-10 h-10 max-sm:w-8 max-sm:h-8 bg-white/20 rounded-full flex items-center justify-center">
+              <Brain className="w-6 h-6 max-sm:w-5 max-sm:h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-sm">المساعد الذكي</h3>
-              <p className="text-blue-100 text-xs">متاح للمساعدة</p>
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-base max-sm:text-sm">مساعد الذكاء الاصطناعي</h3>
+                <span className="bg-yellow-400 text-blue-900 px-2 py-0.5 rounded-full text-xs font-bold">Pro</span>
+              </div>
+              <p className="text-blue-100 text-xs">جاهز للمساعدة • DentalGPT v2.1</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 max-sm:gap-1">
             <button
               onClick={handleExpand}
-              className="p-1 hover:bg-white/20 rounded transition-colors"
+              className="p-2 max-sm:p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+              title="تكبير"
             >
-              <Maximize2 className="w-4 h-4" />
+              <Maximize2 className="w-4 h-4 max-sm:w-3.5 max-sm:h-3.5" />
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 hover:bg-white/20 rounded transition-colors"
+              className="p-2 max-sm:p-1.5 hover:bg-white/20 rounded-lg transition-colors"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4 max-sm:w-3.5 max-sm:h-3.5" />
             </button>
           </div>
         </div>
       </div>
 
+      {/* Smart Suggestions */}
+      <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 max-sm:p-3 border-b border-gray-200">
+        <h4 className="font-semibold text-gray-900 text-sm mb-3 max-sm:text-xs">الاقتراحات الذكية</h4>
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-3 max-sm:gap-2">
+          <div className="bg-white rounded-xl p-3 max-sm:p-2 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-start gap-3 max-sm:gap-2">
+              <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-lg max-sm:text-base">🔍</span>
+              </div>
+              <div className="min-w-0">
+                <h5 className="font-medium text-gray-900 text-xs max-sm:text-[10px] leading-tight mb-1">تحليل صورة أشعة سينية للأسنان</h5>
+                <p className="text-gray-600 text-[10px] max-sm:text-[9px] leading-tight mb-1">تحليل شامل للصور الطبية</p>
+                <span className="inline-block bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-[9px] max-sm:text-[8px] font-medium">تشخيص</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-3 max-sm:p-2 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-start gap-3 max-sm:gap-2">
+              <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-lg max-sm:text-base">💊</span>
+              </div>
+              <div className="min-w-0">
+                <h5 className="font-medium text-gray-900 text-xs max-sm:text-[10px] leading-tight mb-1">اقتراح خطة علاج لتسوس الأسنان</h5>
+                <p className="text-gray-600 text-[10px] max-sm:text-[9px] leading-tight mb-1">خطط علاج مخصصة ومتقدمة</p>
+                <span className="inline-block bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[9px] max-sm:text-[8px] font-medium">علاج</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-3 max-sm:p-2 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-start gap-3 max-sm:gap-2">
+              <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-lg max-sm:text-base">📅</span>
+              </div>
+              <div className="min-w-0">
+                <h5 className="font-medium text-gray-900 text-xs max-sm:text-[10px] leading-tight mb-1">جدولة أفضل أوقات المواعيد</h5>
+                <p className="text-gray-600 text-[10px] max-sm:text-[9px] leading-tight mb-1">تنظيم ذكي للمواعيد</p>
+                <span className="inline-block bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-[9px] max-sm:text-[8px] font-medium">إدارة</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-3 max-sm:p-2 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-start gap-3 max-sm:gap-2">
+              <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-lg max-sm:text-base">⚕️</span>
+              </div>
+              <div className="min-w-0">
+                <h5 className="font-medium text-gray-900 text-xs max-sm:text-[10px] leading-tight mb-1">فحص التفاعلات الدوائية</h5>
+                <p className="text-gray-600 text-[10px] max-sm:text-[9px] leading-tight mb-1">تحقق من سلامة الأدوية</p>
+                <span className="inline-block bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-[9px] max-sm:text-[8px] font-medium">أمان</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="bg-gray-50 p-4 max-sm:p-3 border-b border-gray-200">
+        <h4 className="font-semibold text-gray-900 text-sm mb-3 max-sm:text-xs">إجراءات سريعة:</h4>
+        <div className="grid grid-cols-3 max-sm:grid-cols-2 gap-2 max-sm:gap-1.5">
+          {[
+            { label: "تحليل الأشعة", icon: "🔍" },
+            { label: "خطة العلاج", icon: "💊" },
+            { label: "حجز موعد", icon: "📅" },
+            { label: "حالة طارئة", icon: "🚨" },
+            { label: "فحص الأدوية", icon: "⚕️" },
+            { label: "تاريخ المريض", icon: "📋" }
+          ].map((action, index) => (
+            <button
+              key={index}
+              className="bg-white rounded-lg p-2 max-sm:p-1.5 shadow-sm border border-gray-200 hover:shadow-md transition-all hover:scale-105 active:scale-95"
+            >
+              <div className="text-center">
+                <div className="text-lg max-sm:text-base mb-1">{action.icon}</div>
+                <span className="text-xs max-sm:text-[10px] font-medium text-gray-700 leading-tight">{action.label}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Messages */}
-      <div className="flex-1 p-3 h-48 overflow-y-auto">
+      <div className="flex-1 p-3 max-sm:p-2 h-32 max-sm:h-24 overflow-y-auto bg-gradient-to-b from-white to-gray-50">
         <div className="space-y-4">
           {messages.map((message) => (
             <div
@@ -404,9 +494,20 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
         </div>
       </div>
 
-      {/* Input */}
-      <div className="p-3 border-t border-gray-200">
-        <div className="flex items-center gap-2">
+      {/* Chat Footer */}
+      <div className="bg-white p-3 max-sm:p-2 border-t border-gray-200 rounded-b-2xl">
+        <div className="text-center mb-3">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="w-6 h-6 max-sm:w-5 max-sm:h-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+              <Brain className="w-4 h-4 max-sm:w-3 max-sm:h-3 text-white" />
+            </div>
+            <span className="font-bold text-sm max-sm:text-xs text-gray-900">DentalGPT Pro</span>
+            <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs max-sm:text-[10px] font-medium">100% دقة</span>
+          </div>
+        </div>
+        
+        {/* Input */}
+        <div className="flex items-center gap-2 max-sm:gap-1">
           <div className="flex-1 relative">
             <input
               type="text"
@@ -414,51 +515,33 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
               onChange={(e) => setCurrentMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               placeholder="اكتب رسالتك..."
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+              className="w-full px-3 py-2 max-sm:px-2 max-sm:py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm max-sm:text-xs"
             />
           </div>
           <button
             onClick={handleVoiceInput}
             className={cn(
-              "p-2 rounded-lg transition-colors",
+              "p-2 max-sm:p-1.5 rounded-lg transition-colors",
               isListening
                 ? "bg-red-500 text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200",
             )}
           >
             {isListening ? (
-              <MicOff className="w-4 h-4" />
+              <MicOff className="w-4 h-4 max-sm:w-3 max-sm:h-3" />
             ) : (
-              <Mic className="w-4 h-4" />
+              <Mic className="w-4 h-4 max-sm:w-3 max-sm:h-3" />
             )}
           </button>
           <button
             onClick={handleSendMessage}
             disabled={!currentMessage.trim()}
-            className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="p-2 max-sm:p-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 max-sm:w-3 max-sm:h-3" />
           </button>
         </div>
       </div>
-
-      {/* Quick Actions */}
-      {quickActions && (
-        <div className="p-3 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
-          <div className="grid grid-cols-2 gap-2 max-sm:grid-cols-1">
-            {quickActionButtons.slice(0, 4).map((action, index) => (
-              <button
-                key={index}
-                onClick={action.action}
-                className="flex items-center gap-2 p-2 bg-white rounded-lg hover:bg-gray-100 transition-colors text-xs max-sm:text-[10px] max-sm:p-1.5"
-              >
-                <action.icon className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5 flex-shrink-0" />
-                <span className="truncate">{action.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 
