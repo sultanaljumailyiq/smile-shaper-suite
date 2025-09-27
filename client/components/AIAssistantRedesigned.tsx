@@ -441,58 +441,58 @@ const AIAssistantRedesigned = () => {
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-2rem)]">
       <div
         className={cn(
-          "bg-white/95 backdrop-blur-2xl rounded-xl sm:rounded-2xl shadow-xl border border-gray-200/50 transition-all duration-500",
+          "bg-white/95 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-200/50 transition-all duration-500",
           isMinimized
-            ? "w-56 sm:w-72 h-12 sm:h-16"
+            ? "w-64 sm:w-80 h-16 sm:h-20"
             : isExpanded
-              ? "w-[90vw] sm:w-[520px] h-[80vh] sm:h-[720px]"
-              : "w-[85vw] sm:w-[420px] h-[65vh] sm:h-[620px]",
+              ? "w-[90vw] sm:w-[600px] h-[85vh] sm:h-[850px]"
+              : "w-[85vw] sm:w-[500px] h-[70vh] sm:h-[750px]",
           "overflow-hidden ring-1 ring-black/5",
         )}
       >
         {/* عنوان محسن */}
-        <div className="relative z-10 flex items-center justify-between p-3 sm:p-4 border-b border-gray-200/50 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50">
-          <div className="flex items-center gap-3">
+        <div className="relative z-10 flex items-center justify-between p-5 border-b border-gray-200/50 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50">
+          <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-pulse" />
+              <div className="w-14 h-14 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl">
+                <Brain className="w-7 h-7 text-white animate-pulse" />
               </div>
               <div
                 className={cn(
-                  "absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white shadow-lg",
+                  "absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white shadow-lg",
                   getStatusColor(),
                 )}
               ></div>
               {isConnected ? (
-                <Wifi className="absolute -bottom-0.5 -left-0.5 w-3 h-3 sm:w-4 sm:h-4 text-green-500 drop-shadow-sm" />
+                <Wifi className="absolute -bottom-1 -left-1 w-5 h-5 text-green-500 drop-shadow-sm" />
               ) : (
-                <WifiOff className="absolute -bottom-0.5 -left-0.5 w-3 h-3 sm:w-4 sm:h-4 text-red-500 drop-shadow-sm" />
+                <WifiOff className="absolute -bottom-1 -left-1 w-5 h-5 text-red-500 drop-shadow-sm" />
               )}
             </div>
             {!isMinimized && (
               <div>
-                <h3 className="font-bold text-gray-900 flex items-center gap-2 text-sm sm:text-base">
+                <h3 className="font-bold text-gray-900 flex items-center gap-2 text-lg">
                   مساعد الذكاء الاصطناعي
-                  <span className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-0.5 rounded-full">
+                  <span className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full">
                     Pro
                   </span>
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600 flex items-center gap-2">
+                <p className="text-sm text-gray-600 flex items-center gap-2">
                   <span>{getStatusText()}</span>
-                  <span className="text-green-600 hidden sm:inline">• DentalGPT v2.1</span>
-                  <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-yellow-500" />
+                  <span className="text-green-600">• DentalGPT v2.1</span>
+                  <Star className="w-3 h-3 text-yellow-500" />
                 </p>
               </div>
             )}
           </div>
 
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex items-center gap-2">
             {!isMinimized && (
               <>
                 <button
                   onClick={() => setShowSuggestions(!showSuggestions)}
                   className={cn(
-                    "p-1.5 sm:p-2 rounded-lg transition-colors",
+                    "p-2 rounded-xl transition-colors",
                     showSuggestions
                       ? "bg-blue-100 text-blue-600"
                       : "hover:bg-gray-100 text-gray-600",
