@@ -336,21 +336,18 @@ export default function AdvancedClinicManagement() {
               {/* System Toggle Switch */}
               <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
                 <span className="text-xs text-gray-600">قديم</span>
-                <button 
-                  onClick={() => {
-                    setUseOldManager(!useOldManager);
-                    if (!useOldManager) {
-                      // Switching to old system - redirect
-                      window.location.href = '/clinics-manager';
-                    }
-                  }}
+                <Link 
+                  to="/clinics-manager"
                   className="relative"
                 >
-                  {useOldManager ? (
-                    <ToggleLeft className="w-6 h-6 text-gray-400" />
-                  ) : (
-                    <ToggleRight className="w-6 h-6 text-blue-600" />
-                  )}
+                  <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                </Link>
+                <span className="mx-1 text-xs text-gray-400">|</span>
+                <button 
+                  onClick={() => setUseOldManager(false)}
+                  className="relative"
+                >
+                  <ToggleRight className="w-6 h-6 text-blue-600" />
                 </button>
                 <span className="text-xs text-gray-600">جديد</span>
               </div>
@@ -600,13 +597,7 @@ export default function AdvancedClinicManagement() {
                         </button>
 
                         <button 
-                          onClick={() => {
-                            if (useOldManager) {
-                              window.location.href = '/clinic';
-                            } else {
-                              setActiveSubSection('reports');
-                            }
-                          }}
+                          onClick={() => setActiveSubSection('reports')}
                           className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
                         >
                           <BarChart3 className="w-3 h-3" />
