@@ -585,24 +585,21 @@ export default function AdvancedClinicManagement() {
                     {/* Actions - Compact */}
                     <div className="p-3 border-t border-gray-100">
                       <div className="flex gap-2">
-                        <button 
-                          onClick={() => {
-                            setSelectedClinic(clinic);
-                            setShowEditClinic(true);
-                          }} 
+                        <Link 
+                          to="/clinic-dashboard"
                           className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
                         >
                           <Settings className="w-3 h-3" />
                           <span className="text-xs font-medium">إدارة</span>
-                        </button>
+                        </Link>
 
-                        <button 
-                          onClick={() => setActiveSubSection('reports')}
+                        <Link 
+                          to="/clinic"
                           className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
                         >
                           <BarChart3 className="w-3 h-3" />
                           <span className="text-xs font-medium">تقارير</span>
-                        </button>
+                        </Link>
 
                         <button className="flex items-center justify-center w-8 h-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                           <MoreVertical className="w-3 h-3" />
