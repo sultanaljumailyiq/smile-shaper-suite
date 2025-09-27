@@ -817,10 +817,10 @@ export default function UnifiedNotifications() {
                 </div>
 
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">
+                  <h1 className="text-lg md:text-2xl font-bold text-gray-900">
                     مركز الإشعارات والرسائل
                   </h1>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs md:text-sm text-gray-600">
                     {totalUnread > 0
                       ? `${totalUnread} عنصر غير مقروء`
                       : "جميع العناصر مقروءة"}
@@ -833,28 +833,28 @@ export default function UnifiedNotifications() {
                 <button
                   onClick={() => setActiveTab("reminders")}
                   className={cn(
-                    "flex items-center gap-2 py-2 px-4 rounded-lg transition-all duration-200",
+                    "flex items-center gap-1 md:gap-2 py-1.5 md:py-2 px-2 md:px-4 rounded-lg transition-all duration-200",
                     activeTab === "reminders"
                       ? "bg-white shadow-sm text-blue-600 font-medium"
                       : "text-gray-600 hover:text-gray-900",
                   )}
                 >
-                  <Clock className="w-4 h-4" />
-                  <span>قسم التذكيرات</span>
+                  <Clock className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-xs md:text-sm">قسم التذكيرات</span>
                 </button>
                 <button
                   onClick={() => setActiveTab("notifications")}
                   className={cn(
-                    "flex items-center gap-2 py-2 px-4 rounded-lg transition-all duration-200",
+                    "flex items-center gap-1 md:gap-2 py-1.5 md:py-2 px-2 md:px-4 rounded-lg transition-all duration-200",
                     activeTab === "notifications"
                       ? "bg-white shadow-sm text-blue-600 font-medium"
                       : "text-gray-600 hover:text-gray-900",
                   )}
                 >
-                  <Bell className="w-4 h-4" />
-                  <span>الإشعارات</span>
+                  <Bell className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-xs md:text-sm">الإشعارات</span>
                   {unreadNotifications > 0 && (
-                    <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 min-w-[20px] h-5 flex items-center justify-center">
+                    <span className="bg-red-500 text-white text-xs rounded-full px-1.5 md:px-2 py-0.5 min-w-[16px] md:min-w-[20px] h-4 md:h-5 flex items-center justify-center">
                       {unreadNotifications}
                     </span>
                   )}
@@ -862,16 +862,16 @@ export default function UnifiedNotifications() {
                 <button
                   onClick={() => setActiveTab("messages")}
                   className={cn(
-                    "flex items-center gap-2 py-2 px-4 rounded-lg transition-all duration-200",
+                    "flex items-center gap-1 md:gap-2 py-1.5 md:py-2 px-2 md:px-4 rounded-lg transition-all duration-200",
                     activeTab === "messages"
                       ? "bg-white shadow-sm text-blue-600 font-medium"
                       : "text-gray-600 hover:text-gray-900",
                   )}
                 >
-                  <Mail className="w-4 h-4" />
-                  <span>الرسائل</span>
+                  <Mail className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-xs md:text-sm">الرسائل</span>
                   {unreadMessages > 0 && (
-                    <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 min-w-[20px] h-5 flex items-center justify-center">
+                    <span className="bg-red-500 text-white text-xs rounded-full px-1.5 md:px-2 py-0.5 min-w-[16px] md:min-w-[20px] h-4 md:h-5 flex items-center justify-center">
                       {unreadMessages}
                     </span>
                   )}
@@ -1503,13 +1503,13 @@ export default function UnifiedNotifications() {
           </div>
         ) : (
           // عرض الإشعارات أو الرسائل
-          <div className="flex gap-6">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* شريط البحث والفلاتر */}
-            <div className="w-80 space-y-4">
+            <div className="w-full md:w-80 space-y-4">
               {/* البحث */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
                 <div className="relative">
-                  <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Search className="absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-gray-400" />
                   <Input
                     placeholder={
                       activeTab === "notifications"
@@ -1518,14 +1518,14 @@ export default function UnifiedNotifications() {
                     }
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pr-10"
+                    className="pr-8 md:pr-10 text-sm"
                   />
                 </div>
               </div>
 
               {/* الفلاتر السريعة */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-                <h3 className="font-semibold text-gray-900 mb-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
                   فلاتر سريعة
                 </h3>
                 <div className="space-y-2">
@@ -1567,16 +1567,16 @@ export default function UnifiedNotifications() {
                       key={filterOption.id}
                       onClick={() => setFilter(filterOption.id as any)}
                       className={cn(
-                        "w-full flex items-center justify-between p-3 rounded-xl transition-all duration-200",
+                        "w-full flex items-center justify-between p-2 md:p-3 rounded-xl transition-all duration-200",
                         filter === filterOption.id
                           ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                           : "hover:bg-gray-50 text-gray-700",
                       )}
                     >
-                      <span className="font-medium">{filterOption.label}</span>
+                      <span className="font-medium text-sm md:text-base">{filterOption.label}</span>
                       <span
                         className={cn(
-                          "px-2 py-1 rounded-full text-xs font-bold",
+                          "px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-bold",
                           filter === filterOption.id
                             ? "bg-white/20"
                             : "bg-gray-100 text-gray-600",
@@ -1592,7 +1592,7 @@ export default function UnifiedNotifications() {
 
             {/* المحتوى الرئيسي */}
             <div className="flex-1">
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200">
                 {activeTab === "notifications" ? (
                   // قائمة الإشعارات
                   filteredNotifications.length === 0 ? (
@@ -1613,7 +1613,7 @@ export default function UnifiedNotifications() {
                           <div
                             key={notification.id}
                             className={cn(
-                              "p-3 transition-all duration-200 hover:bg-gray-50 cursor-pointer border-r-4",
+                              "p-2 md:p-3 transition-all duration-200 hover:bg-gray-50 cursor-pointer border-r-4",
                               getPriorityColor(notification.priority),
                               !notification.read && "bg-blue-50/50",
                             )}
@@ -1621,17 +1621,17 @@ export default function UnifiedNotifications() {
                               markAsRead(notification.id, "notification")
                             }
                           >
-                            <div className="flex items-start gap-4">
+                            <div className="flex items-start gap-2 md:gap-4">
                               {notification.avatar ? (
                                 <img
                                   src={notification.avatar}
                                   alt=""
-                                  className="w-9 h-9 rounded-full object-cover ring-2 ring-white shadow"
+                                  className="w-7 md:w-9 h-7 md:h-9 rounded-full object-cover ring-2 ring-white shadow"
                                 />
                               ) : (
                                 <div
                                   className={cn(
-                                    "w-9 h-9 rounded-full flex items-center justify-center",
+                                    "w-7 md:w-9 h-7 md:h-9 rounded-full flex items-center justify-center",
                                     notification.type === "success" &&
                                       "bg-green-100 text-green-600",
                                     notification.type === "warning" &&
@@ -1646,15 +1646,15 @@ export default function UnifiedNotifications() {
                                       "bg-blue-100 text-blue-600",
                                   )}
                                 >
-                                  <Icon className="w-5 h-5" />
+                                  <Icon className="w-3 md:w-5 h-3 md:h-5" />
                                 </div>
                               )}
 
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-2">
+                                <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
                                   <h3
                                     className={cn(
-                                      "text-sm font-semibold",
+                                      "text-xs md:text-sm font-semibold",
                                       notification.read
                                         ? "text-gray-700"
                                         : "text-gray-900",
@@ -1664,19 +1664,19 @@ export default function UnifiedNotifications() {
                                   </h3>
                                   {getTypeIcon(notification.type)}
                                   {notification.priority === "urgent" && (
-                                    <div className="flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-bold">
-                                      <Flame className="w-3 h-3 animate-pulse" />
-                                      عاجل
+                                    <div className="flex items-center gap-1 bg-red-100 text-red-700 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-bold">
+                                      <Flame className="w-2 md:w-3 h-2 md:h-3 animate-pulse" />
+                                      <span className="hidden md:inline">عاجل</span>
                                     </div>
                                   )}
                                   {!notification.read && (
-                                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                                    <div className="w-2 md:w-3 h-2 md:h-3 bg-blue-500 rounded-full animate-pulse" />
                                   )}
                                 </div>
 
                                 <p
                                   className={cn(
-                                    "text-sm mb-2",
+                                    "text-xs md:text-sm mb-1 md:mb-2",
                                     notification.read
                                       ? "text-gray-600"
                                       : "text-gray-700",
@@ -1686,13 +1686,14 @@ export default function UnifiedNotifications() {
                                 </p>
 
                                 <div className="flex items-center justify-between">
-                                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                                  <div className="flex items-center gap-2 md:gap-3 text-xs text-gray-500">
                                     <span className="flex items-center gap-1">
-                                      <Clock className="w-4 h-4" />
-                                      {formatTime(notification.timestamp)}
+                                      <Clock className="w-3 md:w-4 h-3 md:h-4" />
+                                      <span className="hidden md:inline">{formatTime(notification.timestamp)}</span>
+                                      <span className="md:hidden">{formatTime(notification.timestamp).split(' ')[0]}</span>
                                     </span>
                                     {notification.sourceSection && (
-                                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
+                                      <span className="bg-gray-100 text-gray-600 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs">
                                         {notification.sourceSection === "clinic"
                                           ? "العيادة"
                                           : notification.sourceSection ===
@@ -1709,28 +1710,29 @@ export default function UnifiedNotifications() {
                                     )}
                                   </div>
 
-                                  <div className="flex items-center gap-2">
+                                  <div className="flex items-center gap-1 md:gap-2">
                                     {notification.actionUrl && (
                                       <Link
                                         to={notification.actionUrl}
-                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                                        className="px-2 md:px-4 py-1 md:py-2 bg-blue-600 text-white rounded-lg text-xs md:text-sm font-medium hover:bg-blue-700 transition-colors"
                                         onClick={(e) => e.stopPropagation()}
                                       >
-                                        {notification.actionText}
+                                        <span className="hidden md:inline">{notification.actionText}</span>
+                                        <span className="md:hidden">عرض</span>
                                       </Link>
                                     )}
                                   </div>
                                 </div>
                               </div>
 
-                              <div className="flex flex-col gap-2">
+                              <div className="flex flex-col gap-1 md:gap-2">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     toggleStar(notification.id, "notification");
                                   }}
                                   className={cn(
-                                    "p-2 rounded-lg transition-colors",
+                                    "p-1.5 md:p-2 rounded-lg transition-colors",
                                     notification.starred
                                       ? "text-yellow-500 hover:text-yellow-600 bg-yellow-50"
                                       : "text-gray-400 hover:text-yellow-500 hover:bg-yellow-50",
@@ -1738,7 +1740,7 @@ export default function UnifiedNotifications() {
                                 >
                                   <Star
                                     className={cn(
-                                      "w-5 h-5",
+                                      "w-4 md:w-5 h-4 md:h-5",
                                       notification.starred && "fill-current",
                                     )}
                                   />
@@ -1749,9 +1751,9 @@ export default function UnifiedNotifications() {
                                     e.stopPropagation();
                                     removeItem(notification.id, "notification");
                                   }}
-                                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                  className="p-1.5 md:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                                 >
-                                  <Trash2 className="w-5 h-5" />
+                                  <Trash2 className="w-4 md:w-5 h-4 md:h-5" />
                                 </button>
                               </div>
                             </div>
@@ -1777,24 +1779,24 @@ export default function UnifiedNotifications() {
                       <div
                         key={message.id}
                         className={cn(
-                          "p-6 transition-all duration-200 hover:bg-gray-50 cursor-pointer border-r-4",
+                          "p-3 md:p-6 transition-all duration-200 hover:bg-gray-50 cursor-pointer border-r-4",
                           getPriorityColor(message.priority),
                           !message.read && "bg-blue-50/50",
                         )}
                         onClick={() => markAsRead(message.id, "message")}
                       >
-                        <div className="flex items-start gap-4">
+                        <div className="flex items-start gap-2 md:gap-4">
                           <div className="relative">
                             {message.senderAvatar ? (
                               <img
                                 src={message.senderAvatar}
                                 alt=""
-                                className="w-12 h-12 rounded-full object-cover ring-2 ring-white shadow-lg"
+                                className="w-8 md:w-12 h-8 md:h-12 rounded-full object-cover ring-2 ring-white shadow-lg"
                               />
                             ) : (
                               <div
                                 className={cn(
-                                  "w-12 h-12 rounded-full flex items-center justify-center",
+                                  "w-8 md:w-12 h-8 md:h-12 rounded-full flex items-center justify-center",
                                   message.type === "suppliers" &&
                                     "bg-green-100 text-green-600",
                                   message.type === "support" &&
@@ -1807,19 +1809,19 @@ export default function UnifiedNotifications() {
                                     "bg-teal-100 text-teal-600",
                                 )}
                               >
-                                <Mail className="w-6 h-6" />
+                                <Mail className="w-4 md:w-6 h-4 md:h-6" />
                               </div>
                             )}
                             {message.isOnline && (
-                              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+                              <div className="absolute -bottom-1 -right-1 w-3 md:w-4 h-3 md:h-4 bg-green-500 rounded-full border-2 border-white" />
                             )}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
+                            <div className="flex items-center gap-1 md:gap-2 mb-1">
                               <h3
                                 className={cn(
-                                  "font-semibold",
+                                  "font-semibold text-sm md:text-base",
                                   message.read
                                     ? "text-gray-700"
                                     : "text-gray-900",
@@ -1828,18 +1830,18 @@ export default function UnifiedNotifications() {
                                 {message.senderName}
                               </h3>
                               {message.senderRole && (
-                                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                <span className="text-xs text-gray-500 bg-gray-100 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full">
                                   {message.senderRole}
                                 </span>
                               )}
                               {!message.read && (
-                                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                                <div className="w-2 md:w-3 h-2 md:h-3 bg-blue-500 rounded-full animate-pulse" />
                               )}
                             </div>
 
                             <h4
                               className={cn(
-                                "text-lg font-medium mb-2",
+                                "text-sm md:text-lg font-medium mb-1 md:mb-2",
                                 message.read
                                   ? "text-gray-700"
                                   : "text-gray-900",
@@ -1850,7 +1852,7 @@ export default function UnifiedNotifications() {
 
                             <p
                               className={cn(
-                                "text-base mb-3",
+                                "text-xs md:text-base mb-2 md:mb-3",
                                 message.read
                                   ? "text-gray-600"
                                   : "text-gray-700",
@@ -1860,20 +1862,22 @@ export default function UnifiedNotifications() {
                             </p>
 
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-4 text-sm text-gray-500">
+                              <div className="flex items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-500">
                                 <span className="flex items-center gap-1">
-                                  <Clock className="w-4 h-4" />
-                                  {formatTime(message.timestamp)}
+                                  <Clock className="w-3 md:w-4 h-3 md:h-4" />
+                                  <span className="hidden md:inline">{formatTime(message.timestamp)}</span>
+                                  <span className="md:hidden">{formatTime(message.timestamp).split(' ')[0]}</span>
                                 </span>
                                 {message.attachments &&
                                   message.attachments.length > 0 && (
                                     <span className="flex items-center gap-1">
-                                      <Paperclip className="w-4 h-4" />
-                                      {message.attachments.length} مرفق
+                                      <Paperclip className="w-3 md:w-4 h-3 md:h-4" />
+                                      <span className="hidden md:inline">{message.attachments.length} مرفق</span>
+                                      <span className="md:hidden">{message.attachments.length}</span>
                                     </span>
                                   )}
                                 {message.sourceSection && (
-                                  <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
+                                  <span className="bg-gray-100 text-gray-600 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs">
                                     {message.sourceSection === "clinic"
                                       ? "العيادة"
                                       : message.sourceSection === "community"
@@ -1888,23 +1892,23 @@ export default function UnifiedNotifications() {
                                 )}
                               </div>
 
-                              <div className="flex items-center gap-2">
-                                <Button variant="outline" size="sm">
-                                  <Reply className="w-4 h-4 mr-1" />
-                                  رد
+                              <div className="flex items-center gap-1 md:gap-2">
+                                <Button variant="outline" size="sm" className="text-xs md:text-sm px-2 md:px-3 py-1 md:py-2">
+                                  <Reply className="w-3 md:w-4 h-3 md:h-4 mr-1" />
+                                  <span className="hidden md:inline">رد</span>
                                 </Button>
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex flex-col gap-2">
+                          <div className="flex flex-col gap-1 md:gap-2">
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 toggleStar(message.id, "message");
                               }}
                               className={cn(
-                                "p-2 rounded-lg transition-colors",
+                                "p-1.5 md:p-2 rounded-lg transition-colors",
                                 message.starred
                                   ? "text-yellow-500 hover:text-yellow-600 bg-yellow-50"
                                   : "text-gray-400 hover:text-yellow-500 hover:bg-yellow-50",
@@ -1912,7 +1916,7 @@ export default function UnifiedNotifications() {
                             >
                               <Star
                                 className={cn(
-                                  "w-5 h-5",
+                                  "w-4 md:w-5 h-4 md:h-5",
                                   message.starred && "fill-current",
                                 )}
                               />
@@ -1923,9 +1927,9 @@ export default function UnifiedNotifications() {
                                 e.stopPropagation();
                                 removeItem(message.id, "message");
                               }}
-                              className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              className="p-1.5 md:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                             >
-                              <Trash2 className="w-5 h-5" />
+                              <Trash2 className="w-4 md:w-5 h-4 md:h-5" />
                             </button>
                           </div>
                         </div>
