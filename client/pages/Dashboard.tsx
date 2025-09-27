@@ -101,34 +101,34 @@ const Dashboard = () => {
 
   return (
     <div
-      className={`min-h-screen bg-gray-50 space-y-3 sm:space-y-6 p-3 sm:p-6 ${isRTL ? "font-arabic" : ""}`}
+      className={`min-h-screen bg-gray-50 space-y-6 p-6 ${isRTL ? "font-arabic" : ""}`}
       dir="rtl"
     >
       {/* Clinic Selector */}
-      <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-200">
+      <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm sm:text-lg font-semibold text-gray-900">
-            لوحة تحكم إدارة العيادة
+          <h2 className="text-lg font-semibold text-gray-900">
+            لوحة تحكم إدارة العيا��ة
           </h2>
           <div className="relative">
             <button
               onClick={() => setIsClinicDropdownOpen(!isClinicDropdownOpen)}
-              className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-1.5 sm:py-2 bg-gray-50 hover:bg-gray-100 rounded-lg sm:rounded-xl transition-colors"
+              className="flex items-center gap-3 px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors"
             >
-              <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <Building2 className="w-5 h-5 text-blue-600" />
               <div className="text-right">
-                <div className="font-medium text-gray-900 text-xs sm:text-sm">
+                <div className="font-medium text-gray-900">
                   {clinics.find((c) => c.id === selectedClinic)?.name}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-sm text-gray-500">
                   {clinics.find((c) => c.id === selectedClinic)?.location}
                 </div>
               </div>
-              <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
+              <ChevronDown className="w-4 h-4 text-gray-500" />
             </button>
 
             {isClinicDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 sm:w-80 bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 z-50">
+              <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50">
                 <div className="p-2">
                   {clinics.map((clinic) => (
                     <button
@@ -138,23 +138,23 @@ const Dashboard = () => {
                         setIsClinicDropdownOpen(false);
                       }}
                       className={cn(
-                        "w-full text-right p-2 sm:p-3 rounded-lg transition-colors flex items-center gap-2 sm:gap-3",
+                        "w-full text-right p-3 rounded-lg transition-colors flex items-center gap-3",
                         selectedClinic === clinic.id
                           ? "bg-blue-50 text-blue-700 border border-blue-200"
                           : "hover:bg-gray-50",
                       )}
                     >
-                      <Building2 className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                      <Building2 className="w-4 h-4 text-blue-600" />
                       <div className="flex-1">
-                        <div className="font-medium text-xs sm:text-sm">{clinic.name}</div>
-                        <div className="text-xs text-gray-500 flex items-center gap-1 sm:gap-2">
+                        <div className="font-medium">{clinic.name}</div>
+                        <div className="text-sm text-gray-500 flex items-center gap-2">
                           <span>{clinic.location}</span>
                           <span>•</span>
                           <span>{clinic.patients} مريض</span>
                         </div>
                       </div>
                       {selectedClinic === clinic.id && (
-                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                        <CheckCircle className="w-4 h-4 text-blue-600" />
                       )}
                     </button>
                   ))}
@@ -166,76 +166,76 @@ const Dashboard = () => {
       </div>
 
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-xl sm:rounded-3xl p-4 sm:p-8 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute top-0 right-0 w-20 h-20 sm:w-40 sm:h-40 bg-white/10 rounded-full -translate-y-8 sm:-translate-y-16 translate-x-8 sm:translate-x-16"></div>
-        <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-32 sm:h-32 bg-white/10 rounded-full translate-y-8 sm:translate-y-16 -translate-x-8 sm:-translate-x-16"></div>
+        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-16 -translate-x-16"></div>
         <div className="relative z-10">
-          <h1 className="text-lg sm:text-3xl font-bold mb-1 sm:mb-2">
+          <h1 className="text-3xl font-bold mb-2">
             {language === "ar"
               ? "مرحباً بك، د. أحمد!"
               : "Welcome back, Dr. Ahmed!"}
           </h1>
-          <p className="text-blue-100 text-sm sm:text-lg mb-2 sm:mb-4">{currentDate}</p>
-          <p className="text-blue-100 text-xs sm:text-base">
+          <p className="text-blue-100 text-lg mb-4">{currentDate}</p>
+          <p className="text-blue-100">
             لديك {12} موعد اليوم و {3} مهام معلقة
           </p>
 
           {/* Quick Shortcuts */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-3 sm:mt-6 mb-3 sm:mb-6">
+          <div className="grid grid-cols-3 gap-4 mt-6 mb-6">
             <button
               onClick={() => openModal("notifications")}
-              className="bg-white/20 backdrop-blur-sm p-2 sm:p-4 rounded-xl sm:rounded-2xl text-white hover:bg-white/30 transition-all group relative"
+              className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl text-white hover:bg-white/30 transition-all group relative"
             >
-              <div className="flex flex-col items-center gap-1 sm:gap-2">
+              <div className="flex flex-col items-center gap-2">
                 <div className="relative">
-                  <Bell className="w-4 h-4 sm:w-6 sm:h-6" />
-                  <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <Bell className="w-6 h-6" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                     5
                   </span>
                 </div>
-                <span className="text-xs sm:text-sm font-medium">الإشعارات</span>
+                <span className="text-sm font-medium">الإشعارات</span>
               </div>
             </button>
 
             <button
               onClick={() => openModal("messages")}
-              className="bg-white/20 backdrop-blur-sm p-2 sm:p-4 rounded-xl sm:rounded-2xl text-white hover:bg-white/30 transition-all group relative"
+              className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl text-white hover:bg-white/30 transition-all group relative"
             >
-              <div className="flex flex-col items-center gap-1 sm:gap-2">
+              <div className="flex flex-col items-center gap-2">
                 <div className="relative">
-                  <MessageSquare className="w-4 h-4 sm:w-6 sm:h-6" />
-                  <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <MessageSquare className="w-6 h-6" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">
                     8
                   </span>
                 </div>
-                <span className="text-xs sm:text-sm font-medium">الرسائل</span>
+                <span className="text-sm font-medium">ا��رسائل</span>
               </div>
             </button>
 
             <button
               onClick={() => openModal("reminders")}
-              className="bg-white/20 backdrop-blur-sm p-2 sm:p-4 rounded-xl sm:rounded-2xl text-white hover:bg-white/30 transition-all group relative"
+              className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl text-white hover:bg-white/30 transition-all group relative"
             >
-              <div className="flex flex-col items-center gap-1 sm:gap-2">
+              <div className="flex flex-col items-center gap-2">
                 <div className="relative">
-                  <Clock className="w-4 h-4 sm:w-6 sm:h-6" />
-                  <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <Clock className="w-6 h-6" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 text-white text-xs rounded-full flex items-center justify-center">
                     3
                   </span>
                 </div>
-                <span className="text-xs sm:text-sm font-medium">التذكيرات</span>
+                <span className="text-sm font-medium">التذكيرات</span>
               </div>
             </button>
           </div>
 
-          <div className="flex gap-2 sm:gap-4">
-            <button className="bg-white/20 backdrop-blur-sm px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl text-white font-medium hover:bg-white/30 transition-all flex items-center gap-1 sm:gap-2 text-xs sm:text-base">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="flex gap-4">
+            <button className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-xl text-white font-medium hover:bg-white/30 transition-all flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
               عرض المواعيد
             </button>
-            <button className="bg-white text-blue-600 px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium hover:bg-blue-50 transition-all flex items-center gap-1 sm:gap-2 text-xs sm:text-base">
-              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+            <button className="bg-white text-blue-600 px-6 py-3 rounded-xl font-medium hover:bg-blue-50 transition-all flex items-center gap-2">
+              <Plus className="w-5 h-5" />
               موعد جديد
             </button>
           </div>
@@ -243,35 +243,35 @@ const Dashboard = () => {
       </div>
 
       {/* Quick Stats - Bento Style */}
-      <div className="grid grid-cols-12 gap-3 sm:gap-6">
+      <div className="grid grid-cols-12 gap-6">
         {/* Main Revenue Card */}
-        <div className="col-span-12 lg:col-span-8 bg-white rounded-xl sm:rounded-3xl p-4 sm:p-8 shadow-sm border border-gray-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-16 h-16 sm:w-32 sm:h-32 bg-gradient-to-bl from-green-100 to-transparent rounded-full -translate-y-8 sm:-translate-y-16 translate-x-8 sm:translate-x-16"></div>
+        <div className="col-span-12 lg:col-span-8 bg-white rounded-3xl p-8 shadow-sm border border-gray-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-green-100 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
           <div className="relative z-10">
-            <div className="flex items-start justify-between mb-3 sm:mb-6">
+            <div className="flex items-start justify-between mb-6">
               <div>
-                <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   الإيرادات الشهرية
                 </h3>
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <span className="text-xl sm:text-4xl font-bold text-green-600">
+                <div className="flex items-center gap-4">
+                  <span className="text-4xl font-bold text-green-600">
                     2.4M د.ع
                   </span>
-                  <span className="flex items-center gap-1 text-xs sm:text-sm bg-green-100 text-green-700 px-2 sm:px-3 py-1 rounded-full">
-                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="flex items-center gap-1 text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                    <TrendingUp className="w-4 h-4" />
                     +15.3%
                   </span>
                 </div>
-                <p className="text-gray-600 mt-1 sm:mt-2 text-xs sm:text-base">مقارنة بالشهر الماضي</p>
+                <p className="text-gray-600 mt-2">مقارنة بالشهر الماضي</p>
               </div>
-              <div className="w-10 h-10 sm:w-16 sm:h-16 bg-green-100 rounded-xl sm:rounded-2xl flex items-center justify-center">
-                <DollarSign className="w-5 h-5 sm:w-8 sm:h-8 text-green-600" />
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center">
+                <DollarSign className="w-8 h-8 text-green-600" />
               </div>
             </div>
 
             {/* Mini Chart */}
-            <div className="h-16 sm:h-24 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl flex items-end justify-center p-2 sm:p-4">
-              <div className="flex items-end gap-0.5 sm:gap-1 h-full">
+            <div className="h-24 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl flex items-end justify-center p-4">
+              <div className="flex items-end gap-1 h-full">
                 {[40, 65, 45, 80, 60, 75, 90, 85, 70, 95, 100, 85].map(
                   (height, i) => (
                     <div
@@ -287,22 +287,22 @@ const Dashboard = () => {
         </div>
 
         {/* Patients Today */}
-        <div className="col-span-12 lg:col-span-4 bg-white rounded-xl sm:rounded-3xl p-4 sm:p-6 shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 bg-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center">
-              <Users className="w-5 h-5 sm:w-7 sm:h-7 text-blue-600" />
+        <div className="col-span-12 lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center">
+              <Users className="w-7 h-7 text-blue-600" />
             </div>
             <div className="text-right">
-              <p className="text-xs sm:text-sm text-gray-600">مرضى اليوم</p>
-              <p className="text-xl sm:text-3xl font-bold text-gray-900">24</p>
+              <p className="text-sm text-gray-600">مرضى اليوم</p>
+              <p className="text-3xl font-bold text-gray-900">24</p>
             </div>
           </div>
-          <div className="space-y-2 sm:space-y-3">
-            <div className="flex items-center justify-between text-xs sm:text-sm">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">جدد</span>
               <span className="font-semibold text-blue-600">6</span>
             </div>
-            <div className="flex items-center justify-between text-xs sm:text-sm">
+            <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">متابعة</span>
               <span className="font-semibold text-green-600">18</span>
             </div>

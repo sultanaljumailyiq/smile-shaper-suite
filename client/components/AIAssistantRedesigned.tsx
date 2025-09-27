@@ -549,39 +549,39 @@ const AIAssistantRedesigned = () => {
           <>
             {/* الاقتراحات الذكية - تظهر فقط عند النقر */}
             {showSuggestions && (
-              <div className="p-2 sm:p-3 border-b border-gray-100 bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-1.5">
-                    <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4 text-amber-500" />
-                    <span className="font-bold text-gray-700 text-xs sm:text-sm">
+              <div className="p-3 sm:p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <div className="flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
+                    <span className="font-bold text-gray-700 text-sm sm:text-base">
                       الاقتراحات الذكية
                     </span>
-                    <div className="flex-1 h-px bg-gradient-to-r from-amber-200 to-transparent ml-1.5 sm:ml-2"></div>
+                    <div className="flex-1 h-px bg-gradient-to-r from-amber-200 to-transparent ml-2 sm:ml-3"></div>
                   </div>
                   <button
                     onClick={() => setShowSuggestions(false)}
                     className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
                   >
-                    <X className="w-3 h-3 text-gray-500" />
+                    <X className="w-4 h-4 text-gray-500" />
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {predefinedQuestions.slice(0, 6).map((question, index) => (
                     <button
                       key={index}
                       onClick={() => handleQuestionClick(question.text)}
-                      className="group p-1.5 sm:p-2.5 bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl border border-gray-200/50 hover:border-blue-300 hover:bg-blue-50/80 transition-all duration-300 text-right hover:scale-[1.01] hover:shadow-md"
+                      className="group p-2 sm:p-4 bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-gray-200/50 hover:border-blue-300 hover:bg-blue-50/80 transition-all duration-300 text-right hover:scale-[1.02] hover:shadow-lg"
                     >
-                      <div className="flex items-start gap-1.5 sm:gap-2">
-                        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md sm:rounded-lg flex items-center justify-center text-white text-xs sm:text-sm flex-shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="flex items-start gap-2 sm:gap-3">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg sm:rounded-xl flex items-center justify-center text-white text-sm sm:text-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                           {question.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-gray-800 text-xs leading-tight mb-0.5 group-hover:text-blue-700 transition-colors">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm leading-snug mb-1 group-hover:text-blue-700 transition-colors">
                             {question.text}
                           </div>
-                          <div className="text-xs text-gray-500 mb-0.5 hidden sm:block">
+                          <div className="text-xs text-gray-500 mb-1 hidden sm:block">
                             {question.description}
                           </div>
                           <div className="text-xs text-blue-600 font-medium">
@@ -594,12 +594,12 @@ const AIAssistantRedesigned = () => {
                 </div>
 
                 {/* الإجراءات السريعة */}
-                <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-gray-200/50">
-                  <div className="text-xs font-semibold text-gray-600 mb-1.5 sm:mb-2 flex items-center gap-1.5">
-                    <Zap className="w-3 h-3 text-blue-500" />
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200/50">
+                  <div className="text-xs font-semibold text-gray-600 mb-2 sm:mb-3 flex items-center gap-2">
+                    <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
                     إجراءات سريعة:
                   </div>
-                  <div className="grid grid-cols-3 sm:grid-cols-3 gap-1 sm:gap-1.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-2">
                     {quickActions.slice(0, 6).map((action) => {
                       const Icon = action.icon;
                       return (
@@ -609,14 +609,14 @@ const AIAssistantRedesigned = () => {
                             handleSendMessage(action.prompt);
                           }}
                           className={cn(
-                            "flex flex-col items-center gap-0.5 p-1.5 sm:p-2 rounded-lg transition-all hover:scale-105 transform active:scale-95",
+                            "flex flex-col items-center gap-1 p-3 rounded-xl transition-all hover:scale-105 transform active:scale-95",
                             action.color,
-                            "text-white shadow-md hover:shadow-lg border border-white/20",
-                            "hover:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/50",
+                            "text-white shadow-lg hover:shadow-xl border border-white/20",
+                            "hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50",
                           )}
                         >
-                          <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                          <span className="text-xs font-medium text-center leading-none">
+                          <Icon className="w-5 h-5" />
+                          <span className="text-xs font-medium text-center leading-tight">
                             {action.label}
                           </span>
                         </button>
