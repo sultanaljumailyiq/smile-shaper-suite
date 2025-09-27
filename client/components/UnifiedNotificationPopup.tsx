@@ -222,8 +222,8 @@ export default function UnifiedNotificationPopup({
   if (!isOpen) return null;
 
   const positionClasses = {
-    "top-right": "top-16 right-4",
-    "top-left": "top-16 left-4",
+    "top-right": "top-16 sm:right-4 right-0",
+    "top-left": "top-16 sm:left-4 left-0",
     center: "top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
   };
 
@@ -260,9 +260,11 @@ export default function UnifiedNotificationPopup({
       {/* Popup */}
       <div
         className={cn(
-          "absolute w-full max-w-md h-[600px] max-h-[90vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col",
+          "absolute w-full bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col",
+          // Mobile: full width with margins, Desktop: fixed width
+          "max-w-[calc(100vw-2rem)] h-[90vh] mx-4",
+          "sm:max-w-md sm:h-[600px] sm:max-h-[90vh] sm:mx-0",
           positionClasses[position],
-          "mx-4 lg:mx-0", // Add margins on mobile
         )}
       >
         {/* Header */}
