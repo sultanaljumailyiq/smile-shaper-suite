@@ -21,6 +21,9 @@ import {
   UserCheck,
   TrendingUp,
   BookOpen,
+  Map,
+  Ambulance,
+  Globe,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
@@ -137,6 +140,46 @@ const articles = [
     categoryEn: "Prevention",
     image:
       "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=400&h=250&fit=crop",
+  },
+];
+
+// Features data (same as ModernMedicalServices)
+const mainFeatures = [
+  {
+    title: "خريطة تفاعلية ذكية",
+    description: "ابحث عن العيادات والأطباء بالقرب منك",
+    icon: Map,
+    color: "teal",
+  },
+  {
+    title: "تشخيص بالذكاء الاصطناعي",
+    description: "احصل على تشخيص أولي دقيق في دقائق",
+    icon: Brain,
+    color: "purple",
+  },
+  {
+    title: "طوارئ على مدار الساعة",
+    description: "خدمة طوارئ متاحة 24/7",
+    icon: Ambulance,
+    color: "red",
+  },
+  {
+    title: "محتوى تعليمي موثوق",
+    description: "مقالات ونصائح طبية من مصادر موثوقة",
+    icon: BookOpen,
+    color: "emerald",
+  },
+  {
+    title: "أمان وخصوصية",
+    description: "حماية كاملة لبياناتك الطبية",
+    icon: Shield,
+    color: "blue",
+  },
+  {
+    title: "دعم متعدد اللغات",
+    description: "خدماتنا متاحة بجميع اللغات",
+    icon: Globe,
+    color: "indigo",
   },
 ];
 
@@ -569,6 +612,48 @@ export default function LandingPage() {
               <BookOpen className="w-5 h-5" />
               عرض ج��يع المقالات
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white" />
+
+      {/* Features Section - Same as Medical Services */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mt-8 animate-fade-in">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                لماذا تختارنا؟
+              </h2>
+              <p className="text-gray-600">
+                نوفر لك أفضل الخدمات الطبية بأحدث التقنيات وأعلى معايير الجودة
+                والأمان
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center md:gap-4 gap-1">
+              {mainFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className="text-center p-4 hover:bg-gray-50 rounded-lg transition-colors hover-scale"
+                >
+                  <div
+                    className={cn(
+                      "w-10 h-10 mx-auto rounded-lg flex items-center justify-center text-white mb-2 shadow-md",
+                      `bg-${feature.color}-500`,
+                    )}
+                  >
+                    <feature.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 text-sm mb-1">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 text-xs">{feature.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
