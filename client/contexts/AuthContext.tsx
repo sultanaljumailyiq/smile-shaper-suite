@@ -306,10 +306,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setAuthState((prev) => ({ ...prev, isLoading: true }));
 
       if (supabaseEnabled && supabase) {
+        const redirectUrl = `${window.location.origin}/`;
+        
         const { error, data } = await supabase.auth.signUp({
           email: userData.email,
           password: userData.password,
           options: {
+            emailRedirectTo: redirectUrl,
             data: {
               name: userData.name,
               arabicName: userData.arabicName,

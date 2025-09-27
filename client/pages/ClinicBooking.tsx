@@ -216,14 +216,15 @@ export default function ClinicBooking() {
                         alt={`شعار ${clinicData.name}`}
                         className="w-12 h-12 rounded-lg object-cover"
                         onError={(e) => {
-                          // fallback إذا فشل تحميل الصورة
+                          // Safe fallback without innerHTML injection
                           const target = e.target as HTMLImageElement;
                           target.style.display = "none";
-                          target.parentElement!.innerHTML = `
-                            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                              <span class="text-white font-bold text-lg">${clinicData.name.charAt(0)}</span>
-                            </div>
-                          `;
+                          
+                          // Create safe fallback element
+                          const fallback = document.createElement("div");
+                          fallback.className = "w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center";
+                          fallback.innerHTML = `<span class="text-white font-bold text-lg">${clinicData.name.charAt(0)}</span>`;
+                          target.parentElement?.appendChild(fallback);
                         }}
                       />
                     </div>
@@ -454,13 +455,15 @@ export default function ClinicBooking() {
                   alt={`شعار ${clinicData.name}`}
                   className="w-10 h-10 rounded-lg object-cover"
                   onError={(e) => {
+                    // Safe fallback without innerHTML injection
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
-                    target.parentElement!.innerHTML = `
-                      <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">${clinicData.name.charAt(0)}</span>
-                      </div>
-                    `;
+                    
+                    // Create safe fallback element
+                    const fallback = document.createElement("div");
+                    fallback.className = "w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center";
+                    fallback.innerHTML = `<span class="text-white font-bold text-sm">${clinicData.name.charAt(0)}</span>`;
+                    target.parentElement?.appendChild(fallback);
                   }}
                 />
               </div>

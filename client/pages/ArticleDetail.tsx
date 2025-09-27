@@ -238,7 +238,7 @@ export default function ArticleDetail() {
             {/* Article Content */}
             <div 
               className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: articleData.content }}
+              dangerouslySetInnerHTML={{ __html: require("@/utils/sanitizer").sanitizeHtml(articleData.content) }}
             />
 
             {/* Tags */}

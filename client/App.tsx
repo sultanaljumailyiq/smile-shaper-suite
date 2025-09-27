@@ -484,53 +484,39 @@ const App = () => (
                             {/* Auth Routes */}
                             <Route
                               path="/auth"
-                              element={
-                                <Auth mode="signin" userType="dentist" />
-                              }
+                              element={<Auth mode="signin" />}
                             />
                             <Route
                               path="/signin"
-                              element={
-                                <Auth mode="signin" userType="dentist" />
-                              }
+                              element={<Auth mode="signin" />}
                             />
                             <Route
                               path="/signup"
-                              element={
-                                <Auth mode="signup" userType="dentist" />
-                              }
+                              element={<Auth mode="signup" />}
                             />
                             <Route
                               path="/signin/patient"
-                              element={
-                                <Auth mode="signin" userType="patient" />
-                              }
+                              element={<Auth mode="signin" />}
                             />
                             <Route
                               path="/signup/patient"
-                              element={
-                                <Auth mode="signup" userType="patient" />
-                              }
+                              element={<Auth mode="signup" />}
                             />
                             <Route
                               path="/signin/supplier"
-                              element={
-                                <Auth mode="signin" userType="supplier" />
-                              }
+                              element={<Auth mode="signin" />}
                             />
                             <Route
                               path="/signup/supplier"
-                              element={
-                                <Auth mode="signup" userType="supplier" />
-                              }
+                              element={<Auth mode="signup" />}
                             />
                             <Route
                               path="/signin/admin"
-                              element={<Auth mode="signin" userType="admin" />}
+                              element={<Auth mode="signin" />}
                             />
                             <Route
                               path="/signup/admin"
-                              element={<Auth mode="signup" userType="admin" />}
+                              element={<Auth mode="signup" />}
                             />
 
                             {/* Dentist Hub Routes */}

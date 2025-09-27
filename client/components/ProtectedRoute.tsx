@@ -10,31 +10,20 @@ interface ProtectedRouteProps {
   allowedRoles?: string[];
 }
 
-// Mock authentication service - in real app this would connect to actual auth
+// Import the real authentication context
+import { useAuth as useRealAuth } from "@/contexts/AuthContext";
+import { UserRole } from "@/types/system";
+
+// Use the real authentication instead of mock
 const useAuth = () => {
-  // This would typically come from a context or auth service
-  const getCurrentUser = () => {
-    // Mock user data - in real app this would come from localStorage, context, or API
-    const mockUser = {
-      id: "1",
-      name: "د. أحمد الطبيب",
-      email: "dr.ahmed@clinic.com",
-      role: "dentist", // Change to "admin" to test admin access
-      isAuthenticated: true,
-      permissions: ["view_patients", "manage_appointments", "view_reports"],
-    };
-
-    return mockUser;
-  };
-
-  const user = getCurrentUser();
-
+  const auth = useRealAuth();
+  
   return {
-    isAuthenticated: user.isAuthenticated,
-    user,
-    hasRole: (role: string) => user.role === role,
-    hasAnyRole: (roles: string[]) => roles.includes(user.role),
-    isAdmin: () => user.role === "admin",
+    isAuthenticated: auth.isAuthenticated,
+    user: auth.user,
+    hasRole: (role: string) => auth.user?.role === role,
+    hasAnyRole: (roles: string[]) => roles.some(role => auth.user?.role === role),
+    isAdmin: () => auth.user?.role === UserRole.PLATFORM_ADMIN,
   };
 };
 
