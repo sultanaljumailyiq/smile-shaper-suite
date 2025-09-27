@@ -61,7 +61,7 @@ export const NavigationSearch: React.FC<NavigationSearchProps> = ({
       id: "3",
       title: "دليل العيادات",
       description: "العيادات المعتمدة والمتخصصة",
-      path: "/clinics",
+      path: "/dentist-hub/clinics",
       category: "خدمات",
       icon: "🏥",
     },

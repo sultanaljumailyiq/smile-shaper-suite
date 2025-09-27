@@ -117,7 +117,7 @@ import EmergencyHospitals from "./pages/EmergencyHospitals";
 import PainManagement from "./pages/PainManagement";
 import DentalEmergency from "./pages/DentalEmergency";
 import BrowseDentists from "./pages/BrowseDentists";
-import ClinicsManager from "./pages/ClinicsManager";
+// import ClinicsManager from "./pages/ClinicsManager"; // Merged into dentist-hub/clinics
 
 // النظام الجديد /clinic
 import ClinicReservations from "./pages/clinic/ClinicReservations";
@@ -385,7 +385,7 @@ const App = () => (
                             />
                             <Route
                               path="/clinics"
-                              element={<ClinicsManager />}
+                              element={<Navigate to="/dentist-hub/clinics" replace />}
                             />
                             <Route
                               path="/favorites"

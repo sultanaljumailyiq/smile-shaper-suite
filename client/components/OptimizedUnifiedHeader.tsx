@@ -499,7 +499,7 @@ export default function OptimizedUnifiedHeader({
                       </Link>
 
                       <Link
-                        to="/clinics"
+                        to="/dentist-hub/clinics"
                         className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
                         onClick={() => setShowUserMenu(false)}
                       >

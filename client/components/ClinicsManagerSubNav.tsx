@@ -34,7 +34,7 @@ export default function ClinicsManagerSubNav() {
     p.set("tab", id);
     const base = location.pathname.startsWith("/dentist-hub/clinics")
       ? "/dentist-hub/clinics"
-      : "/clinics";
+      : "/dentist-hub/clinics"; // Always redirect to dentist-hub/clinics
     return `${base}?${p.toString()}`;
   };
 
