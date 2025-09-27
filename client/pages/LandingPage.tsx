@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import CompactInteractiveMap from "@/components/CompactInteractiveMap";
 import EmergencyNearbySection from "@/components/EmergencyNearbySection";
+import ImageWithFallback from "@/components/ImageWithFallback";
 
 // Mock data for clinics in Iraq
 const nearbyClinicas = [
@@ -330,15 +331,15 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 أفضل صديق وفي لابتسامتك مع{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                   الرعاية المدعومة بالذكاء الاصطناعي
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                اح��ل على تشخيص أسنان فوري بالذكاء الاصطناعي، ابحث عن أفضل
-                ��لعيادات بالقرب منك، واحجز المواعيد أ��نلاين. انضم للآلاف الذين
+              <p className="text-lg text-gray-600 mb-8">
+                احصل على تشخيص أسنان فوري بالذكاء الاصطناعي، ابحث عن أفضل
+                العيادات بالقرب منك، واحجز المواعيد أونلاين. انضم للآلاف الذين
                 يثقون بزيندنتا لصحة أفواههم.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -359,10 +360,11 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="relative">
-              <img
+              <ImageWithFallback
                 src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=400&fit=crop"
                 alt="Modern dental clinic"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto"
+                type="clinic"
               />
               <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg">
                 <div className="flex items-center gap-3">
@@ -384,12 +386,12 @@ export default function LandingPage() {
       <section id="services" className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-2">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
               رعاية الأسنان المدعومة بالذكاء الاصطناعي
             </h2>
-            <p className="text-base text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto">
               اكتشف مستقبل طب الأسنان مع أدوات التشخيص المتقدمة بالذكاء
-              الاصطناعي وتوص��ات العل��ج المتخصصة.
+              الاصطناعي وتوصيات العلاج المتخصصة.
             </p>
           </div>
 
@@ -520,7 +522,7 @@ export default function LandingPage() {
       <section id="articles" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-900">
               ابق مطلعاً على أحدث المقالات
             </h2>
           </div>
@@ -534,11 +536,11 @@ export default function LandingPage() {
               >
                 <div className="bg-white rounded-2xl overflow-hidden">
                   <div className="relative">
-                    <img
+                    <ImageWithFallback
                       src={article.image}
                       alt={article.title}
                       className="w-full h-44 object-cover"
-                      onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
+                      type="article"
                     />
                     <div className="absolute top-2 left-2">
                       <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] font-medium">

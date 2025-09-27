@@ -26,6 +26,7 @@ import {
   Target,
   ArrowRight,
 } from "lucide-react";
+import ImageWithFallback from "@/components/ImageWithFallback";
 
 interface Clinic {
   id: string;
@@ -308,13 +309,12 @@ const CompactInteractiveMap: React.FC<CompactInteractiveMapProps> = ({
           >
             {/* Compact Clinic Image */}
             <div className="relative h-20 md:h-24 bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center overflow-hidden">
-              <img
+              <ImageWithFallback
                 src={clinic.image}
                 alt={clinic.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "/placeholder.svg";
-                }}
+                type="clinic"
+                clinicName={clinic.name}
               />
               <div className="absolute top-1 right-1 md:top-2 md:right-2">
                 <div
