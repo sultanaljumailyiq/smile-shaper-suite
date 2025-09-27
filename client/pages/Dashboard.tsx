@@ -499,61 +499,61 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="col-span-12 bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">
+        <div className="col-span-12 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+          <h3 className="text-base font-bold text-gray-900 mb-4">
             إجراءات سريعة
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <button className="flex flex-col items-center gap-3 p-4 bg-blue-50 rounded-2xl hover:bg-blue-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-                <Plus className="w-6 h-6 text-white" />
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <button className="flex flex-col items-center gap-2 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <Plus className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-blue-700">
+              <span className="text-xs font-medium text-blue-700">
                 موعد جديد
               </span>
             </button>
 
-            <button className="flex flex-col items-center gap-3 p-4 bg-green-50 rounded-2xl hover:bg-green-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-white" />
+            <button className="flex flex-col items-center gap-2 p-3 bg-green-50 rounded-xl hover:bg-green-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                <Users className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-green-700">
+              <span className="text-xs font-medium text-green-700">
                 مريض جديد
               </span>
             </button>
 
-            <button className="flex flex-col items-center gap-3 p-4 bg-purple-50 rounded-2xl hover:bg-purple-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-white" />
+            <button className="flex flex-col items-center gap-2 p-3 bg-purple-50 rounded-xl hover:bg-purple-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
+                <BarChart3 className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-purple-700">
+              <span className="text-xs font-medium text-purple-700">
                 التقارير
               </span>
             </button>
 
-            <button className="flex flex-col items-center gap-3 p-4 bg-orange-50 rounded-2xl hover:bg-orange-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center">
-                <Package className="w-6 h-6 text-white" />
+            <button className="flex flex-col items-center gap-2 p-3 bg-orange-50 rounded-xl hover:bg-orange-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
+                <Package className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-orange-700">
+              <span className="text-xs font-medium text-orange-700">
                 المخزون
               </span>
             </button>
 
-            <button className="flex flex-col items-center gap-3 p-4 bg-indigo-50 rounded-2xl hover:bg-indigo-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-white" />
+            <button className="flex flex-col items-center gap-2 p-3 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                <DollarSign className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-indigo-700">
+              <span className="text-xs font-medium text-indigo-700">
                 المالية
               </span>
             </button>
 
-            <button className="flex flex-col items-center gap-3 p-4 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all transform hover:scale-105">
-              <div className="w-12 h-12 bg-gray-600 rounded-xl flex items-center justify-center">
-                <Settings className="w-6 h-6 text-white" />
+            <button className="flex flex-col items-center gap-2 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all transform hover:scale-105">
+              <div className="w-8 h-8 bg-gray-600 rounded-lg flex items-center justify-center">
+                <Settings className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-xs font-medium text-gray-700">
                 الإعدادات
               </span>
             </button>
