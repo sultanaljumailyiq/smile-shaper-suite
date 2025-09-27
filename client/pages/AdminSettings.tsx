@@ -169,78 +169,84 @@ export default function AdminSettings() {
   return <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Settings className="w-6 h-6 text-white" />
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <Settings className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-lg sm:text-2xl font-bold text-gray-900">
                   إعدادات النظام
                 </h1>
-                
               </div>
             </div>
-            <Link to="/admin/dashboard">
-              <Button variant="outline" size="sm">
-                العودة لإدارة النظام
-              </Button>
-            </Link>
+            <div className="flex gap-2">
+              <Link to="/admin/platform-admin">
+                <Button variant="default" size="sm" className="text-xs sm:text-sm">
+                  إدارة المنصة
+                </Button>
+              </Link>
+              <Link to="/admin/dashboard">
+                <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                  العودة لإدارة النظام
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="general">عام</TabsTrigger>
-            <TabsTrigger value="sections">الأقسام</TabsTrigger>
-            <TabsTrigger value="theme">المظهر</TabsTrigger>
-            <TabsTrigger value="api">API</TabsTrigger>
-            <TabsTrigger value="security">الأمان</TabsTrigger>
-            <TabsTrigger value="system">النظام</TabsTrigger>
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-3 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 text-xs sm:text-sm">
+            <TabsTrigger value="general" className="text-xs sm:text-sm">عام</TabsTrigger>
+            <TabsTrigger value="sections" className="text-xs sm:text-sm">الأقسام</TabsTrigger>
+            <TabsTrigger value="theme" className="text-xs sm:text-sm">المظهر</TabsTrigger>
+            <TabsTrigger value="api" className="text-xs sm:text-sm">API</TabsTrigger>
+            <TabsTrigger value="security" className="text-xs sm:text-sm">الأمان</TabsTrigger>
+            <TabsTrigger value="system" className="text-xs sm:text-sm">النظام</TabsTrigger>
           </TabsList>
 
           {/* General Settings */}
-          <TabsContent value="general" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Globe className="w-5 h-5" />
+          <TabsContent value="general" className="space-y-3 sm:space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
+              <Card className="text-sm">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-lg">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                     إعدادات عامة
                   </CardTitle>
-                  <CardDescription>الإعدادات الأساسية للمنصة</CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">الإعدادات الأساسية للمنصة</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="site-name">اسم المنصة</Label>
-                    <Input id="site-name" defaultValue="منصة الأسنان الرقمية" />
+                <CardContent className="space-y-3 sm:space-y-4 pt-0">
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="site-name" className="text-xs sm:text-sm">اسم المنصة</Label>
+                    <Input id="site-name" defaultValue="منصة الأسنان الرقمية" className="h-8 sm:h-10 text-xs sm:text-sm" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="site-description">وصف المنصة</Label>
-                    <Textarea id="site-description" defaultValue="منصة شاملة للخدمات الطبية وإدارة العيادات" rows={3} />
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="site-description" className="text-xs sm:text-sm">وصف المنصة</Label>
+                    <Textarea id="site-description" defaultValue="منصة شاملة للخدمات الطبية وإدارة العيادات" rows={2} className="text-xs sm:text-sm" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email">البريد الإلكتروني</Label>
-                    <Input id="contact-email" type="email" defaultValue="info@dentalplatform.com" />
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="contact-email" className="text-xs sm:text-sm">البريد الإلكتروني</Label>
+                    <Input id="contact-email" type="email" defaultValue="info@dentalplatform.com" className="h-8 sm:h-10 text-xs sm:text-sm" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-phone">رقم الهاتف</Label>
-                    <Input id="contact-phone" defaultValue="+964 770 000 0000" />
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="contact-phone" className="text-xs sm:text-sm">رقم الهاتف</Label>
+                    <Input id="contact-phone" defaultValue="+964 770 000 0000" className="h-8 sm:h-10 text-xs sm:text-sm" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Languages className="w-5 h-5" />
+              <Card className="text-sm">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-lg">
+                    <Languages className="w-4 h-4 sm:w-5 sm:h-5" />
                     إعدادات اللغة والمنطقة
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-3 sm:space-y-4 pt-0">
                   <div className="space-y-2">
                     <Label htmlFor="default-language">اللغة الافتراضية</Label>
                     <Select defaultValue="ar">
@@ -287,8 +293,8 @@ export default function AdminSettings() {
             </div>
 
             <div className="flex justify-end">
-              <Button>
-                <Save className="w-4 h-4 mr-2" />
+              <Button size="sm" className="text-xs sm:text-sm">
+                <Save className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 حفظ الإعدادات
               </Button>
             </div>
@@ -331,15 +337,15 @@ export default function AdminSettings() {
                   return <Card key={section.id} className={cn("transition-all duration-200", section.enabled ? "border-green-200 bg-green-50/50" : "border-gray-200 bg-gray-50/50")}>
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between">
-                            <div className="flex items-start gap-3 flex-1">
-                              <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", section.enabled ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-400")}>
-                                <Icon className="w-5 h-5" />
+                            <div className="flex items-start gap-2 sm:gap-3 flex-1">
+                              <div className={cn("w-6 h-6 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center", section.enabled ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-400")}>
+                                <Icon className="w-3 h-3 sm:w-5 sm:h-5" />
                               </div>
                               <div className="flex-1">
-                                <h3 className="font-medium text-gray-900 mb-1">
+                                <h3 className="font-medium text-gray-900 mb-1 text-xs sm:text-sm">
                                   {section.name}
                                 </h3>
-                                <p className="text-sm text-gray-600 mb-2">
+                                <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
                                   {section.description}
                                 </p>
                                 <Badge variant={section.category === "core" ? "default" : section.category === "medical" ? "secondary" : section.category === "commercial" ? "outline" : "destructive"} className="text-xs">
