@@ -70,6 +70,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import type { UserRole as SystemUserRole } from "@/types/system";
 import ClinicsManager from "./ClinicsManager";
+import DentistHubAIPopup from "@/components/DentistHubAIPopup";
 import AdvancedClinicManagement from "./AdvancedClinicManagement";
 import Favorites from "./Favorites";
 
@@ -1344,8 +1345,11 @@ export default function DentistHub() {
         </main>
       </div>
 
+      {/* Dentist Hub AI Assistant Popup */}
+      <DentistHubAIPopup />
+
       {/* Bottom Navigation */}
-      {/* يستخدم ال��ريط السفلي الموحد من الغلاف */}
+      {/* يستخدم الشريط السفلي الموحد من الغلاف */}
     </div>
   );
 }

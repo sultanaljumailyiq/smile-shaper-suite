@@ -32,6 +32,7 @@ import {
   type TreatmentPlan,
 } from "@/services/sharedClinicData";
 import EnhancedAIAssistantIntegration from "@/components/EnhancedAIAssistantIntegration";
+import SmartClinicAIPopup from "@/components/SmartClinicAIPopup";
 
 function SectionCard({ title, icon: Icon, children, action }: { title: string; icon: React.ComponentType<any>; children: React.ReactNode; action?: React.ReactNode }) {
   return (
@@ -448,6 +449,9 @@ export default function SmartClinic(){
         systemType="new"
         currentPage="smart-clinic"
       />
+      
+      {/* Smart Clinic AI Assistant Popup */}
+      <SmartClinicAIPopup />
     </div>
   );
 }
