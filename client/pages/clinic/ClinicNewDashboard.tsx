@@ -1,61 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Calendar,
-  Users,
-  Stethoscope,
-  TrendingUp,
-  Clock,
-  Bell,
-  MessageSquare,
-  Plus,
-  ChevronRight,
-  Activity,
-  Package,
-  AlertTriangle,
-  CheckCircle,
-  Eye,
-  Settings,
-  Phone,
-  Search,
-  Filter,
-  MoreHorizontal,
-  Building2,
-  ChevronDown,
-  FlaskConical,
-  Timer,
-  RotateCcw,
-  Send,
-  FileText,
-  User,
-  UserPlus,
-  Crown,
-  ClipboardList,
-  Target,
-  ArrowRight,
-  Star,
-  Zap,
-  CreditCard,
-  Truck,
-  BarChart3,
-  Home,
-  ShoppingCart,
-  DollarSign,
-  PieChart,
-  Headphones,
-  Wrench,
-  Pill,
-} from "lucide-react";
+import { Calendar, Users, Stethoscope, TrendingUp, Clock, Bell, MessageSquare, Plus, ChevronRight, Activity, Package, AlertTriangle, CheckCircle, Eye, Settings, Phone, Search, Filter, MoreHorizontal, Building2, ChevronDown, FlaskConical, Timer, RotateCcw, Send, FileText, User, UserPlus, Crown, ClipboardList, Target, ArrowRight, Star, Zap, CreditCard, Truck, BarChart3, Home, ShoppingCart, DollarSign, PieChart, Headphones, Wrench, Pill } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import EnhancedAIAssistantIntegration from "@/components/EnhancedAIAssistantIntegration";
 import ClinicSubNav from "@/components/ClinicSubNav";
-import {
-  sharedClinicData,
-  type Appointment,
-  type Patient,
-} from "@/services/sharedClinicData";
+import { sharedClinicData, type Appointment, type Patient } from "@/services/sharedClinicData";
 
 // Mock clinic data - will be shared with clinic_old
 const mockClinicData = {
@@ -64,178 +15,154 @@ const mockClinicData = {
     pendingAppointments: 5,
     completedToday: 7,
     totalPatients: 342,
-    monthlyRevenue: 15750000, // IQD
+    monthlyRevenue: 15750000,
+    // IQD
     activeStaff: 8,
     lowStock: 3,
-    upcomingReminders: 4,
+    upcomingReminders: 4
   },
-  notifications: [
-    {
-      id: "1",
-      type: "appointment",
-      title: "موعد جديد",
-      message: "المريض أحمد محم�� حجز موعداً الساعة 3:00 مساءً",
-      time: "منذ 5 دقائق",
-      priority: "high",
-    },
-    {
-      id: "2",
-      type: "payment",
-      title: "دفعة مستلمة",
-      message: "تم استلام دفعة 250,000 د.ع من المريضة فاطمة علي",
-      time: "منذ 15 دقيقة",
-      priority: "medium",
-    },
-  ],
-  recentPatients: [
-    {
-      id: "1",
-      name: "أحمد محمد الطائي",
-      lastVisit: "2024-01-15",
-      treatment: "تنظيف الأسنان",
-      status: "completed",
-      phone: "+964 770 123 4567",
-    },
-    {
-      id: "2",
-      name: "فاطمة علي السعد",
-      lastVisit: "2024-01-14",
-      treatment: "حشوة ضرس",
-      status: "in_progress",
-      phone: "+964 750 987 6543",
-    },
-  ],
+  notifications: [{
+    id: "1",
+    type: "appointment",
+    title: "موعد جديد",
+    message: "المريض أحمد محم�� حجز موعداً الساعة 3:00 مساءً",
+    time: "منذ 5 دقائق",
+    priority: "high"
+  }, {
+    id: "2",
+    type: "payment",
+    title: "دفعة مستلمة",
+    message: "تم استلام دفعة 250,000 د.ع من المريضة فاطمة علي",
+    time: "منذ 15 دقيقة",
+    priority: "medium"
+  }],
+  recentPatients: [{
+    id: "1",
+    name: "أحمد محمد الطائي",
+    lastVisit: "2024-01-15",
+    treatment: "تنظيف الأسنان",
+    status: "completed",
+    phone: "+964 770 123 4567"
+  }, {
+    id: "2",
+    name: "فاطمة علي السعد",
+    lastVisit: "2024-01-14",
+    treatment: "حشوة ضرس",
+    status: "in_progress",
+    phone: "+964 750 987 6543"
+  }]
 };
 
 // Clinic management sections for new mobile-optimized design
-const clinicSections = [
-  {
-    id: "patients",
-    title: "المرضى",
-    description: "إدارة ملفات المرضى والتاريخ الطبي",
-    icon: Users,
-    color: "blue",
-    count: mockClinicData.stats.totalPatients,
-    path: "/clinic/patients",
-    badge: "جديد",
-  },
-  {
-    id: "reservations",
-    title: "الحجوزات",
-    description: "جدولة المواعيد وإدارة الحجوزات",
-    icon: Calendar,
-    color: "green",
-    count: mockClinicData.stats.todayAppointments,
-    path: "/clinic/reservations",
-    badge:
-      mockClinicData.stats.pendingAppointments > 0
-        ? `${mockClinicData.stats.pendingAppointments} معلقة`
-        : null,
-  },
-  {
-    id: "treatments",
-    title: "العلاجات",
-    description: "خطط العلاج والإجراءات الطبية",
-    icon: Stethoscope,
-    color: "purple",
-    count: 45,
-    path: "/clinic/treatments",
-  },
-  {
-    id: "staff",
-    title: "الموظفي��",
-    description: "إدارة فريق العمل والصلاحيات",
-    icon: UserPlus,
-    color: "indigo",
-    count: mockClinicData.stats.activeStaff,
-    path: "/clinic/staff",
-  },
-  {
-    id: "accounts",
-    title: "الحسابات",
-    description: "الفواتير والمد��وعات والتقارير المالية",
-    icon: CreditCard,
-    color: "emerald",
-    count: "15.7M د.ع",
-    path: "/clinic/accounts",
-  },
-  {
-    id: "sales",
-    title: "المبيعات",
-    description: "مبيعات الأدوية والمواد الطبية",
-    icon: ShoppingCart,
-    color: "orange",
-    count: 23,
-    path: "/clinic/sales",
-  },
-  {
-    id: "purchases",
-    title: "المشتريات",
-    description: "طلبات المواد والأدوية من الموردين",
-    icon: Truck,
-    color: "cyan",
-    count: 8,
-    path: "/clinic/purchases",
-  },
-  {
-    id: "stocks",
-    title: "المخزون",
-    description: "إدارة مخزون الأدوية والمواد الطبية",
-    icon: Package,
-    color: "amber",
-    count: mockClinicData.stats.lowStock,
-    path: "/clinic/stocks",
-    badge: mockClinicData.stats.lowStock > 0 ? "نفاد قريب" : null,
-  },
-  {
-    id: "peripherals",
-    title: "الأجهزة",
-    description: "صيانة وإدارة الأجهزة الطبية",
-    icon: Wrench,
-    color: "slate",
-    count: 12,
-    path: "/clinic/peripherals",
-  },
-  {
-    id: "reports",
-    title: "التقارير",
-    description: "تقارير شاملة عن أ��اء العيادة",
-    icon: BarChart3,
-    color: "rose",
-    count: "تحديث يومي",
-    path: "/clinic/reports",
-  },
-  {
-    id: "lab",
-    title: "المختبر",
-    description: "إدارة طلبات المختبر والتركيبات",
-    icon: Pill,
-    color: "violet",
-    count: 8,
-    path: "/clinic/lab",
-    badge: "طلبات جديدة",
-  },
-];
-
+const clinicSections = [{
+  id: "patients",
+  title: "المرضى",
+  description: "إدارة ملفات المرضى والتاريخ الطبي",
+  icon: Users,
+  color: "blue",
+  count: mockClinicData.stats.totalPatients,
+  path: "/clinic/patients",
+  badge: "جديد"
+}, {
+  id: "reservations",
+  title: "الحجوزات",
+  description: "جدولة المواعيد وإدارة الحجوزات",
+  icon: Calendar,
+  color: "green",
+  count: mockClinicData.stats.todayAppointments,
+  path: "/clinic/reservations",
+  badge: mockClinicData.stats.pendingAppointments > 0 ? `${mockClinicData.stats.pendingAppointments} معلقة` : null
+}, {
+  id: "treatments",
+  title: "العلاجات",
+  description: "خطط العلاج والإجراءات الطبية",
+  icon: Stethoscope,
+  color: "purple",
+  count: 45,
+  path: "/clinic/treatments"
+}, {
+  id: "staff",
+  title: "الموظفي��",
+  description: "إدارة فريق العمل والصلاحيات",
+  icon: UserPlus,
+  color: "indigo",
+  count: mockClinicData.stats.activeStaff,
+  path: "/clinic/staff"
+}, {
+  id: "accounts",
+  title: "الحسابات",
+  description: "الفواتير والمد��وعات والتقارير المالية",
+  icon: CreditCard,
+  color: "emerald",
+  count: "15.7M د.ع",
+  path: "/clinic/accounts"
+}, {
+  id: "sales",
+  title: "المبيعات",
+  description: "مبيعات الأدوية والمواد الطبية",
+  icon: ShoppingCart,
+  color: "orange",
+  count: 23,
+  path: "/clinic/sales"
+}, {
+  id: "purchases",
+  title: "المشتريات",
+  description: "طلبات المواد والأدوية من الموردين",
+  icon: Truck,
+  color: "cyan",
+  count: 8,
+  path: "/clinic/purchases"
+}, {
+  id: "stocks",
+  title: "المخزون",
+  description: "إدارة مخزون الأدوية والمواد الطبية",
+  icon: Package,
+  color: "amber",
+  count: mockClinicData.stats.lowStock,
+  path: "/clinic/stocks",
+  badge: mockClinicData.stats.lowStock > 0 ? "نفاد قريب" : null
+}, {
+  id: "peripherals",
+  title: "الأجهزة",
+  description: "صيانة وإدارة الأجهزة الطبية",
+  icon: Wrench,
+  color: "slate",
+  count: 12,
+  path: "/clinic/peripherals"
+}, {
+  id: "reports",
+  title: "التقارير",
+  description: "تقارير شاملة عن أ��اء العيادة",
+  icon: BarChart3,
+  color: "rose",
+  count: "تحديث يومي",
+  path: "/clinic/reports"
+}, {
+  id: "lab",
+  title: "المختبر",
+  description: "إدارة طلبات المختبر والتركيبات",
+  icon: Pill,
+  color: "violet",
+  count: 8,
+  path: "/clinic/lab",
+  badge: "طلبات جديدة"
+}];
 const ClinicNewDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState("today");
   const [showNotifications, setShowNotifications] = useState(false);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [clinicOptions, setClinicOptions] = useState<
-    { id: string; name: string }[]
-  >([]);
+  const [clinicOptions, setClinicOptions] = useState<{
+    id: string;
+    name: string;
+  }[]>([]);
   const [activeClinicId, setActiveClinicId] = useState<string | null>(null);
-
   useEffect(() => {
     let mounted = true;
     const load = async () => {
       try {
-        const [pts, appts] = await Promise.all([
-          sharedClinicData.getPatients(),
-          sharedClinicData.getAppointments(),
-        ]);
+        const [pts, appts] = await Promise.all([sharedClinicData.getPatients(), sharedClinicData.getAppointments()]);
         if (mounted) {
           setPatients(pts);
           setAppointments(appts);
@@ -249,54 +176,34 @@ const ClinicNewDashboard: React.FC = () => {
       mounted = false;
     };
   }, []);
-
   useEffect(() => {
     try {
       const cached = localStorage.getItem("clinics_cache");
-      const list = cached
-        ? (JSON.parse(cached) as { id: string; name: string }[])
-        : [];
+      const list = cached ? JSON.parse(cached) as {
+        id: string;
+        name: string;
+      }[] : [];
       setClinicOptions(list);
       const stored = localStorage.getItem("active_clinic_id");
-      setActiveClinicId(
-        stored && list.find((c) => c.id === stored)
-          ? stored
-          : list[0]?.id || null,
-      );
+      setActiveClinicId(stored && list.find(c => c.id === stored) ? stored : list[0]?.id || null);
     } catch {
       setClinicOptions([]);
       setActiveClinicId(null);
     }
   }, []);
-
-  const upcomingAppointments = appointments
-    .filter((a) => {
-      const dateTime = new Date(`${a.date}T${(a as any).time || "00:00"}`);
-      return (
-        dateTime >= new Date() &&
-        (a.status === "scheduled" || a.status === "confirmed")
-      );
-    })
-    .sort((a, b) => {
-      const da = new Date(`${a.date}T${(a as any).time || "00:00"}`).getTime();
-      const db = new Date(`${b.date}T${(b as any).time || "00:00"}`).getTime();
-      return da - db;
-    })
-    .slice(0, 5);
-
-  const recentNotes = patients
-    .filter((p) => p.notes && p.notes.trim().length > 0)
-    .map((p) => ({
-      patientName: p.name,
-      note: p.notes,
-      lastVisit: p.lastVisit,
-    }))
-    .sort(
-      (a, b) =>
-        new Date(b.lastVisit).getTime() - new Date(a.lastVisit).getTime(),
-    )
-    .slice(0, 5);
-
+  const upcomingAppointments = appointments.filter(a => {
+    const dateTime = new Date(`${a.date}T${(a as any).time || "00:00"}`);
+    return dateTime >= new Date() && (a.status === "scheduled" || a.status === "confirmed");
+  }).sort((a, b) => {
+    const da = new Date(`${a.date}T${(a as any).time || "00:00"}`).getTime();
+    const db = new Date(`${b.date}T${(b as any).time || "00:00"}`).getTime();
+    return da - db;
+  }).slice(0, 5);
+  const recentNotes = patients.filter(p => p.notes && p.notes.trim().length > 0).map(p => ({
+    patientName: p.name,
+    note: p.notes,
+    lastVisit: p.lastVisit
+  })).sort((a, b) => new Date(b.lastVisit).getTime() - new Date(a.lastVisit).getTime()).slice(0, 5);
   const getColorClasses = (color: string) => {
     const colorMap: Record<string, string> = {
       blue: "bg-blue-500 text-white",
@@ -308,11 +215,10 @@ const ClinicNewDashboard: React.FC = () => {
       cyan: "bg-cyan-500 text-white",
       amber: "bg-amber-500 text-white",
       slate: "bg-slate-500 text-white",
-      rose: "bg-rose-500 text-white",
+      rose: "bg-rose-500 text-white"
     };
     return colorMap[color] || "bg-gray-500 text-white";
   };
-
   const getBgColorClasses = (color: string) => {
     const colorMap: Record<string, string> = {
       blue: "bg-blue-50 border-blue-200",
@@ -324,13 +230,11 @@ const ClinicNewDashboard: React.FC = () => {
       cyan: "bg-cyan-50 border-cyan-200",
       amber: "bg-amber-50 border-amber-200",
       slate: "bg-slate-50 border-slate-200",
-      rose: "bg-rose-50 border-rose-200",
+      rose: "bg-rose-50 border-rose-200"
     };
     return colorMap[color] || "bg-gray-50 border-gray-200";
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -343,58 +247,36 @@ const ClinicNewDashboard: React.FC = () => {
                 <h1 className="text-xl font-bold text-gray-900">
                   لوحة إدارة العيادة
                 </h1>
-                <p className="text-sm text-gray-600">النظام المحسن للهاتف</p>
+                
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              {clinicOptions.length > 0 && (
-                <div className="hidden md:flex items-center gap-2">
+              {clinicOptions.length > 0 && <div className="hidden md:flex items-center gap-2">
                   <label className="text-xs text-gray-500">العيادة</label>
-                  <select
-                    value={activeClinicId || ""}
-                    onChange={(e) => {
-                      const val = e.target.value || null;
-                      setActiveClinicId(val);
-                      if (val) {
-                        localStorage.setItem("active_clinic_id", val);
-                        const chosen = clinicOptions.find((c) => c.id === val);
-                        if (chosen)
-                          localStorage.setItem(
-                            "active_clinic_name",
-                            chosen.name,
-                          );
-                      }
-                    }}
-                    className="px-2 py-1 rounded-lg border text-sm"
-                  >
-                    {clinicOptions.map((c) => (
-                      <option key={c.id} value={c.id}>
+                  <select value={activeClinicId || ""} onChange={e => {
+                const val = e.target.value || null;
+                setActiveClinicId(val);
+                if (val) {
+                  localStorage.setItem("active_clinic_id", val);
+                  const chosen = clinicOptions.find(c => c.id === val);
+                  if (chosen) localStorage.setItem("active_clinic_name", chosen.name);
+                }
+              }} className="px-2 py-1 rounded-lg border text-sm">
+                    {clinicOptions.map(c => <option key={c.id} value={c.id}>
                         {c.name}
-                      </option>
-                    ))}
+                      </option>)}
                   </select>
-                </div>
-              )}
+                </div>}
 
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
-              >
+              <button onClick={() => setShowNotifications(!showNotifications)} className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
                 <Bell className="w-5 h-5" />
-                {mockClinicData.notifications.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {mockClinicData.notifications.length > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {mockClinicData.notifications.length}
-                  </span>
-                )}
+                  </span>}
               </button>
 
-              <Link
-                to="/clinic_old"
-                className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors"
-              >
-                النظام ال��ديم
-              </Link>
+              <Link to="/clinic_old" className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors">النظام القديم</Link>
             </div>
           </div>
         </div>
@@ -461,28 +343,13 @@ const ClinicNewDashboard: React.FC = () => {
 
         {/* Management Sections Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-8">
-          {clinicSections.map((section) => (
-            <Link
-              key={section.id}
-              to={section.path}
-              className={cn(
-                "relative bg-white rounded-xl p-4 shadow-sm border transition-all duration-300 hover:shadow-md hover:-translate-y-1 group",
-                getBgColorClasses(section.color),
-              )}
-            >
-              {section.badge && (
-                <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+          {clinicSections.map(section => <Link key={section.id} to={section.path} className={cn("relative bg-white rounded-xl p-4 shadow-sm border transition-all duration-300 hover:shadow-md hover:-translate-y-1 group", getBgColorClasses(section.color))}>
+              {section.badge && <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
                   {section.badge}
-                </div>
-              )}
+                </div>}
 
               <div className="flex flex-col items-center text-center">
-                <div
-                  className={cn(
-                    "w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform",
-                    getColorClasses(section.color),
-                  )}
-                >
+                <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform", getColorClasses(section.color))}>
                   <section.icon className="w-6 h-6" />
                 </div>
 
@@ -496,9 +363,7 @@ const ClinicNewDashboard: React.FC = () => {
 
                 <div className="mt-auto">
                   <Badge variant="secondary" className="text-xs">
-                    {typeof section.count === "number"
-                      ? section.count.toLocaleString()
-                      : section.count}
+                    {typeof section.count === "number" ? section.count.toLocaleString() : section.count}
                   </Badge>
                 </div>
               </div>
@@ -506,8 +371,7 @@ const ClinicNewDashboard: React.FC = () => {
               <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </div>
-            </Link>
-          ))}
+            </Link>)}
         </div>
 
         {/* Recent Activity & Notifications */}
@@ -518,20 +382,13 @@ const ClinicNewDashboard: React.FC = () => {
               <h3 className="text-lg font-bold text-gray-900">
                 المرضى الحديثون
               </h3>
-              <Link
-                to="/clinic/patients"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-              >
+              <Link to="/clinic/patients" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
                 عرض الكل
               </Link>
             </div>
 
             <div className="space-y-3">
-              {mockClinicData.recentPatients.map((patient) => (
-                <div
-                  key={patient.id}
-                  className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                >
+              {mockClinicData.recentPatients.map(patient => <div key={patient.id} className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
                   <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                     <User className="w-5 h-5 text-blue-600" />
                   </div>
@@ -540,17 +397,11 @@ const ClinicNewDashboard: React.FC = () => {
                     <p className="text-sm text-gray-600">{patient.treatment}</p>
                   </div>
                   <div className="text-left">
-                    <Badge
-                      variant={
-                        patient.status === "completed" ? "default" : "secondary"
-                      }
-                      className="text-xs"
-                    >
+                    <Badge variant={patient.status === "completed" ? "default" : "secondary"} className="text-xs">
                       {patient.status === "completed" ? "مكتمل" : "قيد العلاج"}
                     </Badge>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -564,38 +415,9 @@ const ClinicNewDashboard: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              {mockClinicData.notifications.map((notification) => (
-                <div
-                  key={notification.id}
-                  className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  <div
-                    className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
-                      notification.priority === "high"
-                        ? "bg-red-100"
-                        : "bg-blue-100",
-                    )}
-                  >
-                    {notification.type === "appointment" ? (
-                      <Calendar
-                        className={cn(
-                          "w-4 h-4",
-                          notification.priority === "high"
-                            ? "text-red-600"
-                            : "text-blue-600",
-                        )}
-                      />
-                    ) : (
-                      <CreditCard
-                        className={cn(
-                          "w-4 h-4",
-                          notification.priority === "high"
-                            ? "text-red-600"
-                            : "text-blue-600",
-                        )}
-                      />
-                    )}
+              {mockClinicData.notifications.map(notification => <div key={notification.id} className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                  <div className={cn("w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0", notification.priority === "high" ? "bg-red-100" : "bg-blue-100")}>
+                    {notification.type === "appointment" ? <Calendar className={cn("w-4 h-4", notification.priority === "high" ? "text-red-600" : "text-blue-600")} /> : <CreditCard className={cn("w-4 h-4", notification.priority === "high" ? "text-red-600" : "text-blue-600")} />}
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-gray-900 text-sm">
@@ -608,8 +430,7 @@ const ClinicNewDashboard: React.FC = () => {
                       {notification.time}
                     </p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -622,22 +443,12 @@ const ClinicNewDashboard: React.FC = () => {
               <h3 className="text-lg font-bold text-gray-900">
                 المواعيد القادمة
               </h3>
-              <Link
-                to="/clinic/reservations"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-              >
+              <Link to="/clinic/reservations" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
                 عرض الكل
               </Link>
             </div>
-            {upcomingAppointments.length === 0 ? (
-              <p className="text-sm text-gray-600">لا توجد مواعيد قادمة</p>
-            ) : (
-              <div className="space-y-3">
-                {upcomingAppointments.map((appt) => (
-                  <div
-                    key={appt.id}
-                    className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                  >
+            {upcomingAppointments.length === 0 ? <p className="text-sm text-gray-600">لا توجد مواعيد قادمة</p> : <div className="space-y-3">
+                {upcomingAppointments.map(appt => <div key={appt.id} className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                         <Calendar className="w-5 h-5 text-blue-600" />
@@ -653,16 +464,12 @@ const ClinicNewDashboard: React.FC = () => {
                     </div>
                     <div className="text-left text-xs text-gray-600">
                       <div>{appt.date}</div>
-                      {(appt as any).time && (
-                        <div className="text-gray-500">
+                      {(appt as any).time && <div className="text-gray-500">
                           {(appt as any).time}
-                        </div>
-                      )}
+                        </div>}
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  </div>)}
+              </div>}
           </div>
 
           {/* Notes */}
@@ -673,15 +480,8 @@ const ClinicNewDashboard: React.FC = () => {
                 إدارة الملاحظات
               </button>
             </div>
-            {recentNotes.length === 0 ? (
-              <p className="text-sm text-gray-600">لا توجد ملا��ظات بعد</p>
-            ) : (
-              <div className="space-y-3">
-                {recentNotes.map((n, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                  >
+            {recentNotes.length === 0 ? <p className="text-sm text-gray-600">لا توجد ملا��ظات بعد</p> : <div className="space-y-3">
+                {recentNotes.map((n, idx) => <div key={idx} className="p-3 hover:bg-gray-50 rounded-lg transition-colors">
                     <div className="flex items-center justify-between mb-1">
                       <p className="font-medium text-gray-900 text-sm">
                         {n.patientName}
@@ -693,10 +493,8 @@ const ClinicNewDashboard: React.FC = () => {
                     <p className="text-xs text-gray-700 line-clamp-2">
                       {n.note}
                     </p>
-                  </div>
-                ))}
-              </div>
-            )}
+                  </div>)}
+              </div>}
           </div>
         </div>
 
@@ -706,37 +504,22 @@ const ClinicNewDashboard: React.FC = () => {
             إجراءات سريعة
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button
-              className="h-auto p-4 flex-col gap-2"
-              onClick={() => navigate("/clinic/reservations")}
-            >
+            <Button className="h-auto p-4 flex-col gap-2" onClick={() => navigate("/clinic/reservations")}>
               <Plus className="w-5 h-5" />
               موعد جديد
             </Button>
 
-            <Button
-              variant="outline"
-              className="h-auto p-4 flex-col gap-2"
-              onClick={() => navigate("/clinic/patients")}
-            >
+            <Button variant="outline" className="h-auto p-4 flex-col gap-2" onClick={() => navigate("/clinic/patients")}>
               <UserPlus className="w-5 h-5" />
               مريض جديد
             </Button>
 
-            <Button
-              variant="outline"
-              className="h-auto p-4 flex-col gap-2"
-              onClick={() => navigate("/clinic/treatments")}
-            >
+            <Button variant="outline" className="h-auto p-4 flex-col gap-2" onClick={() => navigate("/clinic/treatments")}>
               <Stethoscope className="w-5 h-5" />
               خطة علاج
             </Button>
 
-            <Button
-              variant="outline"
-              className="h-auto p-4 flex-col gap-2"
-              onClick={() => navigate("/clinic/reports")}
-            >
+            <Button variant="outline" className="h-auto p-4 flex-col gap-2" onClick={() => navigate("/clinic/reports")}>
               <BarChart3 className="w-5 h-5" />
               تقرير
             </Button>
@@ -745,12 +528,7 @@ const ClinicNewDashboard: React.FC = () => {
       </div>
 
       {/* Enhanced AI Assistant */}
-      <EnhancedAIAssistantIntegration
-        systemType="new"
-        currentPage="dashboard"
-      />
-    </div>
-  );
+      <EnhancedAIAssistantIntegration systemType="new" currentPage="dashboard" />
+    </div>;
 };
-
 export default ClinicNewDashboard;
