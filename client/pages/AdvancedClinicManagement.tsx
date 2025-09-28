@@ -358,7 +358,9 @@ export default function AdvancedClinicManagement() {
               {/* System Toggle Switch */}
               <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
                 <span className="text-xs text-gray-600">قديم</span>
-                
+                <Link to="/clinics-manager" className="relative">
+                  <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                </Link>
                 <span className="mx-1 text-xs text-gray-400">|</span>
                 <button onClick={() => setUseOldManager(false)} className="relative">
                   <ToggleRight className="w-6 h-6 text-blue-600" />
@@ -399,7 +401,10 @@ export default function AdvancedClinicManagement() {
                   </div>
                 </div>
 
-                
+                <button onClick={() => setShowAddClinic(true)} className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-sm text-sm">
+                  <Plus className="w-4 h-4" />
+                  إضافة عيادة
+                </button>
               </div>}
           </div>
 
@@ -476,13 +481,7 @@ export default function AdvancedClinicManagement() {
                           <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
                             <Building2 className="w-4 h-4 text-white" />
                           </div>
-                          <div>
-                            <h3 className="text-sm font-bold text-gray-900 line-clamp-1">{clinic.name}</h3>
-                            <div className="flex items-center gap-1 mt-0.5">
-                              <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                              <span className="text-xs text-gray-600">{clinic.rating}</span>
-                            </div>
-                          </div>
+                          
                         </div>
 
                         <div className="flex items-center gap-1">
@@ -499,7 +498,7 @@ export default function AdvancedClinicManagement() {
                       <div className="space-y-1 text-xs">
                         <div className="flex items-center gap-1 text-gray-600">
                           <MapPin className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">{clinic.address}</span>
+                          
                         </div>
                         <div className="flex items-center gap-1 text-gray-600">
                           <Phone className="w-3 h-3 flex-shrink-0" />
