@@ -604,11 +604,7 @@ export default function UnifiedNotifications() {
               <div className="flex items-center gap-3">
                 <div className="relative">
                   
-                  {totalUnread > 0 && <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                      <span className="text-xs text-white font-bold">
-                        {totalUnread}
-                      </span>
-                    </div>}
+                  {totalUnread > 0}
                 </div>
 
                 
