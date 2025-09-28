@@ -663,30 +663,13 @@ export default function ModernMedicalServices() {
                 {/* بطاقة إضافية موجهة للمرضى لحجز المواعيد */}
                 <div className="mb-5">
                   <div onClick={() => handleCardClick("#directory-map")} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer group transform hover:-translate-y-1">
-                    <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
-                            <Calendar className="w-4 h-4" />
-                          </div>
-                          <h3 className="font-bold text-sm leading-tight">
-                            خريطة المواعيد للمرضى
-                          </h3>
-                        </div>
-                        <ArrowRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </div>
-                    </div>
-                    <div className="p-3"></div>
+                    
+                    
                   </div>
                 </div>
 
                 <div className="bg-white rounded-xl border shadow p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Map className="w-6 h-6 text-teal-600" />
-                    <h3 className="text-xl font-bold text-gray-900">
-                      خريطة العيادات والمراكز القريبة
-                    </h3>
-                  </div>
+                  
                   <InteractiveJobsMap mode="clinics" jobs={clinicJobs as any} selectedJob={selectedClinicJob} onJobSelect={(job: any) => setSelectedClinicJob(job)} onShowJobDetails={() => {}} onJobApply={(jobId: number) => navigate(`/simplified-booking/1`)} />
                   <div className="mt-4">
                     <div className="flex gap-3 overflow-x-auto pb-2 -mx-2 px-2">
