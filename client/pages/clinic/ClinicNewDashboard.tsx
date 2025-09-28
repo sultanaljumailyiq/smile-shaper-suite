@@ -359,11 +359,7 @@ const ClinicNewDashboard: React.FC = () => {
 
                 
 
-                <div className="mt-auto">
-                  <Badge variant="secondary" className="text-xs">
-                    {typeof section.count === "number" ? section.count.toLocaleString() : section.count}
-                  </Badge>
-                </div>
+                
               </div>
 
               <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
