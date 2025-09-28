@@ -826,29 +826,7 @@ export default function ModernMedicalServices() {
           </div>
 
           {/* Emergency Contact */}
-          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-2xl p-6 mt-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-1">
-                    هل تحتاج مساعدة عاجلة؟
-                  </h3>
-                  <p className="text-red-100 text-sm">
-                    اتصل بخط الطوارئ المجاني الآن - متاح على مدار الساعة
-                  </p>
-                </div>
-              </div>
-              <div className="text-center">
-                <a href="tel:911" className="bg-white text-red-600 px-6 py-3 rounded-xl font-bold text-xl hover:bg-red-50 transition-colors block">
-                  911
-                </a>
-                <div className="text-red-100 text-xs mt-1">اتصل الآن</div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 
