@@ -953,9 +953,7 @@ export default function UnifiedNotifications() {
                   </select>
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    الوصف
-                  </label>
+                  
                   <Textarea value={newReminder.description} onChange={e => setNewReminder(prev => ({
                 ...prev,
                 description: e.target.value
@@ -977,9 +975,7 @@ export default function UnifiedNotifications() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    تاريخ ووقت الاستحقاق
-                  </label>
+                  
                   <input type="datetime-local" className="w-full p-2 border border-gray-300 rounded-lg" value={newReminder.dueAt} onChange={e => setNewReminder(prev => ({
                 ...prev,
                 dueAt: e.target.value
