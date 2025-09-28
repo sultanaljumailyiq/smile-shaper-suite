@@ -351,7 +351,7 @@ export default function AdvancedClinicManagement() {
                 </button>
                 <div>
                   <h1 className="text-lg md:text-xl font-bold text-gray-900">إدارة العيادات المتقدمة</h1>
-                  <p className="text-xs md:text-sm text-gray-600">إدارة شاملة لجميع عياداتك وخدماتك</p>
+                  
                 </div>
               </div>
 
@@ -495,16 +495,7 @@ export default function AdvancedClinicManagement() {
                       <p className="text-gray-600 text-xs mb-2 line-clamp-2">{clinic.description}</p>
 
                       {/* Compact Info */}
-                      <div className="space-y-1 text-xs">
-                        <div className="flex items-center gap-1 text-gray-600">
-                          <MapPin className="w-3 h-3 flex-shrink-0" />
-                          
-                        </div>
-                        <div className="flex items-center gap-1 text-gray-600">
-                          <Phone className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">{clinic.phone}</span>
-                        </div>
-                      </div>
+                      
                     </div>
 
                     <div className="px-3 py-2 flex items-center justify-end border-b border-gray-100">
