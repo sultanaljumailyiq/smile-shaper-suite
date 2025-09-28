@@ -357,14 +357,10 @@ const ClinicNewDashboard: React.FC = () => {
                   {section.title}
                 </h3>
 
-                <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                  {section.description}
-                </p>
+                
 
                 <div className="mt-auto">
-                  <Badge variant="secondary" className="text-xs">
-                    {typeof section.count === "number" ? section.count.toLocaleString() : section.count}
-                  </Badge>
+                  
                 </div>
               </div>
 
