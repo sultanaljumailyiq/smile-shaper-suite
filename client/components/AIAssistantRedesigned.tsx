@@ -609,14 +609,14 @@ const AIAssistantRedesigned = () => {
                             handleSendMessage(action.prompt);
                           }}
                           className={cn(
-                            "flex flex-col items-center gap-1 p-2 sm:p-3 rounded-xl transition-all hover:scale-105 transform active:scale-95",
+                            "flex flex-col items-center gap-0.5 p-1.5 sm:p-2 rounded-lg transition-all hover:scale-105 transform active:scale-95",
                             action.color,
-                            "text-white shadow-lg hover:shadow-xl border border-white/20",
-                            "hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50",
+                            "text-white shadow-md hover:shadow-lg border border-white/20",
+                            "hover:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/50",
                           )}
                         >
-                          <Icon className="w-3 h-3 sm:w-5 sm:h-5" />
-                          <span className="text-xs font-medium text-center leading-tight">
+                          <Icon className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                          <span className="text-[0.6rem] sm:text-xs font-medium text-center leading-tight">
                             {action.label}
                           </span>
                         </button>
