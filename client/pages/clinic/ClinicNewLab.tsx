@@ -1,11 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Package, Plus, Search, Filter, ArrowLeft, Clock, CheckCircle, AlertTriangle, Phone, MapPin, Calendar, DollarSign, User, FileText, Eye, Edit, Star, Building2, Truck, CreditCard, Timer, Target, Activity, TrendingUp, Award, Settings } from "lucide-react";
+import {
+  Package,
+  Plus,
+  Search,
+  Filter,
+  ArrowLeft,
+  Clock,
+  CheckCircle,
+  AlertTriangle,
+  Phone,
+  MapPin,
+  Calendar,
+  DollarSign,
+  User,
+  FileText,
+  Eye,
+  Edit,
+  Star,
+  Building2,
+  Truck,
+  CreditCard,
+  Timer,
+  Target,
+  Activity,
+  TrendingUp,
+  Award,
+  Settings,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ClinicSubNav from "@/components/ClinicSubNav";
-import { sharedClinicData, Laboratory, LabOrder, TreatmentPlan } from "@/services/sharedClinicData";
+import {
+  sharedClinicData,
+  Laboratory,
+  LabOrder,
+  TreatmentPlan,
+} from "@/services/sharedClinicData";
+
 const ClinicNewLab: React.FC = () => {
   const navigate = useNavigate();
   const [labOrders, setLabOrders] = useState<LabOrder[]>([]);
@@ -15,12 +48,18 @@ const ClinicNewLab: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedLab, setSelectedLab] = useState<string>("all");
   const [showAddOrder, setShowAddOrder] = useState(false);
+
   useEffect(() => {
     loadData();
   }, []);
+
   const loadData = async () => {
     try {
-      const [orders, labs, plans] = await Promise.all([sharedClinicData.getLabOrders(), sharedClinicData.getLaboratories(), sharedClinicData.getTreatmentPlans()]);
+      const [orders, labs, plans] = await Promise.all([
+        sharedClinicData.getLabOrders(),
+        sharedClinicData.getLaboratories(),
+        sharedClinicData.getTreatmentPlans(),
+      ]);
       setLabOrders(orders);
       setLaboratories(labs);
       setTreatmentPlans(plans);
@@ -30,12 +69,19 @@ const ClinicNewLab: React.FC = () => {
   };
 
   // Filter orders based on search, status, and lab
-  const filteredOrders = labOrders.filter(order => {
-    const matchesSearch = order.patientName.toLowerCase().includes(searchQuery.toLowerCase()) || order.description.toLowerCase().includes(searchQuery.toLowerCase()) || order.laboratoryName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = filterStatus === "all" || order.status === filterStatus;
-    const matchesLab = selectedLab === "all" || order.laboratoryId === selectedLab;
+  const filteredOrders = labOrders.filter((order) => {
+    const matchesSearch =
+      order.patientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.laboratoryName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus =
+      filterStatus === "all" || order.status === filterStatus;
+    const matchesLab =
+      selectedLab === "all" || order.laboratoryId === selectedLab;
+
     return matchesSearch && matchesStatus && matchesLab;
   });
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "ordered":
@@ -54,6 +100,7 @@ const ClinicNewLab: React.FC = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
   const getStatusText = (status: string) => {
     switch (status) {
       case "ordered":
@@ -72,6 +119,7 @@ const ClinicNewLab: React.FC = () => {
         return "غير محدد";
     }
   };
+
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
       case "urgent":
@@ -82,6 +130,7 @@ const ClinicNewLab: React.FC = () => {
         return <CheckCircle className="w-4 h-4 text-gray-500" />;
     }
   };
+
   const getOrderTypeIcon = (type: string) => {
     switch (type) {
       case "prosthetics":
@@ -98,6 +147,7 @@ const ClinicNewLab: React.FC = () => {
         return "🔬";
     }
   };
+
   const getOrderTypeText = (type: string) => {
     switch (type) {
       case "prosthetics":
@@ -114,29 +164,42 @@ const ClinicNewLab: React.FC = () => {
         return "أخرى";
     }
   };
+
   const isOverdue = (order: LabOrder) => {
     const expectedDate = new Date(order.expectedDeliveryDate);
     const today = new Date();
-    return expectedDate < today && (order.status === "ordered" || order.status === "in_progress");
+    return (
+      expectedDate < today &&
+      (order.status === "ordered" || order.status === "in_progress")
+    );
   };
 
   // Statistics
   const stats = {
     total: labOrders.length,
-    pending: labOrders.filter(o => o.status === "ordered" || o.status === "in_progress").length,
-    ready: labOrders.filter(o => o.status === "ready").length,
-    overdue: labOrders.filter(o => isOverdue(o)).length,
-    thisMonth: labOrders.filter(o => new Date(o.orderDate).getMonth() === new Date().getMonth()).length,
+    pending: labOrders.filter(
+      (o) => o.status === "ordered" || o.status === "in_progress",
+    ).length,
+    ready: labOrders.filter((o) => o.status === "ready").length,
+    overdue: labOrders.filter((o) => isOverdue(o)).length,
+    thisMonth: labOrders.filter(
+      (o) => new Date(o.orderDate).getMonth() === new Date().getMonth(),
+    ).length,
     totalCost: labOrders.reduce((sum, o) => sum + o.cost, 0),
-    unpaid: labOrders.filter(o => !o.isPaid).length
+    unpaid: labOrders.filter((o) => !o.isPaid).length,
   };
-  return <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link to="/clinic" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <Link
+                to="/clinic"
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Link>
               <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
@@ -167,10 +230,20 @@ const ClinicNewLab: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="ابحث عن طلب أو مريض..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" />
+              <input
+                type="text"
+                placeholder="ابحث عن طلب أو مريض..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              />
             </div>
 
-            <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            >
               <option value="all">جميع الحالات</option>
               <option value="ordered">مطلوب</option>
               <option value="in_progress">قيد التحضير</option>
@@ -178,11 +251,17 @@ const ClinicNewLab: React.FC = () => {
               <option value="delivered">مستلم</option>
             </select>
 
-            <select value={selectedLab} onChange={e => setSelectedLab(e.target.value)} className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+            <select
+              value={selectedLab}
+              onChange={(e) => setSelectedLab(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            >
               <option value="all">جميع المختبرات</option>
-              {laboratories.map(lab => <option key={lab.id} value={lab.id}>
+              {laboratories.map((lab) => (
+                <option key={lab.id} value={lab.id}>
                   {lab.name}
-                </option>)}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -290,7 +369,17 @@ const ClinicNewLab: React.FC = () => {
 
         {/* Lab Orders List */}
         <div className="space-y-4">
-          {filteredOrders.length > 0 ? filteredOrders.map(order => <div key={order.id} className={cn("bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition-all duration-300", isOverdue(order) ? "border-red-200 bg-red-50" : "border-gray-100")}>
+          {filteredOrders.length > 0 ? (
+            filteredOrders.map((order) => (
+              <div
+                key={order.id}
+                className={cn(
+                  "bg-white rounded-xl shadow-sm border overflow-hidden hover:shadow-md transition-all duration-300",
+                  isOverdue(order)
+                    ? "border-red-200 bg-red-50"
+                    : "border-gray-100",
+                )}
+              >
                 {/* Order Header */}
                 <div className="p-4 border-b border-gray-100">
                   <div className="flex items-start justify-between">
@@ -313,7 +402,9 @@ const ClinicNewLab: React.FC = () => {
                       <Badge className={getStatusColor(order.status)}>
                         {getStatusText(order.status)}
                       </Badge>
-                      {isOverdue(order) && <Badge className="bg-red-100 text-red-800">متأخر</Badge>}
+                      {isOverdue(order) && (
+                        <Badge className="bg-red-100 text-red-800">متأخر</Badge>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -343,7 +434,9 @@ const ClinicNewLab: React.FC = () => {
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Timer className="w-4 h-4" />
                         التسليم المتوقع:{" "}
-                        {new Date(order.expectedDeliveryDate).toLocaleDateString("ar-IQ")}
+                        {new Date(
+                          order.expectedDeliveryDate,
+                        ).toLocaleDateString("ar-IQ")}
                       </div>
 
                       <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -353,7 +446,11 @@ const ClinicNewLab: React.FC = () => {
 
                       <div className="flex items-center gap-2 text-sm">
                         <CreditCard className="w-4 h-4" />
-                        <span className={order.isPaid ? "text-green-600" : "text-red-600"}>
+                        <span
+                          className={
+                            order.isPaid ? "text-green-600" : "text-red-600"
+                          }
+                        >
                           {order.isPaid ? "مدفوع" : "غير مدفوع"}
                         </span>
                       </div>
@@ -361,7 +458,30 @@ const ClinicNewLab: React.FC = () => {
                   </div>
 
                   {/* Specifications */}
-                  {order.specifications}
+                  {order.specifications && (
+                    <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2">
+                        المواصفات:
+                      </h4>
+                      <div className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
+                        {order.specifications.material && (
+                          <span>المادة: {order.specifications.material}</span>
+                        )}
+                        {order.specifications.color && (
+                          <span>اللون: {order.specifications.color}</span>
+                        )}
+                        {order.specifications.quantity && (
+                          <span>الكمية: {order.specifications.quantity}</span>
+                        )}
+                        {order.specifications.specialInstructions && (
+                          <div className="md:col-span-2">
+                            تعل��مات خاصة:{" "}
+                            {order.specifications.specialInstructions}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Actions */}
@@ -377,23 +497,36 @@ const ClinicNewLab: React.FC = () => {
                       تعديل
                     </Button>
 
-                    <Button size="sm" variant="outline" onClick={() => navigate(`/clinic/patients/${order.patientId}`)}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() =>
+                        navigate(`/clinic/patients/${order.patientId}`)
+                      }
+                    >
                       <User className="w-4 h-4 mr-2" />
                       ملف المريض
                     </Button>
 
-                    {order.status === "ready" && <Button size="sm">
+                    {order.status === "ready" && (
+                      <Button size="sm">
                         <CheckCircle className="w-4 h-4 mr-2" />
                         تأكيد الاستلام
-                      </Button>}
+                      </Button>
+                    )}
 
-                    {!order.isPaid && <Button size="sm" variant="outline">
+                    {!order.isPaid && (
+                      <Button size="sm" variant="outline">
                         <CreditCard className="w-4 h-4 mr-2" />
                         تسجيل الدفع
-                      </Button>}
+                      </Button>
+                    )}
                   </div>
                 </div>
-              </div>) : <div className="text-center py-12">
+              </div>
+            ))
+          ) : (
+            <div className="text-center py-12">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Package className="w-8 h-8 text-gray-400" />
               </div>
@@ -407,7 +540,8 @@ const ClinicNewLab: React.FC = () => {
                 <Plus className="w-4 h-4 mr-2" />
                 إضافة طلب جديد
               </Button>
-            </div>}
+            </div>
+          )}
         </div>
 
         {/* Laboratory Partners */}
@@ -423,14 +557,26 @@ const ClinicNewLab: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {laboratories.map(lab => <div key={lab.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all">
+            {laboratories.map((lab) => (
+              <div
+                key={lab.id}
+                className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all"
+              >
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-bold text-gray-900">{lab.name}</h3>
                     <div className="flex items-center gap-1 mt-1">
-                      {Array.from({
-                    length: 5
-                  }).map((_, i) => <Star key={i} className={cn("w-3 h-3", i < Math.floor(lab.qualityRating) ? "text-yellow-500 fill-current" : "text-gray-300")} />)}
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={cn(
+                            "w-3 h-3",
+                            i < Math.floor(lab.qualityRating)
+                              ? "text-yellow-500 fill-current"
+                              : "text-gray-300",
+                          )}
+                        />
+                      ))}
                       <span className="text-xs text-gray-600 ml-1">
                         {lab.qualityRating}
                       </span>
@@ -441,7 +587,24 @@ const ClinicNewLab: React.FC = () => {
                   </Badge>
                 </div>
 
-                
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3 h-3" />
+                    {lab.address}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3 h-3" />
+                    {lab.phone}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-3 h-3" />
+                    {lab.workingHours}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Truck className="w-3 h-3" />
+                    {lab.averageDeliveryTime} أيام توصيل
+                  </div>
+                </div>
 
                 <div className="mt-3 flex gap-2">
                   <Button size="sm" variant="outline" className="flex-1">
@@ -452,10 +615,13 @@ const ClinicNewLab: React.FC = () => {
                     طلب جديد
                   </Button>
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ClinicNewLab;
