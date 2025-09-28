@@ -350,17 +350,7 @@ const AIAssistantRedesigned = () => {
               <div className={cn("absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white shadow-lg", getStatusColor())}></div>
               {isConnected ? <Wifi className="absolute -bottom-1 -left-1 w-5 h-5 text-green-500 drop-shadow-sm" /> : <WifiOff className="absolute -bottom-1 -left-1 w-5 h-5 text-red-500 drop-shadow-sm" />}
             </div>
-            {!isMinimized && <div>
-                <h3 className="font-bold text-gray-900 flex items-center gap-2 text-lg">
-                  مساعد الذكاء الاصطناعي
-                  
-                </h3>
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                  <span>{getStatusText()}</span>
-                  
-                  <Star className="w-3 h-3 text-yellow-500" />
-                </p>
-              </div>}
+            {!isMinimized}
           </div>
 
           <div className="flex items-center gap-2">
@@ -368,9 +358,7 @@ const AIAssistantRedesigned = () => {
                 <button onClick={() => setShowSuggestions(!showSuggestions)} className={cn("p-2 rounded-xl transition-colors", showSuggestions ? "bg-blue-100 text-blue-600" : "hover:bg-gray-100 text-gray-600")} title="إظهار/إخفاء الاقتراحات">
                   <Lightbulb className="w-4 h-4" />
                 </button>
-                <button onClick={() => setIsSoundEnabled(!isSoundEnabled)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors" title={isSoundEnabled ? "كتم الصوت" : "تشغيل الصوت"}>
-                  {isSoundEnabled ? <Volume2 className="w-4 h-4 text-gray-600" /> : <VolumeX className="w-4 h-4 text-gray-600" />}
-                </button>
+                
                 <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors" title={isExpanded ? "تصغير" : "توسيع"}>
                   {isExpanded ? <Minimize2 className="w-4 h-4 text-gray-600" /> : <Maximize2 className="w-4 h-4 text-gray-600" />}
                 </button>
