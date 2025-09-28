@@ -161,19 +161,9 @@ export default function Emergency() {
                       </p>
 
                       <div className="space-y-3">
-                        <div className="flex items-center justify-center gap-2">
-                          <Clock className="w-4 h-4 text-gray-500" />
-                          <span className="text-sm text-gray-600">
-                            وقت الاستجابة: {service.responseTime}
-                          </span>
-                        </div>
+                        
 
-                        <div className="flex items-center justify-center gap-2">
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-sm text-green-600 font-medium">
-                            متاح الآن
-                          </span>
-                        </div>
+                        
 
                         <a href={`tel:${service.phone}`} className={cn("block w-full py-3 px-4 rounded-xl font-medium text-white transition-colors", service.color === "red" && "bg-red-600 hover:bg-red-700", service.color === "orange" && "bg-orange-600 hover:bg-orange-700", service.color === "blue" && "bg-blue-600 hover:bg-blue-700")}>
                           <div className="flex items-center justify-center gap-2">
