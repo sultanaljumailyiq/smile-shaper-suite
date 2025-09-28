@@ -523,7 +523,7 @@ const AIAssistantRedesigned = () => {
                     e.preventDefault();
                     handleSendMessage();
                   }
-                }} placeholder="💬 اكتب سؤالك عن التشخيص، العلاج، الجدولة، أو أي موضوع طبي...&#10;✨ يمكنك أيضاً إرفاق صور أو ملفات للتحليل (Shift+Enter للسطر الجديد)" className={cn("relative z-10 w-full px-6 py-4 pr-20 pl-20 bg-transparent", "resize-none border-0 focus:outline-none", "placeholder:text-gray-500 text-right text-sm leading-relaxed", "min-h-[80px] max-h-[160px]")} rows={3} />
+                }} placeholder="" className={cn("relative z-10 w-full px-6 py-4 pr-20 pl-20 bg-transparent", "resize-none border-0 focus:outline-none", "placeholder:text-gray-500 text-right text-sm leading-relaxed", "min-h-[80px] max-h-[160px]")} rows={3} />
 
                     {/* أدوات الجانب الأيسر */}
                     <div className="absolute left-4 bottom-4 flex items-center gap-2">
