@@ -864,9 +864,7 @@ export default function UnifiedNotifications() {
 
               
 
-              <Button variant="outline" size="icon">
-                <Settings className="w-4 h-4" />
-              </Button>
+              
             </div>
           </div>
         </div>
