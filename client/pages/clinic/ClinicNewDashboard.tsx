@@ -342,33 +342,7 @@ const ClinicNewDashboard: React.FC = () => {
         </div>
 
         {/* Management Sections Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-8">
-          {clinicSections.map(section => <Link key={section.id} to={section.path} className={cn("relative bg-white rounded-xl p-4 shadow-sm border transition-all duration-300 hover:shadow-md hover:-translate-y-1 group", getBgColorClasses(section.color))}>
-              {section.badge && <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                  {section.badge}
-                </div>}
-
-              <div className="flex flex-col items-center text-center">
-                <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform", getColorClasses(section.color))}>
-                  <section.icon className="w-6 h-6" />
-                </div>
-
-                <h3 className="font-bold text-gray-900 mb-1 text-sm">
-                  {section.title}
-                </h3>
-
-                
-
-                <div className="mt-auto">
-                  
-                </div>
-              </div>
-
-              <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </div>
-            </Link>)}
-        </div>
+        
 
         {/* Recent Activity & Notifications */}
         <div className="grid md:grid-cols-2 gap-6">
