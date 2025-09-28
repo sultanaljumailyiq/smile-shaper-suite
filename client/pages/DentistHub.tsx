@@ -467,22 +467,7 @@ export default function DentistHub() {
         </Link>
       </div>
     </div>;
-  const RewardsSection = () => <div className="bg-white rounded-2xl border border-gray-100 p-4 md:p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-          <Award className="w-5 h-5 text-amber-600" /> المكافآت
-        </h3>
-        <Link to="/marketplace" className="text-amber-600 text-sm">
-          المتجر
-        </Link>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <StatWidget title="نقاط الولاء" value={2400} icon={Star} color="orange" />
-        <StatWidget title="قسائم نشطة" value={2} icon={CreditCard} color="blue" />
-        <StatWidget title="طلبات مكافآت" value={1} icon={Gift} color="red" />
-        <StatWidget title="وفورات" value={"IQD 180,000"} icon={TrendingUp} color="green" />
-      </div>
-    </div>;
+  const RewardsSection = () => {};
 
   // اختصارات العيادة السريعة
   const ClinicShortcuts = () => {
