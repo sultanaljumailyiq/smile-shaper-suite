@@ -577,9 +577,9 @@ export default function ModernMedicalServices() {
                   <h2 className="text-2xl font-bold text-gray-900 mb-1">
                     {currentCategory.title}
                   </h2>
-                  <p className="text-gray-600">{currentCategory.description}</p>
+                  
                 </div>
-                {activeCategory === "emergency" && <BookOpenCheck className="w-6 h-6 text-blue-600 ml-auto flex flex-col justify-center items-center" />}
+                {activeCategory === "emergency"}
               </div>
             </div>
 
