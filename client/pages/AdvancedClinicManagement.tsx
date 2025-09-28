@@ -399,10 +399,7 @@ export default function AdvancedClinicManagement() {
                   </div>
                 </div>
 
-                <button onClick={() => setShowAddClinic(true)} className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-sm text-sm">
-                  <Plus className="w-4 h-4" />
-                  إضافة عيادة
-                </button>
+                
               </div>}
           </div>
 
