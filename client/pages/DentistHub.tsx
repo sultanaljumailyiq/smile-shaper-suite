@@ -587,12 +587,7 @@ export default function DentistHub() {
       {hasClinicPermission("clinic", "read") && <ClinicSystemSwitcher />}
       {hasClinicPermission("clinic", "read") && <ClinicShortcuts />}
       {/* Widgets: Mobile-first interactive summary */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-        <StatWidget title="إجمالي الطلبات" value={currentUser.stats.totalOrders} icon={ShoppingCart} color="blue" trend="+12% هذا الشهر" />
-        <StatWidget title="إجمالي المشتريات" value={currentUser.stats.totalSpent} icon={TrendingUp} color="green" trend="+6% هذا الأ��بوع" />
-        <StatWidget title="المبلغ المُوفر" value={currentUser.stats.savedAmount} icon={Award} color="purple" trend="+18% مقارنةً بالشهر الماضي" />
-        <StatWidget title="المنتجات الم��ضلة" value={currentUser.stats.favoriteProducts} icon={Heart} color="red" trend="+3 منتجات مضافة" />
-      </div>
+      
 
       {/* Multi-Clinics & Staff Overview */}
       {hasClinicPermission("clinic", "read") && <div className="grid md:grid-cols-2 gap-4">
