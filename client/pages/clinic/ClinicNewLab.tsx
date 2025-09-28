@@ -361,20 +361,7 @@ const ClinicNewLab: React.FC = () => {
                   </div>
 
                   {/* Specifications */}
-                  {order.specifications && <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                      <h4 className="font-medium text-gray-900 mb-2">
-                        المواصفات:
-                      </h4>
-                      <div className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
-                        {order.specifications.material && <span>المادة: {order.specifications.material}</span>}
-                        {order.specifications.color && <span>اللون: {order.specifications.color}</span>}
-                        {order.specifications.quantity && <span>الكمية: {order.specifications.quantity}</span>}
-                        {order.specifications.specialInstructions && <div className="md:col-span-2">
-                            تعل��مات خاصة:{" "}
-                            {order.specifications.specialInstructions}
-                          </div>}
-                      </div>
-                    </div>}
+                  {order.specifications}
                 </div>
 
                 {/* Actions */}
