@@ -864,10 +864,7 @@ export default function UnifiedNotifications() {
                 </DialogContent>
               </Dialog>
 
-              <Button variant="outline" onClick={markAllAsRead} disabled={totalUnread === 0} className="text-green-600 border-green-300 hover:bg-green-50">
-                <CheckCircle2 className="w-4 h-4 mr-2" />
-                تعيين الكل كمقروء
-              </Button>
+              
 
               <Button variant="outline" size="icon">
                 <Settings className="w-4 h-4" />
