@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
-import AIAssistantRedesigned from "./AIAssistantRedesigned";
+import SimpleFloatingAI from "./SimpleFloatingAI";
 import NotificationSystem from "./NotificationSystem";
 import "@/styles/legacy-compact.css";
 
@@ -414,7 +414,7 @@ export function Layout({ children }: LayoutProps) {
       </div>
 
       {/* AI Assistant */}
-      <AIAssistantRedesigned />
+      <SimpleFloatingAI />
     </div>
   );
 }
