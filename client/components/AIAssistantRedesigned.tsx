@@ -512,7 +512,7 @@ const AIAssistantRedesigned = () => {
               </div>
 
               {/* منطقة الإدخال الرئيسية */}
-              <div className="px-5 pb-4">
+              <div className="px-2 pb-2">
                 <div className="relative">
                   <div className="relative bg-white rounded-3xl shadow-lg border-2 border-gray-300 hover:border-blue-400 focus-within:border-blue-500 transition-all duration-300">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-indigo-500/5 rounded-3xl"></div>
