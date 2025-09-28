@@ -1,29 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Users,
-  Plus,
-  Search,
-  Filter,
-  MoreHorizontal,
-  Phone,
-  Calendar,
-  Eye,
-  Edit,
-  User,
-  ArrowLeft,
-  MapPin,
-  Heart,
-  Clock,
-  AlertTriangle,
-  CheckCircle,
-  Star,
-  Badge as BadgeIcon,
-  FileText,
-  Camera,
-  Download,
-  Share,
-} from "lucide-react";
+import { Users, Plus, Search, Filter, MoreHorizontal, Phone, Calendar, Eye, Edit, User, ArrowLeft, MapPin, Heart, Clock, AlertTriangle, CheckCircle, Star, Badge as BadgeIcon, FileText, Camera, Download, Share } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,99 +8,93 @@ import ClinicSubNav from "@/components/ClinicSubNav";
 import { sharedClinicData, Patient } from "@/services/sharedClinicData";
 
 // Mock patients data - shared with clinic_old system
-const mockPatients = [
-  {
-    id: "1",
-    name: "أحمد محمد الطائي",
-    age: 28,
-    phone: "+964 770 123 4567",
-    email: "ahmed.taie@email.com",
-    address: "ا��كرادة، بغداد",
-    lastVisit: "2024-01-15",
-    nextAppointment: "2024-01-22",
-    treatment: "تنظيف الأسنان",
-    status: "active",
-    priority: "normal",
-    totalVisits: 8,
-    totalSpent: 750000, // IQD
-    notes: "مريض منتظم، لا يوجد حساسية معروفة",
-    medicalHistory: ["تسوس أسنان", "التهاب لثة خفيف"],
-    avatar: null,
-  },
-  {
-    id: "2",
-    name: "فاطمة علي السعد",
-    age: 35,
-    phone: "+964 750 987 6543",
-    email: "fatima.saad@email.com",
-    address: "المنصور، بغداد",
-    lastVisit: "2024-01-14",
-    nextAppointment: "2024-01-20",
-    treatment: "حشوة ضرس",
-    status: "in_treatment",
-    priority: "high",
-    totalVisits: 12,
-    totalSpent: 1250000,
-    notes: "تحتاج متابعة دورية، حساسية من البنسلين",
-    medicalHistory: ["تسوس متقدم", "حشوات سابقة", "تقويم أسنان"],
-    avatar: null,
-  },
-  {
-    id: "3",
-    name: "محمد حسن الكريم",
-    age: 42,
-    phone: "+964 771 456 7890",
-    email: "mohammed.kareem@email.com",
-    address: "الجادرية، بغداد",
-    lastVisit: "2024-01-10",
-    nextAppointment: null,
-    treatment: "زراعة أسنان",
-    status: "completed",
-    priority: "normal",
-    totalVisits: 15,
-    totalSpent: 2100000,
-    notes: "تم إكمال زراعة الأسنان بنجاح",
-    medicalHistory: ["فقدان أسنان", "زراعة أسنان"],
-    avatar: null,
-  },
-  {
-    id: "4",
-    name: "سارة أحمد النور",
-    age: 24,
-    phone: "+964 782 321 6547",
-    email: "sara.noor@email.com",
-    address: "الحرية، بغداد",
-    lastVisit: "2024-01-12",
-    nextAppointment: "2024-01-25",
-    treatment: "تقويم أسنان",
-    status: "active",
-    priority: "normal",
-    totalVisits: 6,
-    totalSpent: 950000,
-    notes: "تقويم أسنان، ا��مرح��ة الثانية",
-    medicalHistory: ["تقويم أسنان"],
-    avatar: null,
-  },
-  {
-    id: "5",
-    name: "عبد الله يوسف الشمري",
-    age: 50,
-    phone: "+964 790 654 3210",
-    email: "abdullah.shamri@email.com",
-    address: "الكاظمية، بغداد",
-    lastVisit: "2024-01-08",
-    nextAppointment: "2024-01-18",
-    treatment: "علاج عصب",
-    status: "urgent",
-    priority: "high",
-    totalVisits: 4,
-    totalSpent: 580000,
-    notes: "ألم شديد، يحتاج علاج عاجل",
-    medicalHistory: ["ألم أسنان حاد", "التهاب عصب"],
-    avatar: null,
-  },
-];
-
+const mockPatients = [{
+  id: "1",
+  name: "أحمد محمد الطائي",
+  age: 28,
+  phone: "+964 770 123 4567",
+  email: "ahmed.taie@email.com",
+  address: "ا��كرادة، بغداد",
+  lastVisit: "2024-01-15",
+  nextAppointment: "2024-01-22",
+  treatment: "تنظيف الأسنان",
+  status: "active",
+  priority: "normal",
+  totalVisits: 8,
+  totalSpent: 750000,
+  // IQD
+  notes: "مريض منتظم، لا يوجد حساسية معروفة",
+  medicalHistory: ["تسوس أسنان", "التهاب لثة خفيف"],
+  avatar: null
+}, {
+  id: "2",
+  name: "فاطمة علي السعد",
+  age: 35,
+  phone: "+964 750 987 6543",
+  email: "fatima.saad@email.com",
+  address: "المنصور، بغداد",
+  lastVisit: "2024-01-14",
+  nextAppointment: "2024-01-20",
+  treatment: "حشوة ضرس",
+  status: "in_treatment",
+  priority: "high",
+  totalVisits: 12,
+  totalSpent: 1250000,
+  notes: "تحتاج متابعة دورية، حساسية من البنسلين",
+  medicalHistory: ["تسوس متقدم", "حشوات سابقة", "تقويم أسنان"],
+  avatar: null
+}, {
+  id: "3",
+  name: "محمد حسن الكريم",
+  age: 42,
+  phone: "+964 771 456 7890",
+  email: "mohammed.kareem@email.com",
+  address: "الجادرية، بغداد",
+  lastVisit: "2024-01-10",
+  nextAppointment: null,
+  treatment: "زراعة أسنان",
+  status: "completed",
+  priority: "normal",
+  totalVisits: 15,
+  totalSpent: 2100000,
+  notes: "تم إكمال زراعة الأسنان بنجاح",
+  medicalHistory: ["فقدان أسنان", "زراعة أسنان"],
+  avatar: null
+}, {
+  id: "4",
+  name: "سارة أحمد النور",
+  age: 24,
+  phone: "+964 782 321 6547",
+  email: "sara.noor@email.com",
+  address: "الحرية، بغداد",
+  lastVisit: "2024-01-12",
+  nextAppointment: "2024-01-25",
+  treatment: "تقويم أسنان",
+  status: "active",
+  priority: "normal",
+  totalVisits: 6,
+  totalSpent: 950000,
+  notes: "تقويم أسنان، ا��مرح��ة الثانية",
+  medicalHistory: ["تقويم أسنان"],
+  avatar: null
+}, {
+  id: "5",
+  name: "عبد الله يوسف الشمري",
+  age: 50,
+  phone: "+964 790 654 3210",
+  email: "abdullah.shamri@email.com",
+  address: "الكاظمية، بغداد",
+  lastVisit: "2024-01-08",
+  nextAppointment: "2024-01-18",
+  treatment: "علاج عصب",
+  status: "urgent",
+  priority: "high",
+  totalVisits: 4,
+  totalSpent: 580000,
+  notes: "ألم شديد، يحتاج علاج عاجل",
+  medicalHistory: ["ألم أسنان حاد", "التهاب عصب"],
+  avatar: null
+}];
 const ClinicNewPatients: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -131,7 +102,6 @@ const ClinicNewPatients: React.FC = () => {
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [patients, setPatients] = useState<Patient[]>([]);
-
   useEffect(() => {
     (async () => {
       try {
@@ -144,17 +114,11 @@ const ClinicNewPatients: React.FC = () => {
   }, []);
 
   // Filter patients based on search and status
-  const filteredPatients = patients.filter((patient) => {
-    const matchesSearch =
-      patient.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      patient.phone.includes(searchQuery) ||
-      patient.treatment.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus =
-      filterStatus === "all" || patient.status === filterStatus;
-
+  const filteredPatients = patients.filter(patient => {
+    const matchesSearch = patient.name.toLowerCase().includes(searchQuery.toLowerCase()) || patient.phone.includes(searchQuery) || patient.treatment.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = filterStatus === "all" || patient.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
@@ -169,7 +133,6 @@ const ClinicNewPatients: React.FC = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
-
   const getStatusText = (status: string) => {
     switch (status) {
       case "active":
@@ -184,29 +147,23 @@ const ClinicNewPatients: React.FC = () => {
         return "غير محدد";
     }
   };
-
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
       case "high":
-        return <AlertTriangle className="w-4 h-4 text-red-500" />;
+        return;
       case "normal":
         return <CheckCircle className="w-4 h-4 text-green-500" />;
       default:
         return <CheckCircle className="w-4 h-4 text-gray-500" />;
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link
-                to="/clinic"
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
+              <Link to="/clinic" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Link>
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -237,20 +194,10 @@ const ClinicNewPatients: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="ابحث عن مريض..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
+              <input type="text" placeholder="ابحث عن مريض..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             </div>
 
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
+            <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
               <option value="all">جميع ا��حالات</option>
               <option value="active">نشط</option>
               <option value="in_treatment">قيد العلاج</option>
@@ -283,7 +230,7 @@ const ClinicNewPatients: React.FC = () => {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {patients.filter((p) => p.status === "active").length}
+                  {patients.filter(p => p.status === "active").length}
                 </p>
                 <p className="text-sm text-gray-600">مرضى نشطون</p>
               </div>
@@ -297,7 +244,7 @@ const ClinicNewPatients: React.FC = () => {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {patients.filter((p) => p.status === "urgent").length}
+                  {patients.filter(p => p.status === "urgent").length}
                 </p>
                 <p className="text-sm text-gray-600">حالات عاجلة</p>
               </div>
@@ -311,7 +258,7 @@ const ClinicNewPatients: React.FC = () => {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {patients.filter((p) => p.nextAppointment).length}
+                  {patients.filter(p => p.nextAppointment).length}
                 </p>
                 <p className="text-sm text-gray-600">مواعيد قادمة</p>
               </div>
@@ -321,11 +268,7 @@ const ClinicNewPatients: React.FC = () => {
 
         {/* Patients Grid - compact mobile cards */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3">
-          {filteredPatients.map((patient) => (
-            <div
-              key={patient.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 group"
-            >
+          {filteredPatients.map(patient => <div key={patient.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 group">
               {/* Patient Header */}
               <div className="p-4 border-b border-gray-100">
                 <div className="flex items-start justify-between">
@@ -337,7 +280,7 @@ const ClinicNewPatients: React.FC = () => {
                       <h3 className="font-bold text-gray-900">
                         {patient.name}
                       </h3>
-                      <p className="text-xs text-gray-600">{patient.age} سنة</p>
+                      
                     </div>
                   </div>
 
@@ -352,50 +295,26 @@ const ClinicNewPatients: React.FC = () => {
 
               {/* Patient Info */}
               <div className="p-3 space-y-2">
-                <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                  <Phone className="w-4 h-4" />
-                  {patient.phone}
-                </div>
+                
 
-                <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                  <MapPin className="w-4 h-4" />
-                  {patient.address}
-                </div>
+                
 
-                <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                  <Heart className="w-4 h-4" />
-                  {patient.treatment}
-                </div>
+                
 
                 <div className="flex items-center gap-1.5 text-xs text-gray-600">
                   <Clock className="w-4 h-4" />
                   آخر زيارة: {patient.lastVisit}
                 </div>
 
-                {patient.nextAppointment && (
-                  <div className="flex items-center gap-1.5 text-xs text-blue-600">
+                {patient.nextAppointment && <div className="flex items-center gap-1.5 text-xs text-blue-600">
                     <Calendar className="w-4 h-4" />
                     موعد قادم: {patient.nextAppointment}
-                  </div>
-                )}
+                  </div>}
               </div>
 
               {/* Stats */}
               <div className="px-3 py-2 bg-gray-50 border-t border-gray-100">
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div>
-                    <p className="text-base font-bold text-gray-900">
-                      {patient.totalVisits}
-                    </p>
-                    <p className="text-xs text-gray-600">زيارة</p>
-                  </div>
-                  <div>
-                    <p className="text-base font-bold text-gray-900">
-                      {(patient.totalSpent / 1000).toFixed(0)}K
-                    </p>
-                    <p className="text-[10px] text-gray-600">د.ع</p>
-                  </div>
-                </div>
+                
               </div>
 
               {/* Actions */}
@@ -411,22 +330,16 @@ const ClinicNewPatients: React.FC = () => {
                     موعد
                   </Button>
 
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => window.open(`tel:${patient.phone}`)}
-                  >
+                  <Button size="sm" variant="outline" onClick={() => window.open(`tel:${patient.phone}`)}>
                     <Phone className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Empty State */}
-        {filteredPatients.length === 0 && (
-          <div className="text-center py-12">
+        {filteredPatients.length === 0 && <div className="text-center py-12">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Users className="w-8 h-8 text-gray-400" />
             </div>
@@ -440,11 +353,8 @@ const ClinicNewPatients: React.FC = () => {
               <Plus className="w-4 h-4 mr-2" />
               إضافة مريض جديد
             </Button>
-          </div>
-        )}
+          </div>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ClinicNewPatients;
