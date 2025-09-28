@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { 
-  Building2, Plus, Edit, Trash2, Settings, Users, Calendar, MapPin, Phone, Mail, 
-  Globe, Copy, Check, ArrowLeft, UserPlus, Stethoscope, Clock, Star, DollarSign, 
-  FileText, BarChart3, Shield, Key, Wifi, Camera, Save, X, Search, Filter, 
-  MoreVertical, ExternalLink, Database, UserCheck, TrendingUp, Activity,
-  PieChart, ToggleLeft, ToggleRight
-} from "lucide-react";
+import { Building2, Plus, Edit, Trash2, Settings, Users, Calendar, MapPin, Phone, Mail, Globe, Copy, Check, ArrowLeft, UserPlus, Stethoscope, Clock, Star, DollarSign, FileText, BarChart3, Shield, Key, Wifi, Camera, Save, X, Search, Filter, MoreVertical, ExternalLink, Database, UserCheck, TrendingUp, Activity, PieChart, ToggleLeft, ToggleRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigation } from "@/contexts/NavigationContext";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
 interface Clinic {
   id: string;
   name: string;
@@ -36,7 +29,6 @@ interface Clinic {
   monthlyRevenue: number;
   createdAt: string;
 }
-
 interface Doctor {
   id: string;
   name: string;
@@ -64,13 +56,41 @@ const mockClinics: Clinic[] = [{
   description: "عيادة متخصصة في طب الأسنان التجميلي والعلاجي",
   specialties: ["تقويم الأسنان", "زراعة الأسنان", "تجميل الأسنان", "علاج الجذور"],
   workingHours: {
-    sunday: { open: "09:00", close: "17:00", isOpen: true },
-    monday: { open: "09:00", close: "17:00", isOpen: true },
-    tuesday: { open: "09:00", close: "17:00", isOpen: true },
-    wednesday: { open: "09:00", close: "17:00", isOpen: true },
-    thursday: { open: "09:00", close: "17:00", isOpen: true },
-    friday: { open: "10:00", close: "14:00", isOpen: true },
-    saturday: { open: "09:00", close: "17:00", isOpen: false }
+    sunday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: true
+    },
+    monday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: true
+    },
+    tuesday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: true
+    },
+    wednesday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: true
+    },
+    thursday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: true
+    },
+    friday: {
+      open: "10:00",
+      close: "14:00",
+      isOpen: true
+    },
+    saturday: {
+      open: "09:00",
+      close: "17:00",
+      isOpen: false
+    }
   },
   doctors: [{
     id: "1",
@@ -112,13 +132,41 @@ const mockClinics: Clinic[] = [{
   description: "مركز طبي متكامل لجميع خدمات طب الأسنان",
   specialties: ["جراحة الفم", "زراعة الأسنان", "تركيبات الأسنان"],
   workingHours: {
-    sunday: { open: "08:00", close: "18:00", isOpen: true },
-    monday: { open: "08:00", close: "18:00", isOpen: true },
-    tuesday: { open: "08:00", close: "18:00", isOpen: true },
-    wednesday: { open: "08:00", close: "18:00", isOpen: true },
-    thursday: { open: "08:00", close: "18:00", isOpen: true },
-    friday: { open: "09:00", close: "13:00", isOpen: true },
-    saturday: { open: "08:00", close: "18:00", isOpen: false }
+    sunday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: true
+    },
+    monday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: true
+    },
+    tuesday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: true
+    },
+    wednesday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: true
+    },
+    thursday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: true
+    },
+    friday: {
+      open: "09:00",
+      close: "13:00",
+      isOpen: true
+    },
+    saturday: {
+      open: "08:00",
+      close: "18:00",
+      isOpen: false
+    }
   },
   doctors: [{
     id: "3",
@@ -139,9 +187,10 @@ const mockClinics: Clinic[] = [{
   monthlyRevenue: 12000000,
   createdAt: "2023-03-10"
 }];
-
 export default function AdvancedClinicManagement() {
-  const { goBack } = useNavigation();
+  const {
+    goBack
+  } = useNavigation();
   const [clinics, setClinics] = useState<Clinic[]>(mockClinics);
   const [selectedClinic, setSelectedClinic] = useState<Clinic | null>(null);
   const [showAddClinic, setShowAddClinic] = useState(false);
@@ -152,20 +201,19 @@ export default function AdvancedClinicManagement() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [useOldManager, setUseOldManager] = useState(false);
   const [activeSubSection, setActiveSubSection] = useState<"clinics" | "staff" | "reports" | "database">("clinics");
-
   const toggleExpanded = (id: string) => {
     setExpandedIds(prev => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id); 
-      else next.add(id);
+      if (next.has(id)) next.delete(id);else next.add(id);
       return next;
     });
   };
-
   const updateClinicField = <K extends keyof Clinic,>(id: string, field: K, value: Clinic[K]) => {
-    setClinics(prev => prev.map(c => c.id === id ? { ...c, [field]: value } : c));
+    setClinics(prev => prev.map(c => c.id === id ? {
+      ...c,
+      [field]: value
+    } : c));
   };
-
   const copyBookingUrl = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
@@ -175,15 +223,10 @@ export default function AdvancedClinicManagement() {
       console.error("Failed to copy URL:", error);
     }
   };
-
-  const filteredClinics = clinics.filter(clinic => 
-    clinic.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    clinic.address.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredClinics = clinics.filter(clinic => clinic.name.toLowerCase().includes(searchTerm.toLowerCase()) || clinic.address.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // Sub-sections components
-  const StaffManagementSection = () => (
-    <div className="space-y-3">
+  const StaffManagementSection = () => <div className="space-y-3">
       <div className="bg-white rounded-lg p-3 border border-gray-100">
         <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
           <UserCheck className="w-4 h-4 text-blue-600" />
@@ -208,11 +251,8 @@ export default function AdvancedClinicManagement() {
           </button>
         </div>
       </div>
-    </div>
-  );
-
-  const ReportsSection = () => (
-    <div className="space-y-3">
+    </div>;
+  const ReportsSection = () => <div className="space-y-3">
       <div className="bg-white rounded-lg p-3 border border-gray-100">
         <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
           <BarChart3 className="w-4 h-4 text-purple-600" />
@@ -245,11 +285,8 @@ export default function AdvancedClinicManagement() {
           </button>
         </div>
       </div>
-    </div>
-  );
-
-  const DatabaseSection = () => (
-    <div className="space-y-3">
+    </div>;
+  const DatabaseSection = () => <div className="space-y-3">
       <div className="bg-white rounded-lg p-3 border border-gray-100">
         <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
           <Database className="w-4 h-4 text-indigo-600" />
@@ -282,49 +319,34 @@ export default function AdvancedClinicManagement() {
           </div>
         </div>
       </div>
-    </div>
-  );
-
+    </div>;
   if (useOldManager) {
     // Redirect to old clinic manager
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
         <div className="text-center p-6">
           <Building2 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h2 className="text-lg font-semibold text-gray-900 mb-2">مدير العيادات القديم</h2>
           <p className="text-sm text-gray-600 mb-4">سيتم توجيهك إلى نظام الإدارة القديم</p>
-          <Link 
-            to="/clinics-manager" 
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
+          <Link to="/clinics-manager" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             <ExternalLink className="w-4 h-4" />
             الانتقال للنظام القديم
           </Link>
           <div className="mt-4">
-            <button 
-              onClick={() => setUseOldManager(false)}
-              className="text-sm text-gray-600 hover:text-gray-900"
-            >
+            <button onClick={() => setUseOldManager(false)} className="text-sm text-gray-600 hover:text-gray-900">
               العودة للنظام الجديد
             </button>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gray-50" dir="rtl">
+  return <div className="min-h-screen bg-gray-50" dir="rtl">
       <div className="p-2 md:p-4 lg:p-6 pb-20">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-4">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <button 
-                  onClick={goBack}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
+                <button onClick={goBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                   <ArrowLeft className="w-4 h-4 text-gray-600" />
                 </button>
                 <div>
@@ -336,17 +358,9 @@ export default function AdvancedClinicManagement() {
               {/* System Toggle Switch */}
               <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
                 <span className="text-xs text-gray-600">قديم</span>
-                <Link 
-                  to="/clinics-manager"
-                  className="relative"
-                >
-                  <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
-                </Link>
+                
                 <span className="mx-1 text-xs text-gray-400">|</span>
-                <button 
-                  onClick={() => setUseOldManager(false)}
-                  className="relative"
-                >
+                <button onClick={() => setUseOldManager(false)} className="relative">
                   <ToggleRight className="w-6 h-6 text-blue-600" />
                 </button>
                 <span className="text-xs text-gray-600">جديد</span>
@@ -355,52 +369,41 @@ export default function AdvancedClinicManagement() {
 
             {/* Sub-navigation */}
             <div className="flex bg-white rounded-lg p-1 border border-gray-200 mb-4">
-              {[
-                { id: "clinics", label: "العيادات", icon: Building2 },
-                { id: "staff", label: "الكادر", icon: Users },
-                { id: "reports", label: "التقارير", icon: BarChart3 },
-                { id: "database", label: "قاعدة البيانات", icon: Database }
-              ].map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSubSection(section.id as any)}
-                  className={cn(
-                    "flex-1 flex items-center justify-center gap-1 py-2 px-2 md:px-3 rounded-lg transition-all text-xs md:text-sm",
-                    activeSubSection === section.id
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-                  )}
-                >
+              {[{
+              id: "clinics",
+              label: "العيادات",
+              icon: Building2
+            }, {
+              id: "staff",
+              label: "الكادر",
+              icon: Users
+            }, {
+              id: "reports",
+              label: "التقارير",
+              icon: BarChart3
+            }, {
+              id: "database",
+              label: "قاعدة البيانات",
+              icon: Database
+            }].map(section => <button key={section.id} onClick={() => setActiveSubSection(section.id as any)} className={cn("flex-1 flex items-center justify-center gap-1 py-2 px-2 md:px-3 rounded-lg transition-all text-xs md:text-sm", activeSubSection === section.id ? "bg-blue-600 text-white shadow-sm" : "text-gray-600 hover:text-gray-900 hover:bg-gray-50")}>
                   <section.icon className="w-3 h-3 md:w-4 md:h-4" />
                   <span className="hidden md:inline">{section.label}</span>
-                </button>
-              ))}
+                </button>)}
             </div>
 
-            {activeSubSection === "clinics" && (
-              <div className="flex flex-col md:flex-row gap-3 justify-between">
+            {activeSubSection === "clinics" && <div className="flex flex-col md:flex-row gap-3 justify-between">
                 <div className="flex-1 max-w-md">
                   <div className="relative">
                     <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="ابحث في العيادات..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pr-10 pl-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
+                    <input type="text" placeholder="ابحث في العيادات..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pr-10 pl-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
                   </div>
                 </div>
 
-                <button 
-                  onClick={() => setShowAddClinic(true)} 
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-sm text-sm"
-                >
+                <button onClick={() => setShowAddClinic(true)} className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-sm text-sm">
                   <Plus className="w-4 h-4" />
                   إضافة عيادة
                 </button>
-              </div>
-            )}
+              </div>}
           </div>
 
           {/* Content based on active sub-section */}
@@ -408,8 +411,7 @@ export default function AdvancedClinicManagement() {
           {activeSubSection === "reports" && <ReportsSection />}
           {activeSubSection === "database" && <DatabaseSection />}
 
-          {activeSubSection === "clinics" && (
-            <>
+          {activeSubSection === "clinics" && <>
               {/* Stats Overview - Compact */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-4">
                 <div className="bg-white rounded-lg p-3 border border-gray-100">
@@ -469,8 +471,7 @@ export default function AdvancedClinicManagement() {
 
               {/* Clinics Grid - Compact */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
-                {filteredClinics.map(clinic => (
-                  <div key={clinic.id} className="bg-white rounded-lg border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
+                {filteredClinics.map(clinic => <div key={clinic.id} className="bg-white rounded-lg border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
                     {/* Clinic Header - Very Compact */}
                     <div className="p-3 border-b border-gray-100">
                       <div className="flex items-start justify-between mb-2">
@@ -511,10 +512,7 @@ export default function AdvancedClinicManagement() {
                     </div>
 
                     <div className="px-3 py-2 flex items-center justify-end border-b border-gray-100">
-                      <button 
-                        onClick={() => toggleExpanded(clinic.id)} 
-                        className="text-xs text-gray-600 hover:text-gray-900 inline-flex items-center gap-1"
-                      >
+                      <button onClick={() => toggleExpanded(clinic.id)} className="text-xs text-gray-600 hover:text-gray-900 inline-flex items-center gap-1">
                         {expandedIds.has(clinic.id) ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                         تفاصيل
                       </button>
@@ -528,14 +526,8 @@ export default function AdvancedClinicManagement() {
                             <p className="text-xs font-medium text-gray-700 mb-0.5">رابط الحجز</p>
                             <p className="text-xs text-gray-500 truncate">{clinic.bookingUrl}</p>
                           </div>
-                          <button 
-                            onClick={() => copyBookingUrl(clinic.bookingUrl)} 
-                            className="flex items-center gap-1 px-2 py-1 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors ml-2"
-                          >
-                            {copiedUrl === clinic.bookingUrl ? 
-                              <Check className="w-3 h-3 text-green-600" /> : 
-                              <Copy className="w-3 h-3 text-gray-500" />
-                            }
+                          <button onClick={() => copyBookingUrl(clinic.bookingUrl)} className="flex items-center gap-1 px-2 py-1 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors ml-2">
+                            {copiedUrl === clinic.bookingUrl ? <Check className="w-3 h-3 text-green-600" /> : <Copy className="w-3 h-3 text-gray-500" />}
                           </button>
                         </div>
                       </div>
@@ -544,21 +536,17 @@ export default function AdvancedClinicManagement() {
                       <div className="p-3">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="text-sm font-semibold text-gray-900">الكادر الطبي ({clinic.doctors.length})</h4>
-                          <button 
-                            onClick={() => {
-                              setSelectedClinic(clinic);
-                              setShowAddDoctor(true);
-                            }} 
-                            className="text-indigo-600 hover:text-indigo-700 text-xs font-medium"
-                          >
+                          <button onClick={() => {
+                      setSelectedClinic(clinic);
+                      setShowAddDoctor(true);
+                    }} className="text-indigo-600 hover:text-indigo-700 text-xs font-medium">
                             إضافة
                           </button>
                         </div>
 
                         {/* Compact Doctors List */}
                         <div className="space-y-2">
-                          {clinic.doctors.slice(0, 2).map(doctor => (
-                            <div key={doctor.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                          {clinic.doctors.slice(0, 2).map(doctor => <div key={doctor.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
                               <div className="w-5 h-5 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
                                 <Stethoscope className="w-3 h-3 text-indigo-600" />
                               </div>
@@ -570,33 +558,24 @@ export default function AdvancedClinicManagement() {
                                 <Star className="w-3 h-3 text-yellow-500 fill-current" />
                                 <span className="text-xs text-gray-600">{doctor.rating}</span>
                               </div>
-                            </div>
-                          ))}
+                            </div>)}
                         </div>
 
-                        {clinic.doctors.length > 2 && (
-                          <p className="text-xs text-gray-500 text-center mt-2">
+                        {clinic.doctors.length > 2 && <p className="text-xs text-gray-500 text-center mt-2">
                             +{clinic.doctors.length - 2} أطباء آخرين
-                          </p>
-                        )}
+                          </p>}
                       </div>
                     </div>
 
                     {/* Actions - Compact */}
                     <div className="p-3 border-t border-gray-100">
                       <div className="flex gap-2">
-                        <Link 
-                          to="/clinic-dashboard"
-                          className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
-                        >
+                        <Link to="/clinic-dashboard" className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors">
                           <Settings className="w-3 h-3" />
                           <span className="text-xs font-medium">إدارة</span>
                         </Link>
 
-                        <Link 
-                          to="/clinic"
-                          className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
-                        >
+                        <Link to="/clinic" className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">
                           <BarChart3 className="w-3 h-3" />
                           <span className="text-xs font-medium">تقارير</span>
                         </Link>
@@ -606,31 +585,23 @@ export default function AdvancedClinicManagement() {
                         </button>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
 
               {/* Empty State */}
-              {filteredClinics.length === 0 && (
-                <div className="text-center py-8">
+              {filteredClinics.length === 0 && <div className="text-center py-8">
                   <Building2 className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                   <h3 className="text-base font-medium text-gray-900 mb-2">لا توجد عيادات</h3>
                   <p className="text-gray-600 text-sm mb-4">ابدأ بإضافة عيادة جديدة لإدارة خدماتك الطبية</p>
-                  <button 
-                    onClick={() => setShowAddClinic(true)} 
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors mx-auto text-sm"
-                  >
+                  <button onClick={() => setShowAddClinic(true)} className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors mx-auto text-sm">
                     <Plus className="w-4 h-4" />
                     إضافة عيادة جديدة
                   </button>
-                </div>
-              )}
-            </>
-          )}
+                </div>}
+            </>}
         </div>
       </div>
 
       {/* Modals would go here - Add Clinic, Edit Clinic, Add Doctor */}
-    </div>
-  );
+    </div>;
 }
