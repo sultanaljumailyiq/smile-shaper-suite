@@ -350,17 +350,7 @@ const AIAssistantRedesigned = () => {
               <div className={cn("absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white shadow-lg", getStatusColor())}></div>
               {isConnected ? <Wifi className="absolute -bottom-1 -left-1 w-5 h-5 text-green-500 drop-shadow-sm" /> : <WifiOff className="absolute -bottom-1 -left-1 w-5 h-5 text-red-500 drop-shadow-sm" />}
             </div>
-            {!isMinimized && <div>
-                <h3 className="font-bold text-gray-900 flex items-center gap-2 text-lg">
-                  مساعد الذكاء الاصطناعي
-                  
-                </h3>
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                  <span>{getStatusText()}</span>
-                  
-                  <Star className="w-3 h-3 text-yellow-500" />
-                </p>
-              </div>}
+            {!isMinimized}
           </div>
 
           <div className="flex items-center gap-2">
@@ -368,9 +358,7 @@ const AIAssistantRedesigned = () => {
                 <button onClick={() => setShowSuggestions(!showSuggestions)} className={cn("p-2 rounded-xl transition-colors", showSuggestions ? "bg-blue-100 text-blue-600" : "hover:bg-gray-100 text-gray-600")} title="إظهار/إخفاء الاقتراحات">
                   <Lightbulb className="w-4 h-4" />
                 </button>
-                <button onClick={() => setIsSoundEnabled(!isSoundEnabled)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors" title={isSoundEnabled ? "كتم الصوت" : "تشغيل الصوت"}>
-                  {isSoundEnabled ? <Volume2 className="w-4 h-4 text-gray-600" /> : <VolumeX className="w-4 h-4 text-gray-600" />}
-                </button>
+                
                 <button onClick={() => setIsExpanded(!isExpanded)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors" title={isExpanded ? "تصغير" : "توسيع"}>
                   {isExpanded ? <Minimize2 className="w-4 h-4 text-gray-600" /> : <Maximize2 className="w-4 h-4 text-gray-600" />}
                 </button>
@@ -450,19 +438,7 @@ const AIAssistantRedesigned = () => {
             {/* منطقة الإدخال المحسنة */}
             <div className="bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50 border-t border-gray-200">
               {/* عنوان منطقة الإدخال */}
-              <div className="px-5 pt-4 pb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <MessageCircle className="w-4 h-4 text-blue-500" />
-                  <span className="font-medium">أكتب رسالتك أو أرفق ملف</span>
-                  <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"></div>
-                  <div className={cn("flex items-center gap-1", isConnected ? "text-green-600" : "text-red-600")}>
-                    {isConnected ? <Wifi className="w-3 h-3" /> : <WifiOff className="w-3 h-3" />}
-                    <span className="text-xs">
-                      {isConnected ? "متصل" : "غير متصل"}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
 
               {/* منطقة الإدخال الرئيسية */}
               <div className="px-2 pb-2">
