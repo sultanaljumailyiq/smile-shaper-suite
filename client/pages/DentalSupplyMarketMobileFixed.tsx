@@ -4,32 +4,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Star,
   ArrowRight,
-  Plus,
-  Zap,
-  Gift,
-  Clock,
-  Eye,
-  TrendingUp,
-  ChevronLeft,
-  ChevronRight,
-  Percent,
-  Timer,
-  Package,
   Heart,
-  Search,
-  ShoppingCart,
-  Award,
-  Truck,
-  Tag,
-  Sparkles,
-  Filter,
-  Grid3X3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import {
-  dentalProducts,
   getFeaturedProducts,
   getNewProducts,
   getDiscountedProducts,
@@ -56,86 +36,28 @@ const promoSlides = [
     gradient: "from-blue-600 to-indigo-600",
     badge: "جديد",
   },
-  {
-    id: 3,
-    title: "معدات التعقيم",
-    subtitle: "حماية مضمونة",
-    buttonText: "شراء",
-    image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=600&h=300&fit=crop",
-    gradient: "from-green-600 to-teal-600",
-    badge: "الأكثر مبيعاً",
-  },
 ];
 
 // Mobile-optimized categories
 const categories = [
-  {
-    id: "1",
-    name: "أدوات الأسنان",
-    icon: "🦷",
-    count: 150,
-    color: "bg-blue-500",
-  },
-  {
-    id: "2",
-    name: "حشوات الأسنان",
-    icon: "🔧",
-    count: 89,
-    color: "bg-purple-500",
-  },
-  {
-    id: "3",
-    name: "معدات التنظيف",
-    icon: "🧽",
-    count: 67,
-    color: "bg-green-500",
-  },
-  {
-    id: "4",
-    name: "أجهزة الأشعة",
-    icon: "📱",
-    count: 45,
-    color: "bg-orange-500",
-  },
-  {
-    id: "5",
-    name: "معدات التعقيم",
-    icon: "🧼",
-    count: 78,
-    color: "bg-teal-500",
-  },
-  {
-    id: "6",
-    name: "مواد التجميل",
-    icon: "✨",
-    count: 123,
-    color: "bg-pink-500",
-  },
-  {
-    id: "7",
-    name: "أدوات الجراحة",
-    icon: "🔪",
-    count: 56,
-    color: "bg-red-500",
-  },
-  {
-    id: "8",
-    name: "أجهزة الليزر",
-    icon: "⚡",
-    count: 34,
-    color: "bg-yellow-500",
-  },
+  { id: "1", name: "أدوات الأسنان", icon: "🦷", count: 150, color: "bg-blue-500" },
+  { id: "2", name: "حشوات الأسنان", icon: "🔧", count: 89, color: "bg-purple-500" },
+  { id: "3", name: "معدات التنظيف", icon: "🧽", count: 67, color: "bg-green-500" },
+  { id: "4", name: "أجهزة الأشعة", icon: "📱", count: 45, color: "bg-orange-500" },
+  { id: "5", name: "معدات التعقيم", icon: "🧼", count: 78, color: "bg-teal-500" },
+  { id: "6", name: "مواد التجميل", icon: "✨", count: 123, color: "bg-pink-500" },
 ];
 
 // Mobile Product Card Component
 const MobileProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }: any) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-lg transition-all duration-300">
-      <div className="relative aspect-square bg-gray-50">
+    <div className="w-full max-w-full bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-lg transition-all duration-300">
+      <div className="relative aspect-square bg-gray-50 w-full">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          style={{ maxWidth: '100%', objectFit: 'cover' }}
         />
         
         {/* Badges */}
@@ -164,7 +86,7 @@ const MobileProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite 
         </button>
       </div>
 
-      <div className="p-3">
+      <div className="p-3 w-full">
         <h3 className="font-semibold text-sm text-gray-900 mb-1 line-clamp-2 leading-tight">
           {product.name}
         </h3>
@@ -228,15 +150,15 @@ const MobileCategoryCard = ({ category }: any) => {
 // Mobile Section Header
 const MobileSectionHeader = ({ title, subtitle, viewAllLink }: any) => {
   return (
-    <div className="flex items-center justify-between mb-4">
-      <div>
-        <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-        {subtitle && <p className="text-sm text-gray-600 mt-1">{subtitle}</p>}
+    <div className="flex items-center justify-between mb-4 w-full">
+      <div className="flex-1 min-w-0">
+        <h2 className="text-lg font-bold text-gray-900 truncate">{title}</h2>
+        {subtitle && <p className="text-sm text-gray-600 mt-1 truncate">{subtitle}</p>}
       </div>
       {viewAllLink && (
         <Link
           to={viewAllLink}
-          className="text-blue-600 text-sm font-medium hover:text-blue-700 flex items-center gap-1"
+          className="text-blue-600 text-sm font-medium hover:text-blue-700 flex items-center gap-1 flex-shrink-0"
         >
           عرض الكل
           <ArrowRight className="w-3 h-3" />
@@ -246,7 +168,7 @@ const MobileSectionHeader = ({ title, subtitle, viewAllLink }: any) => {
   );
 };
 
-export default function DentalSupplyMarketMobile() {
+export default function DentalSupplyMarketMobileFixed() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const isMobile = useIsMobile();
   const { addItem } = useCart();
@@ -320,9 +242,9 @@ export default function DentalSupplyMarketMobile() {
   };
 
   return (
-    <div className="mobile-container w-full max-w-full overflow-x-hidden min-h-screen bg-gray-50" dir="rtl">
+    <div className="w-full min-h-screen bg-gray-50 overflow-x-hidden" dir="rtl" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
       {/* Mobile Hero Banner */}
-      <div className="relative h-48 mb-4 mx-3 mt-3 rounded-2xl overflow-hidden max-w-full">
+      <div className="relative h-48 mb-4 mx-3 mt-3 rounded-2xl overflow-hidden" style={{ maxWidth: 'calc(100vw - 24px)' }}>
         <div className="absolute inset-0 w-full h-full">
           <img
             src={promoSlides[currentSlide].image}
@@ -367,13 +289,13 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* Mobile Categories */}
-      <div className="w-full max-w-full overflow-hidden px-3 mb-6">
+      <div className="w-full px-3 mb-6" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
         <MobileSectionHeader 
           title="التصنيفات" 
           subtitle="تسوق حسب التخصص"
           viewAllLink="/dental-supply/categories"
         />
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide max-w-full">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ maxWidth: '100%' }}>
           {categories.map((category) => (
             <MobileCategoryCard key={category.id} category={category} />
           ))}
@@ -381,13 +303,13 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* Flash Deals */}
-      <div className="w-full max-w-full px-3 mb-6">
-        <MobileSectionHeader
+      <div className="w-full px-3 mb-6" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
+        <MobileSectionHeader 
           title="⚡ عروض البرق" 
           subtitle="لفترة محدودة فقط"
           viewAllLink="/dental-supply/flash-deals"
         />
-        <div className="grid grid-cols-2 gap-3 w-full max-w-full">
+        <div className="grid grid-cols-2 gap-3 w-full">
           {flashDealsProducts.slice(0, 4).map((product, index) => (
             <MobileProductCard
               key={`flash-${index}`}
@@ -407,13 +329,13 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* Featured Products */}
-      <div className="w-full max-w-full px-3 mb-6">
-        <MobileSectionHeader
+      <div className="w-full px-3 mb-6" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
+        <MobileSectionHeader 
           title="⭐ المنتجات المميزة" 
           subtitle="الأكثر شعبية"
           viewAllLink="/dental-supply/featured"
         />
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 w-full">
           {enhancedProducts.slice(0, 6).map((product) => (
             <MobileProductCard
               key={product.id}
@@ -427,13 +349,13 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* New Arrivals */}
-      <div className="w-full max-w-full px-3 mb-6">
-        <MobileSectionHeader
+      <div className="w-full px-3 mb-6" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
+        <MobileSectionHeader 
           title="✨ وصل حديثاً" 
           subtitle="أحدث المنتجات"
           viewAllLink="/dental-supply/new-arrivals"
         />
-        <div className="flex gap-3 overflow-x-auto pb-2 w-full max-w-full">
+        <div className="flex gap-3 overflow-x-auto pb-2 w-full" style={{ maxWidth: '100%' }}>
           {newArrivals.slice(0, 8).map((product, index) => (
             <div key={`new-${index}`} className="flex-shrink-0 w-40">
               <MobileProductCard
@@ -453,13 +375,13 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* Trending Products */}
-      <div className="w-full max-w-full px-3 mb-6">
-        <MobileSectionHeader
+      <div className="w-full px-3 mb-6" style={{ maxWidth: '100vw', boxSizing: 'border-box' }}>
+        <MobileSectionHeader 
           title="🔥 الأكثر طلباً" 
           subtitle="الأعلى مبيعاً"
           viewAllLink="/dental-supply/trending"
         />
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 w-full">
           {trendingProducts.slice(0, 4).map((product, index) => (
             <MobileProductCard
               key={`trending-${index}`}
@@ -478,7 +400,7 @@ export default function DentalSupplyMarketMobile() {
       </div>
 
       {/* Bottom Spacing for Navigation */}
-      <div className="h-20"></div>
+      <div className="h-20 w-full"></div>
     </div>
   );
 }

@@ -44,7 +44,7 @@ import Auth from "./pages/Auth";
 import PatientMarketplace from "./pages/PatientMarketplace";
 import DentalSupplyMarket from "./pages/DentalSupplyMarket";
 import DentalSupplyMarketResponsive from "./pages/DentalSupplyMarketResponsive";
-import DentalSupplyMarketMobile from "./pages/DentalSupplyMarketMobile";
+import DentalSupplyMarketMobileFixed from "./pages/DentalSupplyMarketMobileFixed";
 import StoreLayout from "./components/StoreLayout";
 import MarketplaceAdmin from "./pages/MarketplaceAdmin";
 import SuperAdminSettings from "./pages/SuperAdminSettings";
@@ -228,7 +228,7 @@ const App = () => (
                             >
                               <Route
                                 index
-                                element={<DentalSupplyMarketMobile />}
+                                element={<DentalSupplyMarketMobileFixed />}
                               />
                               <Route
                                 path="categories"
