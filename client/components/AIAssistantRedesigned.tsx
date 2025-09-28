@@ -338,8 +338,8 @@ const AIAssistantRedesigned = () => {
   }
 
   // النافذة المنبثقة المعاد تصميمها
-  return <div className="fixed bottom-6 right-6 z-50">
-      <div className={cn("bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-gray-200/50 transition-all duration-500", isMinimized ? "w-80 h-20" : isExpanded ? "w-[600px] h-[850px]" : "w-[500px] h-[750px]", "overflow-hidden ring-1 ring-black/5")}>
+  return <div className="fixed bottom-2 right-2 left-2 sm:bottom-6 sm:right-6 sm:left-auto z-50">
+      <div className={cn("bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-gray-200/50 transition-all duration-500", isMinimized ? "w-full sm:w-80 h-20" : isExpanded ? "w-full sm:w-[600px] h-[85vh] sm:h-[850px]" : "w-full sm:w-[500px] h-[80vh] sm:h-[750px]", "overflow-hidden ring-1 ring-black/5")}>
         {/* عنوان محسن */}
         <div className="relative z-10 flex items-center justify-between p-5 border-b border-gray-200/50 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50">
           <div className="flex items-center gap-4">
