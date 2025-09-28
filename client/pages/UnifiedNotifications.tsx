@@ -1049,12 +1049,7 @@ export default function UnifiedNotifications() {
             {/* شريط البحث والفلاتر */}
             <div className="w-full md:w-80 space-y-4">
               {/* البحث */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
-                <div className="relative">
-                  <Search className="absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-gray-400" />
-                  <Input placeholder={activeTab === "notifications" ? "ابحث في الإشعارات..." : "ابحث في الرسائل..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pr-8 md:pr-10 text-sm" />
-                </div>
-              </div>
+              
 
               {/* الفلاتر السريعة */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
