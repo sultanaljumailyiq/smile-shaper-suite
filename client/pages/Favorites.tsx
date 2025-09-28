@@ -555,48 +555,10 @@ export default function Favorites() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              {/* زر الرجوع */}
-              {navState.previousSection !== "favorites" && navState.navigationHistory.length > 1 && <button onClick={goBack} className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="text-sm font-medium">
-                      {navState.previousSection === "marketplace" ? "المتجر" : navState.previousSection === "home" ? "الرئيسية" : navState.previousSection === "jobs" ? "الوظائف" : navState.previousSection === "community" ? "المجتمع" : "رجوع"}
-                    </span>
-                  </button>}
-
-              <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center", `bg-gradient-to-r ${config.gradient}`)}>
-                <config.icon className="w-6 h-6 text-white" />
-              </div>
-              <div />
-            </div>
+            
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4">
-              <div className="bg-white border border-gray-200 rounded-xl p-3">
-                <p className="text-xs text-gray-500 mb-1">الكل</p>
-                <p className="text-lg font-bold text-gray-900">{totals.all}</p>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-xl p-3">
-                <p className="text-xs text-gray-500 mb-1">المتجر</p>
-                <p className="text-lg font-bold text-blue-600">
-                  {totals.marketplace}
-                </p>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-xl p-3">
-                <p className="text-xs text-gray-500 mb-1">المجتمع</p>
-                <p className="text-lg font-bold text-emerald-600">
-                  {totals.community}
-                </p>
-              </div>
-              
-              <div className="bg-white border border-gray-200 rounded-xl p-3">
-                <p className="text-xs text-gray-500 mb-1">التعليم</p>
-                <p className="text-lg font-bold text-rose-600">
-                  {totals.education}
-                </p>
-              </div>
-              
-            </div>
+            
 
             {/* Overview Cards */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
