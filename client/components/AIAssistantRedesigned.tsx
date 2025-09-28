@@ -438,7 +438,19 @@ const AIAssistantRedesigned = () => {
             {/* منطقة الإدخال المحسنة */}
             <div className="bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50 border-t border-gray-200">
               {/* عنوان منطقة الإدخال */}
-              
+              <div className="px-5 pt-4 pb-3">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <MessageCircle className="w-4 h-4 text-blue-500" />
+                  <span className="font-medium">أكتب رسالتك أو أرفق ملف</span>
+                  <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"></div>
+                  <div className={cn("flex items-center gap-1", isConnected ? "text-green-600" : "text-red-600")}>
+                    {isConnected ? <Wifi className="w-3 h-3" /> : <WifiOff className="w-3 h-3" />}
+                    <span className="text-xs">
+                      {isConnected ? "متصل" : "غير متصل"}
+                    </span>
+                  </div>
+                </div>
+              </div>
 
               {/* منطقة الإدخال الرئيسية */}
               <div className="px-2 pb-2">
