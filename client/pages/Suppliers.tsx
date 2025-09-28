@@ -1,146 +1,115 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Truck,
-  Star,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Award,
-  Users,
-  Package,
-  Search,
-  Filter,
-  Grid3X3,
-  List,
-  CheckCircle,
-  TrendingUp,
-} from "lucide-react";
+import { Truck, Star, MapPin, Phone, Mail, Globe, Award, Users, Package, Search, Filter, Grid3X3, List, CheckCircle, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Sample suppliers data
-const suppliers = [
-  {
-    id: 1,
-    name: "DentalTech Solutions",
-    arabicName: "شركة حلول الأسنان التقنية",
-    image:
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop",
-    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
-    rating: 4.9,
-    reviewCount: 234,
-    location: "بغداد، العراق",
-    speciality: "معدات طبية متقدمة",
-    productsCount: 450,
-    verified: true,
-    established: 2015,
-    description: "موردين معدات طب الأسنان المتقدمة والتقنيات الحديثة",
-    contact: {
-      phone: "+964 770 123 4567",
-      email: "info@dentaltech.iq",
-      website: "www.dentaltech.iq",
-    },
-    badges: ["موثق", "شحن سريع", "ضمان شامل"],
-    growth: "+25%",
+const suppliers = [{
+  id: 1,
+  name: "DentalTech Solutions",
+  arabicName: "شركة حلول الأسنان التقنية",
+  image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop",
+  logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
+  rating: 4.9,
+  reviewCount: 234,
+  location: "بغداد، العراق",
+  speciality: "معدات طبية متقدمة",
+  productsCount: 450,
+  verified: true,
+  established: 2015,
+  description: "موردين معدات طب الأسنان المتقدمة والتقنيات الحديثة",
+  contact: {
+    phone: "+964 770 123 4567",
+    email: "info@dentaltech.iq",
+    website: "www.dentaltech.iq"
   },
-  {
-    id: 2,
-    name: "MedEquip Iraq",
-    arabicName: "المعدات الطبية العراقية",
-    image:
-      "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=300&h=200&fit=crop",
-    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
-    rating: 4.7,
-    reviewCount: 189,
-    location: "أربيل، العراق",
-    speciality: "أدوات جراحية",
-    productsCount: 320,
-    verified: true,
-    established: 2018,
-    description: "متخصصون في الأدوات الجراحية وأدوات طب الأسنان",
-    contact: {
-      phone: "+964 750 987 6543",
-      email: "sales@medequip.iq",
-      website: "www.medequip.iq",
-    },
-    badges: ["جودة عالية", "أسعار منافسة", "دعم فني"],
-    growth: "+18%",
+  badges: ["موثق", "شحن سريع", "ضمان شامل"],
+  growth: "+25%"
+}, {
+  id: 2,
+  name: "MedEquip Iraq",
+  arabicName: "المعدات الطبية العراقية",
+  image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=300&h=200&fit=crop",
+  logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
+  rating: 4.7,
+  reviewCount: 189,
+  location: "أربيل، العراق",
+  speciality: "أدوات جراحية",
+  productsCount: 320,
+  verified: true,
+  established: 2018,
+  description: "متخصصون في الأدوات الجراحية وأدوات طب الأسنان",
+  contact: {
+    phone: "+964 750 987 6543",
+    email: "sales@medequip.iq",
+    website: "www.medequip.iq"
   },
-  {
-    id: 3,
-    name: "Dental Pro Supplies",
-    arabicName: "مستلزمات طب الأسنان المحترف",
-    image:
-      "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=300&h=200&fit=crop",
-    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
-    rating: 4.8,
-    reviewCount: 156,
-    location: "البصرة، العراق",
-    speciality: "مواد الترميم",
-    productsCount: 280,
-    verified: true,
-    established: 2016,
-    description: "موردين مواد الترميم والحشو عالية الجودة",
-    contact: {
-      phone: "+964 771 456 7890",
-      email: "contact@dentalpro.iq",
-      website: "www.dentalpro.iq",
-    },
-    badges: ["مواد أصلية", "توصيل مجاني", "استشارة فنية"],
-    growth: "+32%",
+  badges: ["جودة عالية", "أسعار منافسة", "دعم فني"],
+  growth: "+18%"
+}, {
+  id: 3,
+  name: "Dental Pro Supplies",
+  arabicName: "مستلزمات طب الأسنان المحترف",
+  image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=300&h=200&fit=crop",
+  logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
+  rating: 4.8,
+  reviewCount: 156,
+  location: "البصرة، العراق",
+  speciality: "مواد الترميم",
+  productsCount: 280,
+  verified: true,
+  established: 2016,
+  description: "موردين مواد الترميم والحشو عالية الجودة",
+  contact: {
+    phone: "+964 771 456 7890",
+    email: "contact@dentalpro.iq",
+    website: "www.dentalpro.iq"
   },
-  {
-    id: 4,
-    name: "Iraqi Dental Imports",
-    arabicName: "واردات الأسنان العراقية",
-    image:
-      "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=300&h=200&fit=crop",
-    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
-    rating: 4.6,
-    reviewCount: 98,
-    location: "النجف، العراق",
-    speciality: "معدات تقويم",
-    productsCount: 180,
-    verified: true,
-    established: 2019,
-    description: "مستوردين معدات تقويم الأسنان من أفضل الشركات العالمية",
-    contact: {
-      phone: "+964 782 234 5678",
-      email: "info@iraqidental.iq",
-      website: "www.iraqidental.iq",
-    },
-    badges: ["واردات أصلية", "خدمة عملاء", "تدريب"],
-    growth: "+15%",
+  badges: ["مواد أصلية", "توصيل مجاني", "استشارة فنية"],
+  growth: "+32%"
+}, {
+  id: 4,
+  name: "Iraqi Dental Imports",
+  arabicName: "واردات الأسنان العراقية",
+  image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=300&h=200&fit=crop",
+  logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop",
+  rating: 4.6,
+  reviewCount: 98,
+  location: "النجف، العراق",
+  speciality: "معدات تقويم",
+  productsCount: 180,
+  verified: true,
+  established: 2019,
+  description: "مستوردين معدات تقويم الأسنان من أفضل الشركات العالمية",
+  contact: {
+    phone: "+964 782 234 5678",
+    email: "info@iraqidental.iq",
+    website: "www.iraqidental.iq"
   },
-];
-
+  badges: ["واردات أصلية", "خدمة عملاء", "تدريب"],
+  growth: "+15%"
+}];
 export default function Suppliers() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpeciality, setSelectedSpeciality] = useState("all");
   const [sortBy, setSortBy] = useState("rating");
   const [viewMode, setViewMode] = useState("grid");
-
-  const specialities = [...new Set(suppliers.map((s) => s.speciality))];
-
-  const SupplierCard = ({ supplier }: { supplier: any }) => (
-    <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
+  const specialities = [...new Set(suppliers.map(s => s.speciality))];
+  const SupplierCard = ({
+    supplier
+  }: {
+    supplier: any;
+  }) => <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
       {/* Header Image */}
       <div className="relative h-32 bg-gradient-to-r from-blue-500 to-indigo-500 overflow-hidden">
-        <img
-          src={supplier.image}
-          alt={supplier.arabicName}
-          className="w-full h-full object-cover opacity-20"
-        />
+        <img src={supplier.image} alt={supplier.arabicName} className="w-full h-full object-cover opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
         {/* Verification Badge */}
-        {supplier.verified && (
-          <div className="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+        {supplier.verified && <div className="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
             <CheckCircle className="w-3 h-3" />
             موثق
-          </div>
-        )}
+          </div>}
 
         {/* Growth Badge */}
         <div className="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
@@ -153,11 +122,7 @@ export default function Suppliers() {
       <div className="p-6 relative">
         {/* Logo */}
         <div className="absolute -top-8 right-6 w-16 h-16 bg-white rounded-xl shadow-lg border-4 border-white overflow-hidden">
-          <img
-            src={supplier.logo}
-            alt={supplier.name}
-            className="w-full h-full object-cover"
-          />
+          <img src={supplier.logo} alt={supplier.name} className="w-full h-full object-cover" />
         </div>
 
         <div className="pt-10">
@@ -166,21 +131,11 @@ export default function Suppliers() {
             <h3 className="font-bold text-gray-900 text-lg line-clamp-1">
               {supplier.arabicName}
             </h3>
-            <p className="text-sm text-gray-500">{supplier.name}</p>
+            
 
             <div className="flex items-center gap-2 mt-2">
               <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={cn(
-                      "w-4 h-4",
-                      i < Math.floor(supplier.rating)
-                        ? "text-yellow-400 fill-current"
-                        : "text-gray-300",
-                    )}
-                  />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className={cn("w-4 h-4", i < Math.floor(supplier.rating) ? "text-yellow-400 fill-current" : "text-gray-300")} />)}
               </div>
               <span className="text-sm text-gray-600">
                 {supplier.rating} ({supplier.reviewCount})
@@ -189,11 +144,7 @@ export default function Suppliers() {
           </div>
 
           {/* Speciality */}
-          <div className="mb-3">
-            <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">
-              {supplier.speciality}
-            </span>
-          </div>
+          
 
           {/* Description */}
           <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -201,20 +152,7 @@ export default function Suppliers() {
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="text-center">
-              <div className="font-bold text-gray-900">
-                {supplier.productsCount}
-              </div>
-              <div className="text-xs text-gray-500">منتج</div>
-            </div>
-            <div className="text-center">
-              <div className="font-bold text-gray-900">
-                {supplier.established}
-              </div>
-              <div className="text-xs text-gray-500">تأسست</div>
-            </div>
-          </div>
+          
 
           {/* Location */}
           <div className="flex items-center gap-2 mb-4">
@@ -223,47 +161,25 @@ export default function Suppliers() {
           </div>
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-1 mb-4">
-            {supplier.badges.slice(0, 2).map((badge: string, index: number) => (
-              <span
-                key={index}
-                className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full"
-              >
-                {badge}
-              </span>
-            ))}
-          </div>
+          
 
           {/* Contact Actions */}
           <div className="flex gap-2">
-            <Link
-              to={`/suppliers/${supplier.id}`}
-              className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-3 rounded-lg text-center text-sm font-medium hover:shadow-lg transition-all duration-300"
-            >
+            <Link to={`/suppliers/${supplier.id}`} className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-3 rounded-lg text-center text-sm font-medium hover:shadow-lg transition-all duration-300">
               عرض المنتجات
             </Link>
-            <a
-              href={`tel:${supplier.contact.phone}`}
-              className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-            >
+            <a href={`tel:${supplier.contact.phone}`} className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
               <Phone className="w-4 h-4 text-gray-600" />
             </a>
           </div>
         </div>
       </div>
-    </div>
-  );
-
-  const filteredSuppliers = suppliers.filter((supplier) => {
-    const matchesSearch =
-      supplier.arabicName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      supplier.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSpeciality =
-      selectedSpeciality === "all" ||
-      supplier.speciality === selectedSpeciality;
+    </div>;
+  const filteredSuppliers = suppliers.filter(supplier => {
+    const matchesSearch = supplier.arabicName.toLowerCase().includes(searchQuery.toLowerCase()) || supplier.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSpeciality = selectedSpeciality === "all" || supplier.speciality === selectedSpeciality;
     return matchesSearch && matchesSpeciality;
   });
-
   const sortedSuppliers = [...filteredSuppliers].sort((a, b) => {
     switch (sortBy) {
       case "rating":
@@ -276,9 +192,7 @@ export default function Suppliers() {
         return 0;
     }
   });
-
-  return (
-    <div className="min-h-screen p-6" dir="rtl">
+  return <div className="min-h-screen p-6" dir="rtl">
       {/* Page Header */}
       <div className="mb-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -303,35 +217,19 @@ export default function Suppliers() {
             {/* Search */}
             <div className="relative">
               <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="ابحث في الموردين..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pr-10 pl-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right text-sm"
-              />
+              <input type="text" placeholder="ابحث في الموردين..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-64 pr-10 pl-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right text-sm" />
             </div>
 
             {/* Speciality Filter */}
-            <select
-              value={selectedSpeciality}
-              onChange={(e) => setSelectedSpeciality(e.target.value)}
-              className="px-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-            >
+            <select value={selectedSpeciality} onChange={e => setSelectedSpeciality(e.target.value)} className="px-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
               <option value="all">جميع التخصصات</option>
-              {specialities.map((spec) => (
-                <option key={spec} value={spec}>
+              {specialities.map(spec => <option key={spec} value={spec}>
                   {spec}
-                </option>
-              ))}
+                </option>)}
             </select>
 
             {/* Sort */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-            >
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)} className="px-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
               <option value="rating">الأعلى تقييماً</option>
               <option value="products">الأكثر منتجات</option>
               <option value="established">الأقدم تأسيساً</option>
@@ -360,9 +258,7 @@ export default function Suppliers() {
                 إجمالي المنتجات
               </p>
               <p className="text-2xl font-bold">
-                {suppliers
-                  .reduce((sum, s) => sum + s.productsCount, 0)
-                  .toLocaleString()}
+                {suppliers.reduce((sum, s) => sum + s.productsCount, 0).toLocaleString()}
               </p>
             </div>
             <Package className="w-8 h-8 text-green-200" />
@@ -375,10 +271,7 @@ export default function Suppliers() {
                 متوسط التقييم
               </p>
               <p className="text-2xl font-bold">
-                {(
-                  suppliers.reduce((sum, s) => sum + s.rating, 0) /
-                  suppliers.length
-                ).toFixed(1)}
+                {(suppliers.reduce((sum, s) => sum + s.rating, 0) / suppliers.length).toFixed(1)}
               </p>
             </div>
             <Star className="w-8 h-8 text-purple-200" />
@@ -397,14 +290,11 @@ export default function Suppliers() {
 
       {/* Suppliers Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {sortedSuppliers.map((supplier) => (
-          <SupplierCard key={supplier.id} supplier={supplier} />
-        ))}
+        {sortedSuppliers.map(supplier => <SupplierCard key={supplier.id} supplier={supplier} />)}
       </div>
 
       {/* Empty State */}
-      {filteredSuppliers.length === 0 && (
-        <div className="text-center py-12">
+      {filteredSuppliers.length === 0 && <div className="text-center py-12">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
             لا توجد موردين
@@ -412,8 +302,6 @@ export default function Suppliers() {
           <p className="text-gray-600">
             جرب تغيير الفلاتر أو البحث بكلمات مختلفة
           </p>
-        </div>
-      )}
-    </div>
-  );
+        </div>}
+    </div>;
 }
