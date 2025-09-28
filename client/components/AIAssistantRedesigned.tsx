@@ -549,11 +549,11 @@ const AIAssistantRedesigned = () => {
           <>
             {/* الاقتراحات الذكية - تظهر فقط عند النقر */}
             {showSuggestions && (
-              <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50">
-                <div className="flex items-center justify-between mb-4">
+              <div className="p-3 sm:p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 via-blue-50 to-purple-50">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <div className="flex items-center gap-2">
-                    <Lightbulb className="w-5 h-5 text-amber-500" />
-                    <span className="font-bold text-gray-700">
+                    <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
+                    <span className="font-bold text-gray-700 text-xs sm:text-sm">
                       الاقتراحات الذكية
                     </span>
                     <div className="flex-1 h-px bg-gradient-to-r from-amber-200 to-transparent ml-3"></div>
@@ -566,22 +566,22 @@ const AIAssistantRedesigned = () => {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {predefinedQuestions.slice(0, 6).map((question, index) => (
                     <button
                       key={index}
                       onClick={() => handleQuestionClick(question.text)}
-                      className="group p-4 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 hover:border-blue-300 hover:bg-blue-50/80 transition-all duration-300 text-right hover:scale-[1.02] hover:shadow-lg"
+                      className="group p-2 sm:p-4 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 hover:border-blue-300 hover:bg-blue-50/80 transition-all duration-300 text-right hover:scale-[1.02] hover:shadow-lg"
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="flex items-start gap-2 sm:gap-3">
+                        <div className="w-6 h-6 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-sm sm:text-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                           {question.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-gray-800 text-sm leading-snug mb-1 group-hover:text-blue-700 transition-colors">
+                          <div className="font-semibold text-gray-800 text-xs sm:text-sm leading-snug mb-1 group-hover:text-blue-700 transition-colors">
                             {question.text}
                           </div>
-                          <div className="text-xs text-gray-500 mb-1">
+                          <div className="text-xs sm:text-xs text-gray-500 mb-1">
                             {question.description}
                           </div>
                           <div className="text-xs text-blue-600 font-medium">
@@ -594,12 +594,12 @@ const AIAssistantRedesigned = () => {
                 </div>
 
                 {/* الإجراءات السريعة */}
-                <div className="mt-4 pt-4 border-t border-gray-200/50">
-                  <div className="text-xs font-semibold text-gray-600 mb-3 flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-blue-500" />
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200/50">
+                  <div className="text-xs font-semibold text-gray-600 mb-2 sm:mb-3 flex items-center gap-2">
+                    <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
                     إجراءات سريعة:
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2">
                     {quickActions.slice(0, 6).map((action) => {
                       const Icon = action.icon;
                       return (
@@ -609,13 +609,13 @@ const AIAssistantRedesigned = () => {
                             handleSendMessage(action.prompt);
                           }}
                           className={cn(
-                            "flex flex-col items-center gap-1 p-3 rounded-xl transition-all hover:scale-105 transform active:scale-95",
+                            "flex flex-col items-center gap-1 p-2 sm:p-3 rounded-xl transition-all hover:scale-105 transform active:scale-95",
                             action.color,
                             "text-white shadow-lg hover:shadow-xl border border-white/20",
                             "hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50",
                           )}
                         >
-                          <Icon className="w-5 h-5" />
+                          <Icon className="w-3 h-3 sm:w-5 sm:h-5" />
                           <span className="text-xs font-medium text-center leading-tight">
                             {action.label}
                           </span>
@@ -630,7 +630,7 @@ const AIAssistantRedesigned = () => {
             {/* منطقة الرسائل */}
             <div
               className={cn(
-                "flex-1 overflow-y-auto p-5 space-y-4 scroll-smooth",
+                "flex-1 overflow-y-auto p-3 sm:p-5 space-y-3 sm:space-y-4 scroll-smooth",
                 "scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100",
                 showSuggestions
                   ? isExpanded
@@ -652,7 +652,7 @@ const AIAssistantRedesigned = () => {
                 >
                   <div
                     className={cn(
-                      "max-w-[85%] rounded-2xl px-5 py-4 text-sm relative",
+                      "max-w-[85%] rounded-2xl px-3 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm relative",
                       "transition-all duration-200 hover:shadow-md",
                       message.sender === "user"
                         ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl"
@@ -661,11 +661,11 @@ const AIAssistantRedesigned = () => {
                     )}
                   >
                     {message.sender === "ai" && (
-                      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
-                        <div className="w-7 h-7 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                          <Sparkles className="w-4 h-4 text-white" />
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3 pb-2 border-b border-gray-200">
+                        <div className="w-5 h-5 sm:w-7 sm:h-7 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                         </div>
-                        <span className="text-sm font-bold text-blue-600">
+                        <span className="text-xs sm:text-sm font-bold text-blue-600">
                           DentalGPT Pro
                         </span>
                         {message.confidence && (
