@@ -1051,7 +1051,46 @@ export default function UnifiedNotifications() {
       // عرض الإشعارات أو الرسائل
       <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* شريط البحث والفلاتر */}
-            
+            <div className="w-full md:w-80 space-y-4">
+              {/* البحث */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                <div className="relative">
+                  <Search className="absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-gray-400" />
+                  <Input placeholder={activeTab === "notifications" ? "ابحث في الإشعارات..." : "ابحث في الرسائل..."} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pr-8 md:pr-10 text-sm" />
+                </div>
+              </div>
+
+              {/* الفلاتر السريعة */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
+                  فلاتر سريعة
+                </h3>
+                <div className="space-y-2">
+                  {[{
+                id: "all",
+                label: "الكل",
+                count: activeTab === "notifications" ? notifications.length : messages.length
+              }, {
+                id: "unread",
+                label: "غير مقروءة",
+                count: activeTab === "notifications" ? unreadNotifications : unreadMessages
+              }, {
+                id: "starred",
+                label: "مميزة",
+                count: activeTab === "notifications" ? starredNotifications : starredMessages
+              }, {
+                id: "urgent",
+                label: "عاجلة",
+                count: activeTab === "notifications" ? urgentNotifications : urgentMessages
+              }].map(filterOption => <button key={filterOption.id} onClick={() => setFilter(filterOption.id as any)} className={cn("w-full flex items-center justify-between p-2 md:p-3 rounded-xl transition-all duration-200", filter === filterOption.id ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" : "hover:bg-gray-50 text-gray-700")}>
+                      <span className="font-medium text-sm md:text-base">{filterOption.label}</span>
+                      <span className={cn("px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-bold", filter === filterOption.id ? "bg-white/20" : "bg-gray-100 text-gray-600")}>
+                        {filterOption.count}
+                      </span>
+                    </button>)}
+                </div>
+              </div>
+            </div>
 
             {/* المحتوى الرئيسي */}
             <div className="flex-1">
