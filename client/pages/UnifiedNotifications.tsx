@@ -601,20 +601,7 @@ export default function UnifiedNotifications() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </button>
 
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <Bell className="w-6 h-6 text-white" />
-                  </div>
-                  {totalUnread > 0 && <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                      <span className="text-xs text-white font-bold">
-                        {totalUnread}
-                      </span>
-                    </div>}
-                </div>
-
-                
-              </div>
+              
 
               {/* Tabs */}
               <div className="flex bg-gray-100 rounded-xl p-1 ml-6">
