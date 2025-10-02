@@ -135,6 +135,7 @@ import SmartClinicKnowledge from "./pages/SmartClinicKnowledge";
 import SmartClinicMain from "./pages/SmartClinicMain";
 import SmartClinicChatbot from "./pages/SmartClinicChatbot";
 import SmartClinicLearning from "./pages/SmartClinicLearning";
+import SmartClinic from "./pages/SmartClinic";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FinanceUnified from "./pages/clinic_old/FinanceUnified";
 import AssetsUnified from "./pages/clinic_old/AssetsUnified";
@@ -350,29 +351,21 @@ const App = () => (
                               element={<AIAssistantPage />}
                             />
                             <Route
-                              path="/dentist-hub/smart-clinic/main"
-                              element={
-                                <ProtectedRoute>
-                                  <SmartClinicMain />
-                                </ProtectedRoute>
-                              }
+                              path="/dentist-hub/smart-clinic/*"
+                              element={<SmartClinic />}
                             />
-                            <Route
-                              path="/dentist-hub/smart-clinic/chatbot"
-                              element={
-                                <ProtectedRoute>
-                                  <SmartClinicChatbot />
-                                </ProtectedRoute>
-                              }
-                            />
-                            <Route
-                              path="/dentist-hub/smart-clinic/learning"
-                              element={
-                                <ProtectedRoute>
-                                  <SmartClinicLearning />
-                                </ProtectedRoute>
-                              }
-                            />
+            <Route
+              path="/dentist-hub/smart-clinic/main"
+              element={<SmartClinicMain />}
+            />
+            <Route
+              path="/dentist-hub/smart-clinic/chatbot"
+              element={<SmartClinicChatbot />}
+            />
+            <Route
+              path="/dentist-hub/smart-clinic/learning"
+              element={<SmartClinicLearning />}
+            />
                             <Route
                               path="/dentist-hub/smart-clinic/ai-assistant"
                               element={<SmartClinicAIAssistant />}

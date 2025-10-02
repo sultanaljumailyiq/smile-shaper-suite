@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Building2, Plus, Edit, Trash2, Settings, Users, Calendar, MapPin, Phone, Mail, Globe, Copy, Check, ArrowLeft, UserPlus, Stethoscope, Clock, Star, DollarSign, FileText, BarChart3, Shield, Key, Wifi, Camera, Save, X, Search, Filter, MoreVertical, ExternalLink, Database, UserCheck, TrendingUp, Activity, PieChart, ToggleLeft, ToggleRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -201,6 +201,14 @@ export default function AdvancedClinicManagement() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [useOldManager, setUseOldManager] = useState(false);
   const [activeSubSection, setActiveSubSection] = useState<"clinics" | "staff" | "reports" | "database">("clinics");
+  
+  // Load system preference from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('defaultClinicSystem');
+    if (saved === 'old') {
+      setUseOldManager(true);
+    }
+  }, []);
   const toggleExpanded = (id: string) => {
     setExpandedIds(prev => {
       const next = new Set(prev);
@@ -358,12 +366,32 @@ export default function AdvancedClinicManagement() {
               {/* System Toggle Switch */}
               <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
                 <span className="text-xs text-gray-600">قديم</span>
-                <button onClick={() => setUseOldManager(true)} className="relative">
-                  <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                <button 
+                  onClick={() => {
+                    setUseOldManager(true);
+                    localStorage.setItem('defaultClinicSystem', 'old');
+                  }} 
+                  className="relative"
+                >
+                  {useOldManager ? (
+                    <ToggleRight className="w-6 h-6 text-blue-600" />
+                  ) : (
+                    <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                  )}
                 </button>
                 <span className="mx-1 text-xs text-gray-400">|</span>
-                <button onClick={() => setUseOldManager(false)} className="relative">
-                  <ToggleRight className="w-6 h-6 text-blue-600" />
+                <button 
+                  onClick={() => {
+                    setUseOldManager(false);
+                    localStorage.setItem('defaultClinicSystem', 'new');
+                  }} 
+                  className="relative"
+                >
+                  {!useOldManager ? (
+                    <ToggleRight className="w-6 h-6 text-blue-600" />
+                  ) : (
+                    <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
+                  )}
                 </button>
                 <span className="text-xs text-gray-600">جديد</span>
               </div>
@@ -557,12 +585,18 @@ export default function AdvancedClinicManagement() {
                     {/* Actions - Compact */}
                     <div className="p-3 border-t border-gray-100">
                       <div className="flex gap-2">
-                        <Link to="/clinic-dashboard" className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors">
+                        <Link 
+                          to={useOldManager ? "/clinic_old" : "/clinic"} 
+                          className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
+                        >
                           <Settings className="w-3 h-3" />
                           <span className="text-xs font-medium">إدارة</span>
                         </Link>
 
-                        <Link to="/clinic" className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">
+                        <Link 
+                          to={useOldManager ? "/clinic_old/reports" : "/clinic/reports"} 
+                          className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
+                        >
                           <BarChart3 className="w-3 h-3" />
                           <span className="text-xs font-medium">تقارير</span>
                         </Link>
