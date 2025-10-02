@@ -113,7 +113,7 @@ export default function ClinicFinderCard() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden h-[450px]">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl shadow-lg overflow-hidden h-[450px]">
       <div className="flex h-full">
         {/* Clinics List */}
         <div className="w-1/3 border-r border-gray-200 flex flex-col">

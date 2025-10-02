@@ -9,6 +9,10 @@ import {
   Brain,
   Calendar,
   CheckCircle2,
+  Clock,
+  CreditCard,
+  Building2,
+  MessageCircle,
   Download,
   FileText,
   Filter,
@@ -99,7 +103,7 @@ export default function SmartClinic(){
   const base = "/dentist-hub/smart-clinic";
   const sectionFromPath = useMemo(()=>{
     const seg = location.pathname.replace(base, "").split("/").filter(Boolean)[0];
-    return seg || "overview";
+    return seg || "main";
   }, [location.pathname]);
   const [section, setSection] = useState<string>(sectionFromPath);
   useEffect(()=> setSection(sectionFromPath), [sectionFromPath]);
@@ -220,21 +224,17 @@ export default function SmartClinic(){
 
   const kpis = (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-      <StatMini label="متوسط وقت الجلسة" value={`${avgSessionTime} د`} color="teal" icon={ClockIcon} />
-      <StatMini label="العائد لكل مريض" value={`${revenuePerPatient.toLocaleString()} IQD`} color="purple" icon={CreditIcon} />
+      <StatMini label="متوسط وقت الجلسة" value={`${avgSessionTime} د`} color="teal" icon={Clock} />
+      <StatMini label="العائد لكل مريض" value={`${revenuePerPatient.toLocaleString()} IQD`} color="purple" icon={CreditCard} />
       <StatMini label="عدد المرضى" value={patients.length} color="indigo" icon={Users} />
       <StatMini label="مناطق رئيسية" value={locationDist.slice(0,1).map(d=>d.name).join(" ") || "—"} color="orange" icon={MapPin} />
     </div>
   );
 
   const tabs = [
-    { key:"overview", label:"النظرة العامة", to:`${base}/overview` },
-    { key:"clinics", label:"تحليل العيادات", to:`${base}/clinics` },
-    { key:"staff", label:"تحليل الطاقم الطبي", to:`${base}/staff` },
-    { key:"patients", label:"تحليل المرضى", to:`${base}/patients` },
-    { key:"reports", label:"التقارير الذكية", to:`${base}/reports` },
-    { key:"ai-plans", label:"الخطط العلاجية الذكية", to:`${base}/ai-plans` },
-    { key:"knowledge", label:"مكتبة المعرفة", to:`${base}/knowledge` },
+    { key:"main", label:"الصفحة الرئيسية", to:`${base}/main` },
+    { key:"chatbot", label:"المساعد الذكي", to:`${base}/chatbot` },
+    { key:"learning", label:"مكتبة التعلم", to:`${base}/learning` },
   ];
 
   // المساعد الذكي المحسن متاح الآن
@@ -260,29 +260,59 @@ export default function SmartClinic(){
 
       <TabPills items={tabs} current={section} onChange={(k)=> setSection(k)} />
 
-      {section==="overview" && (
+      {section==="main" && (
         <div className="space-y-4">
-          <SectionCard title="اختصارات ذكية" icon={Sparkles} action={<Link to={`${base}/reports`} className="text-xs text-blue-600">فتح التقارير</Link>}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              <StatMini label="مرضى اليوم" value={appointments.filter(a=> a.date === new Date().toISOString().slice(0,10)).length} color="blue" icon={Users} />
-              <StatMini label="نسبة الحضور" value={`$${""}${Math.max(75, Math.min(98, patients.length? 80: 0))}%`} color="green" icon={CheckCircle2} />
-              <StatMini label="أكثر علاج مطلوب" value={(treatmentCounts.sort((a,b)=>b.count-a.count)[0]?.name)||"—"} color="purple" icon={Stethoscope} />
-              <StatMini label="تنبيه مخزون" value="مواد منخفضة" color="red" icon={AlertTriangle} />
+          <SectionCard title="مرحباً بك في العيادة الذكية" icon={Sparkles}>
+            <p className="text-sm text-gray-700 mb-4">
+              نظام متكامل لإدارة العيادة بالذكاء الاصطناعي مع تحليلات متقدمة وتقارير شاملة
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="p-3 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl text-center">
+                <Users className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-gray-900">{patients.length} مريض</p>
+              </div>
+              <div className="p-3 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl text-center">
+                <Calendar className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-gray-900">{appointments.length} موعد</p>
+              </div>
+              <div className="p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl text-center">
+                <CheckCircle2 className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-gray-900">نظام نشط</p>
+              </div>
             </div>
           </SectionCard>
 
-          <SectionCard title="نظرة عامة على الأداء" icon={BarChart3}>
-            <ChartContainer className="h-40" config={{ patients: { label: "المرضى", color: "#2563eb" }, revenue: { label: "الإيرادات", color: "#059669" } }}>
-              <Recharts.AreaChart data={chartsData} margin={{ left: 8, right: 8, top: 10, bottom: 0 }}>
-                <Recharts.CartesianGrid strokeDasharray="3 3" />
-                <Recharts.XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                <Recharts.YAxis tick={{ fontSize: 10 }} />
-                <ChartTooltip contentStyle={{ fontSize: 12 }} />
-                <Recharts.Area type="monotone" dataKey="patients" stroke="#2563eb" fill="#bfdbfe" name="المرضى" />
-                <Recharts.Area type="monotone" dataKey="revenue" stroke="#059669" fill="#a7f3d0" name="الإيرادات" />
-                <ChartLegend />
-              </Recharts.AreaChart>
-            </ChartContainer>
+          <SectionCard title="الوصول السريع" icon={Activity}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <button 
+                onClick={() => navigate(`${base}/chatbot`)}
+                className="p-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl hover:shadow-lg transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <MessageCircle className="w-6 h-6" />
+                  <div className="text-right">
+                    <p className="font-semibold">المساعد الذكي</p>
+                    <p className="text-xs opacity-90">احصل على استشارات فورية</p>
+                  </div>
+                </div>
+              </button>
+              <button 
+                onClick={() => navigate(`${base}/learning`)}
+                className="p-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:shadow-lg transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <BookOpen className="w-6 h-6" />
+                  <div className="text-right">
+                    <p className="font-semibold">مكتبة التعلم</p>
+                    <p className="text-xs opacity-90">مصادر ومعلومات طبية</p>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </SectionCard>
+
+          <SectionCard title="مؤشرات الأداء" icon={Activity}>
+            {kpis}
           </SectionCard>
 
           <SectionCard title="تنبيهات ذكية" icon={Bell}>
@@ -292,158 +322,33 @@ export default function SmartClinic(){
               ))}
             </div>
           </SectionCard>
-
-          <SectionCard title="مؤشرات الأداء" icon={Activity}>
-            {kpis}
-          </SectionCard>
         </div>
       )}
 
-      {section==="clinics" && (
-        <div className="space-y-4">
-          <SectionCard title="مقارنة بين العيادات" icon={BuildingIcon}>
-            <div className="text-[12px] text-gray-600 mb-2">الدعم لعدة فروع. البيانات تُستمد من المواعيد والمرضى الحالية.</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              <StatMini label="عدد المراجعين" value={patients.length} color="indigo" icon={Users} />
-              <StatMini label="الحجوزات النشطة" value={appointments.filter(a=> a.status!=="cancelled").length} color="cyan" icon={Calendar} />
-              <StatMini label="المتوسط الزمني" value={`${avgSessionTime} د`} color="teal" icon={ClockIcon} />
-              <StatMini label="أكثر علاج شائع" value={treatmentCounts.sort((a,b)=>b.count-a.count)[0]?.name||"—"} color="purple" icon={Stethoscope} />
-            </div>
-          </SectionCard>
-          <SectionCard title="تنبيه ذكي" icon={AlertTriangle}>
-            <div className="text-sm text-gray-800">نسبة المرضى الجدد أقل من بعض الفروع الافتراضية. عزز التسويق المحلي.</div>
-          </SectionCard>
+      {section==="chatbot" && (
+        <div className="bg-white rounded-2xl p-4 border border-gray-100">
+          <p className="text-sm text-gray-600 mb-4">المساعد الذكي متاح الآن. انتقل إلى الصفحة المخصصة للحصول على تجربة كاملة.</p>
+          <button
+            onClick={() => navigate(`${base}/chatbot`)}
+            className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+          >
+            فتح المساعد الذكي
+          </button>
         </div>
       )}
 
-      {section==="staff" && (
-        <div className="space-y-4">
-          <SectionCard title="إحصائيات الطاقم" icon={Users}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              <StatMini label="المرضى الجدد" value={newVsReturning.newcomers} color="blue" icon={Users} />
-              <StatMini label="المرضى المتكررين" value={newVsReturning.returning} color="green" icon={Users} />
-              <StatMini label="الإيراد/مريض" value={`${revenuePerPatient.toLocaleString()} IQD`} color="purple" icon={CreditIcon} />
-              <StatMini label="متوسط مدة العلاج" value={`${avgSessionTime} د`} color="teal" icon={ClockIcon} />
-            </div>
-            <div className="text-[12px] text-gray-600 mt-3">توصية: زيادة جلسات التقويم عند ارتفاع الطلب.</div>
-          </SectionCard>
+      {section==="learning" && (
+        <div className="bg-white rounded-2xl p-4 border border-gray-100">
+          <p className="text-sm text-gray-600 mb-4">مكتبة التعلم تحتوي على مصادر تعليمية ومعلومات طبية محدثة.</p>
+          <button
+            onClick={() => navigate(`${base}/learning`)}
+            className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+          >
+            فتح مكتبة التعلم
+          </button>
         </div>
       )}
 
-      {section==="patients" && (
-        <div className="space-y-4">
-          <SectionCard title="توزيع المرضى حسب العمر" icon={PieChart}>
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-              {Object.entries(ageBuckets).map(([k,v])=> (
-                <div key={k} className="p-2 bg-gray-50 rounded-xl text-center">
-                  <div className="text-[11px] text-gray-600">{k}</div>
-                  <div className="text-sm font-bold text-gray-900">{v}</div>
-                </div>
-              ))}
-            </div>
-          </SectionCard>
-          <SectionCard title="التوزيع الجغرافي" icon={MapPin}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {locationDist.map(r=> (
-                <div key={r.name} className="p-2 bg-gray-50 rounded-xl flex items-center justify-between">
-                  <div className="text-sm text-gray-800">{r.name}</div>
-                  <div className="text-xs text-gray-600">{r.value} مريض</div>
-                </div>
-              ))}
-            </div>
-          </SectionCard>
-          <SectionCard title="أكثر الحالات شيوعًا" icon={FlaskConical}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {commonConditions.map(([name,count])=> (
-                <div key={name} className="p-2 rounded-xl bg-blue-50 text-blue-700 text-sm flex items-center justify-between">
-                  <span>{name}</span>
-                  <span className="font-bold">{count}</span>
-                </div>
-              ))}
-            </div>
-          </SectionCard>
-        </div>
-      )}
-
-      {section==="reports" && (
-        <div className="space-y-4">
-          <SectionCard title="تقارير ذكية" icon={FileText} action={<button className="text-xs text-gray-700 border px-2 py-1 rounded-lg flex items-center gap-1"><Download className="w-3.5 h-3.5"/>تصدير</button>}>
-            <div className="flex items-center gap-2 mb-3">
-              <button className="px-2.5 py-1 rounded-lg text-xs bg-blue-50 text-blue-700">يومي</button>
-              <button className="px-2.5 py-1 rounded-lg text-xs hover:bg-gray-50">أسبوعي</button>
-              <button className="px-2.5 py-1 rounded-lg text-xs hover:bg-gray-50">شهري</button>
-              <button className="ml-auto px-2.5 py-1 rounded-lg text-xs hover:bg-gray-50 flex items-center gap-1"><Filter className="w-3.5 h-3.5"/>تخصيص</button>
-            </div>
-            <ChartContainer className="h-48" config={{ patients: { label: "المرضى", color: "#2563eb" }, revenue: { label: "الإيرادات", color: "#059669" } }}>
-              <Recharts.LineChart data={chartsData} margin={{ left: 8, right: 8, top: 10, bottom: 0 }}>
-                <Recharts.CartesianGrid strokeDasharray="3 3" />
-                <Recharts.XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                <Recharts.YAxis tick={{ fontSize: 10 }} />
-                <ChartTooltip contentStyle={{ fontSize: 12 }} />
-                <Recharts.Line type="monotone" dataKey="patients" stroke="#2563eb" name="المرضى" />
-                <Recharts.Line type="monotone" dataKey="revenue" stroke="#059669" name="الإيرادات" />
-                <ChartLegend />
-              </Recharts.LineChart>
-            </ChartContainer>
-            <div className="text-[12px] text-gray-600 mt-2">توقع: الشهر القادم قد يزور العيادة {Math.max( (patients.length||1)+2, 5 )} مرضى بناءً على الأنماط.</div>
-          </SectionCard>
-
-          <SectionCard title="تحليل العلاجات" icon={Stethoscope}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {treatmentCounts.map(t=> (
-                <div key={t.name} className="p-2 rounded-xl border bg-white flex items-center justify-between">
-                  <div className="text-sm text-gray-800">{t.name}</div>
-                  <div className="text-xs text-gray-600">{t.count} حالة • معدل {t.avg.toLocaleString()} IQD</div>
-                </div>
-              ))}
-              {treatmentCounts.length===0 && (
-                <div className="text-sm text-gray-500">لا توجد بيانات علاجات بعد</div>
-              )}
-            </div>
-          </SectionCard>
-        </div>
-      )}
-
-      {section==="ai-plans" && (
-        <div className="space-y-4">
-          <SectionCard title="المساعد الذكي للخطط العلاجية" icon={Brain}>
-            <div className="space-y-2">
-              <label className="text-[12px] text-gray-700">وصف الحالة</label>
-              <textarea className="w-full p-2 border rounded-xl text-sm" rows={4} placeholder="اكتب الأعراض، نتائج الفحص، ملاحظات الأشعة..." />
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1.5 rounded-xl text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center gap-1"><Sparkles className="w-3.5 h-3.5"/>استخدم المساعد الذكي</span>
-                <Link to="/clinic/reservations" className="px-3 py-1.5 rounded-xl text-xs border">جدولة المواعيد</Link>
-                <Link to="/clinic/accounts" className="px-3 py-1.5 rounded-xl text-xs border">ربط بالفواتير</Link>
-              </div>
-              <div className="text-[12px] text-gray-600">سيتم اقتراح مدة الخطة، المواد المطلوبة، والتكلفة التقديرية مع إمكانية التعديل.</div>
-            </div>
-          </SectionCard>
-        </div>
-      )}
-
-      {section==="knowledge" && (
-        <div className="space-y-4">
-          <SectionCard title="بروتوكولات علاجية حديثة" icon={BookOpen}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {[
-                {t:"بروتوكول علاج اللثة المزمنة", c:"مستند سريري محدث"},
-                {t:"خطة زراعة سن مفردة", c:"خطوات مفصلة ومخاطر"},
-                {t:"تيجان الزيركونيا", c:"معايير اختيار المواد"},
-              ].map((it)=> (
-                <div key={it.t} className="p-2 rounded-xl bg-gray-50 text-sm">
-                  <div className="font-medium text-gray-900">{it.t}</div>
-                  <div className="text-[12px] text-gray-600">{it.c}</div>
-                </div>
-              ))}
-            </div>
-          </SectionCard>
-          <SectionCard title="توصيات من الذكاء الاصطناعي" icon={Sparkles}>
-            <div className="text-sm text-gray-800">تقترح المنظومة زيادة مخزون المواد الخاصة بعلاج اللثة استنادًا لارتفاع الحالات.</div>
-          </SectionCard>
-        </div>
-      )}
-
-      {/* المساعد الذكي المحسن - متوافق مع نظام إدارة العيادة */}
       <EnhancedAIAssistantIntegration
         systemType="new"
         currentPage="smart-clinic"
@@ -451,8 +356,3 @@ export default function SmartClinic(){
     </div>
   );
 }
-
-// Local tiny icons (avoid extra deps)
-function ClockIcon(props:any){ return <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>; }
-function CreditIcon(props:any){ return <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>; }
-function BuildingIcon(props:any){ return <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M3 21V7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v12"/><path d="M6 21V10"/><path d="M10 21V10"/><path d="M14 21V10"/><path d="M18 21V10"/></svg>; }

@@ -421,7 +421,9 @@ export default function DentistHub() {
         </div>
       </div>;
   };
-  const FavoritesSection = () => {};
+  const FavoritesSection = () => {
+    return null;
+  };
   const OffersAndSubscriptions = () => <div className="bg-white rounded-2xl border border-gray-100 p-4 md:p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -446,7 +448,9 @@ export default function DentistHub() {
         </Link>
       </div>
     </div>;
-  const RewardsSection = () => {};
+  const RewardsSection = () => {
+    return null;
+  };
 
   // اختصارات العيادة السريعة
   const ClinicShortcuts = () => {

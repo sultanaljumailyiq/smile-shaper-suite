@@ -361,7 +361,11 @@ const ClinicNewLab: React.FC = () => {
                   </div>
 
                   {/* Specifications */}
-                  {order.specifications}
+                  {order.specifications && (
+                    <div className="text-xs text-gray-600 mt-2">
+                      <strong>المواصفات:</strong> {JSON.stringify(order.specifications)}
+                    </div>
+                  )}
                 </div>
 
                 {/* Actions */}

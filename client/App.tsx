@@ -132,6 +132,9 @@ import ClinicOldLab from "./pages/ClinicOldLab";
 import AIAssistantPage from "./pages/AIAssistantPage";
 import SmartClinicAIAssistant from "./pages/SmartClinicAIAssistant";
 import SmartClinicKnowledge from "./pages/SmartClinicKnowledge";
+import SmartClinicMain from "./pages/SmartClinicMain";
+import SmartClinicChatbot from "./pages/SmartClinicChatbot";
+import SmartClinicLearning from "./pages/SmartClinicLearning";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FinanceUnified from "./pages/clinic_old/FinanceUnified";
 import AssetsUnified from "./pages/clinic_old/AssetsUnified";
@@ -345,6 +348,30 @@ const App = () => (
                             <Route
                               path="/ai-assistant"
                               element={<AIAssistantPage />}
+                            />
+                            <Route
+                              path="/dentist-hub/smart-clinic/main"
+                              element={
+                                <ProtectedRoute>
+                                  <SmartClinicMain />
+                                </ProtectedRoute>
+                              }
+                            />
+                            <Route
+                              path="/dentist-hub/smart-clinic/chatbot"
+                              element={
+                                <ProtectedRoute>
+                                  <SmartClinicChatbot />
+                                </ProtectedRoute>
+                              }
+                            />
+                            <Route
+                              path="/dentist-hub/smart-clinic/learning"
+                              element={
+                                <ProtectedRoute>
+                                  <SmartClinicLearning />
+                                </ProtectedRoute>
+                              }
                             />
                             <Route
                               path="/dentist-hub/smart-clinic/ai-assistant"

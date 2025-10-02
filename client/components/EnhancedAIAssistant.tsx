@@ -515,7 +515,8 @@ const EnhancedAIAssistant: React.FC<EnhancedAIAssistantProps> = ({
               onChange={(e) => setCurrentMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               placeholder="اكتب رسالتك..."
-              className="w-full px-3 py-2 max-sm:px-2 max-sm:py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm max-sm:text-xs"
+              className="w-full px-3 py-2 max-sm:px-2 max-sm:py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm max-sm:text-xs bg-white text-gray-900"
+              style={{ fontSize: '14px', color: '#111827' }}
             />
           </div>
           <button

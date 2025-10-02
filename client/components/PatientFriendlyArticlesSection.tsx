@@ -168,8 +168,10 @@ export default function PatientFriendlyArticlesSection({
   }) => (
     <div
       className={cn(
-        "group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100",
-        featured && "ring-2 ring-purple-500/20 shadow-md",
+        "group relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100",
+        featured 
+          ? "bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 ring-2 ring-purple-500/20 shadow-md"
+          : "bg-gradient-to-br from-gray-50 via-white to-blue-50",
       )}
     >
       <Link to={`/articles/${article.id}`} className="absolute inset-0 z-10" aria-label={article.title} />

@@ -358,9 +358,9 @@ export default function AdvancedClinicManagement() {
               {/* System Toggle Switch */}
               <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
                 <span className="text-xs text-gray-600">قديم</span>
-                <Link to="/clinics-manager" className="relative">
+                <button onClick={() => setUseOldManager(true)} className="relative">
                   <ToggleLeft className="w-6 h-6 text-gray-400 hover:text-gray-600" />
-                </Link>
+                </button>
                 <span className="mx-1 text-xs text-gray-400">|</span>
                 <button onClick={() => setUseOldManager(false)} className="relative">
                   <ToggleRight className="w-6 h-6 text-blue-600" />
