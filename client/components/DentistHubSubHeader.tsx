@@ -29,6 +29,13 @@ const tabs: TabItem[] = [
     match: (p) => p.startsWith("/dentist-hub/smart-clinic"),
   },
   {
+    key: "clinics",
+    label: "ادارة العيادات",
+    path: "/dentist-hub/clinics",
+    icon: Building,
+    match: (p) => p.startsWith("/dentist-hub/clinics"),
+  },
+  {
     key: "profile",
     label: "الملف الشخصي",
     path: "/dentist-hub/profile",
