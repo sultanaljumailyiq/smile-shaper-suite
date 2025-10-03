@@ -328,25 +328,6 @@ export default function AdvancedClinicManagement() {
         </div>
       </div>
     </div>;
-  if (useOldManager) {
-    // Redirect to old clinic manager
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
-        <div className="text-center p-6">
-          <Building2 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">مدير العيادات القديم</h2>
-          <p className="text-sm text-gray-600 mb-4">سيتم توجيهك إلى نظام الإدارة القديم</p>
-          <Link to="/clinics-manager" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            <ExternalLink className="w-4 h-4" />
-            الانتقال للنظام القديم
-          </Link>
-          <div className="mt-4">
-            <button onClick={() => setUseOldManager(false)} className="text-sm text-gray-600 hover:text-gray-900">
-              العودة للنظام الجديد
-            </button>
-          </div>
-        </div>
-      </div>;
-  }
   return <div className="min-h-screen bg-gray-50" dir="rtl">
       <div className="p-2 md:p-4 lg:p-6 pb-20">
         <div className="max-w-7xl mx-auto">
