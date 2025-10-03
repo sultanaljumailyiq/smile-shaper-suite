@@ -476,23 +476,23 @@ const AIAssistantRedesigned = () => {
                     e.preventDefault();
                     handleSendMessage();
                   }
-                }} placeholder="" className={cn("relative z-10 w-full px-6 py-4 pr-20 pl-20 bg-transparent", "resize-none border-0 focus:outline-none", "placeholder:text-gray-500 text-right text-sm leading-relaxed", "min-h-[80px] max-h-[160px]")} rows={3} />
+                }} placeholder="اكتب رسالتك هنا..." className={cn("relative z-10 w-full bg-transparent", "resize-none border-0 focus:outline-none", "placeholder:text-gray-400 text-right leading-relaxed", "px-3 py-3 pr-14 pl-24 sm:px-6 sm:py-4 sm:pr-20 sm:pl-20", "text-sm sm:text-base", "min-h-[60px] sm:min-h-[80px] max-h-[120px] sm:max-h-[160px]")} rows={2} />
 
                     {/* أدوات الجانب الأيسر */}
-                    <div className="absolute left-4 bottom-4 flex items-center gap-2">
-                      <button onClick={() => setIsListening(!isListening)} className={cn("p-2.5 rounded-2xl transition-all duration-200 group", isListening ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-blue-100 text-gray-500 hover:text-blue-600")} title={isListening ? "إيقاف التسجيل الصوتي" : "بدء التسجيل الصوتي"}>
-                        <Mic className={cn("w-4 h-4", isListening && "animate-pulse")} />
+                    <div className="absolute left-2 sm:left-4 bottom-2 sm:bottom-4 flex items-center gap-1 sm:gap-2">
+                      <button onClick={() => setIsListening(!isListening)} className={cn("p-2 sm:p-2.5 rounded-xl sm:rounded-2xl transition-all duration-200 group", isListening ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-blue-100 text-gray-500 hover:text-blue-600")} title={isListening ? "إيقاف التسجيل الصوتي" : "بدء التسجيل الصوتي"}>
+                        <Mic className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4", isListening && "animate-pulse")} />
                       </button>
-                      <button onClick={() => fileInputRef.current?.click()} className="p-2.5 hover:bg-blue-100 rounded-2xl transition-all duration-200 text-gray-500 hover:text-blue-600 group" title="إرفاق ملف أو صورة للتحليل">
-                        <Upload className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      <button onClick={() => fileInputRef.current?.click()} className="p-2 sm:p-2.5 hover:bg-blue-100 rounded-xl sm:rounded-2xl transition-all duration-200 text-gray-500 hover:text-blue-600 group" title="إرفاق ملف أو صورة للتحليل">
+                        <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
                       </button>
                       <input ref={fileInputRef} type="file" onChange={handleFileUpload} accept="image/*,.pdf,.doc,.docx" multiple className="hidden" />
                     </div>
 
                     {/* زر الإرسال */}
-                    <div className="absolute right-4 bottom-4">
-                      <button onClick={() => handleSendMessage()} disabled={!inputValue.trim() || !isConnected} className={cn("bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 rounded-2xl", "hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl", "transform hover:scale-105 active:scale-95 group", "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none", "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2")} title="إرسال الرسالة (Enter)">
-                        <Send className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="absolute right-2 sm:right-4 bottom-2 sm:bottom-4">
+                      <button onClick={() => handleSendMessage()} disabled={!inputValue.trim() || !isConnected} className={cn("bg-gradient-to-r from-blue-600 to-purple-600 text-white", "p-2.5 sm:p-3 rounded-xl sm:rounded-2xl", "hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl", "transform hover:scale-105 active:scale-95 group", "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none", "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2")} title="إرسال الرسالة (Enter)">
+                        <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform" />
                       </button>
                     </div>
                   </div>

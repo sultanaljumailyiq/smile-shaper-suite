@@ -116,6 +116,7 @@ export default function AdminSettings() {
   // API settings
   const [apiSettings, setApiSettings] = useState({
     openaiKey: "",
+    geminiKey: "",
     googleMapsKey: "",
     paymentGateway: "stripe",
     smsProvider: "twilio",
@@ -478,24 +479,33 @@ export default function AdminSettings() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="openai-key">مفتاح OpenAI</Label>
+                    <Label htmlFor="openai-key">مفتاح OpenAI (ChatGPT)</Label>
                     <Input id="openai-key" type="password" placeholder="sk-..." value={apiSettings.openaiKey} onChange={e => setApiSettings(prev => ({
                     ...prev,
                     openaiKey: e.target.value
                   }))} />
+                    <p className="text-xs text-gray-500">استخدم للتحليل والتشخيص الذكي</p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="ai-model">نموذج الذكاء الاصطناعي</Label>
-                    <Select defaultValue="gpt-4">
+                    <Label htmlFor="gemini-key">مفتاح Google Gemini</Label>
+                    <Input id="gemini-key" type="password" placeholder="AI..." value={apiSettings.geminiKey} onChange={e => setApiSettings(prev => ({
+                    ...prev,
+                    geminiKey: e.target.value
+                  }))} />
+                    <p className="text-xs text-gray-500">استخدم لتحليل الصور والتقارير الطبية</p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="ai-model">نموذج الذكاء الاصطناعي الافتراضي</Label>
+                    <Select defaultValue="gemini">
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="gemini">Google Gemini (مجاني)</SelectItem>
                         <SelectItem value="gpt-4">GPT-4</SelectItem>
                         <SelectItem value="gpt-3.5-turbo">
                           GPT-3.5 Turbo
                         </SelectItem>
-                        <SelectItem value="claude-3">Claude 3</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
