@@ -21,7 +21,9 @@ import {
   BookOpen,
   MessageCircle,
   Zap,
+  Bot,
 } from "lucide-react";
+import PatientAIAssistant from "@/components/PatientAIAssistant";
 import { cn } from "@/lib/utils";
 
 interface MedicalService {
@@ -342,6 +344,22 @@ export default function MedicalServices() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Patient AI Assistant Section */}
+          <div className="mb-12">
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Bot className="w-8 h-8 text-green-600" />
+                <h2 className="text-3xl font-bold text-gray-900">
+                  مساعدك الصحي الذكي
+                </h2>
+              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                احصل على نصائح صحية فورية، تحليل للأعراض، وإرشادات طبية موثوقة باستخدام الذكاء الاصطناعي المتقدم
+              </p>
+            </div>
+            <PatientAIAssistant />
           </div>
 
           {/* Contact Section */}

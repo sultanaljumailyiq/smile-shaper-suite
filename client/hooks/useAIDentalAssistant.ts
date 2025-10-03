@@ -4,29 +4,45 @@ import { useToast } from '@/hooks/use-toast';
 
 interface UseAIDentalAssistantProps {
   clinicData?: any;
+  clinicId?: string;
+  agentType?: 'clinic' | 'patient' | 'diagnosis' | 'workflow';
+  customInstructions?: string;
 }
 
-export const useAIDentalAssistant = ({ clinicData }: UseAIDentalAssistantProps = {}) => {
+export const useAIDentalAssistant = ({ 
+  clinicData, 
+  clinicId,
+  agentType = 'clinic',
+  customInstructions 
+}: UseAIDentalAssistantProps = {}) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const sendMessage = async (message: string, imageData?: string, analysisType?: string) => {
+  const sendMessage = async (
+    message: string, 
+    imageData?: string, 
+    analysisType?: string,
+    overrideAgentType?: string
+  ) => {
     setIsLoading(true);
     
     try {
-      const { data, error } = await supabase.functions.invoke('ai-dental-assistant', {
+      const { data, error } = await supabase.functions.invoke('ai-agent-manager', {
         body: {
           message,
           clinicData,
+          clinicId,
           imageData,
-          analysisType
+          analysisType,
+          agentType: overrideAgentType || agentType,
+          customInstructions
         }
       });
 
       if (error) {
-        console.error('AI Assistant Error:', error);
+        console.error('AI Agent Error:', error);
         toast({
-          title: 'خطأ في المساعد الذكي',
+          title: 'خطأ في وكيل الذكاء الاصطناعي',
           description: 'تأكد من إضافة مفاتيح API في إعدادات النظام',
           variant: 'destructive'
         });
@@ -35,10 +51,10 @@ export const useAIDentalAssistant = ({ clinicData }: UseAIDentalAssistantProps =
 
       return data;
     } catch (error) {
-      console.error('AI Assistant Exception:', error);
+      console.error('AI Agent Exception:', error);
       toast({
         title: 'خطأ في الاتصال',
-        description: 'فشل الاتصال بالمساعد الذكي',
+        description: 'فشل الاتصال بوكيل الذكاء الاصطناعي',
         variant: 'destructive'
       });
       return null;

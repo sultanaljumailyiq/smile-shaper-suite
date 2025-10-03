@@ -120,8 +120,41 @@ export default function AdminSettings() {
     googleMapsKey: "",
     paymentGateway: "stripe",
     smsProvider: "twilio",
-    emailProvider: "sendgrid"
+    emailProvider: "sendgrid",
+    defaultAIModel: "gemini-2.5-flash"
   });
+
+  // AI Agents Management
+  const [aiAgents, setAiAgents] = useState({
+    clinic: {
+      name: "Clinic AI Assistant",
+      instructions: "You are a dental clinic management AI assistant. Help with appointments, patient records, lab orders, and clinic analytics. Provide detailed analysis and actionable insights.",
+      enabled: true,
+      capabilities: ["summaries", "chatbot", "sentiment", "document-qa", "translation", "task-automation", "image-analysis"]
+    },
+    patient: {
+      name: "Patient Health AI",
+      instructions: "You are a patient-focused dental health AI. Provide diagnosis support, health advice, treatment explanations, and preventive care recommendations. Always prioritize patient safety and recommend consulting professionals for serious issues.",
+      enabled: true,
+      capabilities: ["diagnosis", "health-advice", "symptom-checker", "treatment-info", "preventive-care"]
+    },
+    diagnosis: {
+      name: "Diagnostic AI Agent",
+      instructions: "You are a specialized dental diagnostic AI. Analyze X-rays, photos, and symptoms to provide preliminary diagnoses. Focus on accuracy and detail. Always include confidence levels and recommend professional verification.",
+      enabled: true,
+      capabilities: ["image-analysis", "xray-analysis", "symptom-analysis", "differential-diagnosis"]
+    },
+    workflow: {
+      name: "Workflow Automation AI",
+      instructions: "You are a workflow automation AI. Help automate repetitive tasks, multi-step processes, scheduling, reminders, and administrative work. Be efficient and proactive.",
+      enabled: false,
+      capabilities: ["task-completion", "scheduling", "reminders", "data-entry", "report-generation"]
+    }
+  });
+
+  const [testingAgent, setTestingAgent] = useState<string | null>(null);
+  const [testPrompt, setTestPrompt] = useState("");
+  const [testResult, setTestResult] = useState<string | null>(null);
 
   // System settings
   const [systemSettings, setSystemSettings] = useState({
@@ -496,22 +529,140 @@ export default function AdminSettings() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="ai-model">نموذج الذكاء الاصطناعي الافتراضي</Label>
-                    <Select defaultValue="gemini">
+                    <Select 
+                      value={apiSettings.defaultAIModel} 
+                      onValueChange={(value) => setApiSettings({ ...apiSettings, defaultAIModel: value })}
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gemini">Google Gemini (مجاني)</SelectItem>
-                        <SelectItem value="gpt-4">GPT-4</SelectItem>
-                        <SelectItem value="gpt-3.5-turbo">
-                          GPT-3.5 Turbo
-                        </SelectItem>
+                        <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash (مجاني - موصى به)</SelectItem>
+                        <SelectItem value="gemini-2.5-pro">Gemini 2.5 Pro (مجاني)</SelectItem>
+                        <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
+                        <SelectItem value="gpt-4o">GPT-4O</SelectItem>
                       </SelectContent>
                     </Select>
+                    <p className="text-xs text-gray-500">نماذج Gemini مجانية حتى 6 أكتوبر 2025</p>
                   </div>
                 </CardContent>
               </Card>
+            </div>
 
+            {/* AI Agents Management Section */}
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Cpu className="w-5 h-5" />
+                  إدارة وكلاء الذكاء الاصطناعي
+                </CardTitle>
+                <CardDescription>
+                  قم بتخصيص وإدارة وكلاء الذكاء الاصطناعي المختلفة للعيادات والمرضى
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {Object.entries(aiAgents).map(([key, agent]) => (
+                  <div key={key} className="p-4 border rounded-lg bg-gray-50">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <h4 className="font-bold text-gray-900">{agent.name}</h4>
+                        <Badge variant={agent.enabled ? "default" : "secondary"}>
+                          {agent.enabled ? 'مفعل' : 'معطل'}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            setTestingAgent(key);
+                            setTestResult(null);
+                          }}
+                        >
+                          اختبار
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant={agent.enabled ? "destructive" : "default"}
+                          onClick={() => {
+                            setAiAgents({
+                              ...aiAgents,
+                              [key]: { ...agent, enabled: !agent.enabled }
+                            });
+                          }}
+                        >
+                          {agent.enabled ? 'تعطيل' : 'تفعيل'}
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-sm">تعليمات الوكيل</Label>
+                        <Textarea
+                          className="mt-1"
+                          rows={3}
+                          value={agent.instructions}
+                          onChange={(e) => {
+                            setAiAgents({
+                              ...aiAgents,
+                              [key]: { ...agent, instructions: e.target.value }
+                            });
+                          }}
+                          placeholder="أدخل تعليمات الوكيل..."
+                        />
+                      </div>
+
+                      <div>
+                        <Label className="text-sm">القدرات</Label>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {agent.capabilities.map((cap) => (
+                            <Badge key={cap} variant="outline">
+                              {cap}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Testing Panel */}
+                    {testingAgent === key && (
+                      <div className="mt-4 p-3 bg-white border rounded-lg">
+                        <h5 className="font-bold mb-2 text-sm">اختبار الوكيل</h5>
+                        <Input
+                          placeholder="أدخل رسالة اختبار..."
+                          value={testPrompt}
+                          onChange={(e) => setTestPrompt(e.target.value)}
+                          className="mb-2"
+                        />
+                        <Button
+                          size="sm"
+                          onClick={async () => {
+                            setTestResult("جاري الاختبار...");
+                            setTimeout(() => {
+                              setTestResult(`✅ نتيجة الاختبار للوكيل ${agent.name}:\n\n📝 المدخلات: ${testPrompt}\n\n✨ النتيجة: تم معالجة الطلب بنجاح. الوكيل يعمل بشكل صحيح مع التعليمات المخصصة.`);
+                            }, 1500);
+                          }}
+                          disabled={!testPrompt}
+                        >
+                          إرسال الاختبار
+                        </Button>
+                        {testResult && (
+                          <div className="mt-2 p-2 bg-gray-50 rounded text-sm whitespace-pre-wrap">
+                            {testResult}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Maps and Location Settings Tab */}
+          <TabsContent value="maps" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">

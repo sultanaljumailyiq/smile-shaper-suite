@@ -64,3 +64,6 @@ verify_jwt = false
 
 [functions.generate-clinic-report]
 verify_jwt = false
+
+[functions.ai-agent-manager]
+verify_jwt = false
