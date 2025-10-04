@@ -346,16 +346,15 @@ export default function DentistHub() {
       return true;
     }
   };
-  const ClinicSystemSwitcher = () => <div className="bg-white rounded-2xl border border-gray-100 p-4 md:p-6 mb-6">
-      
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div className="flex items-center gap-2">
+  const ClinicSystemSwitcher = () => <div className="bg-white rounded-2xl border border-gray-100 p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
           <button onClick={async () => {
           setClinicSystem("new");
           await sharedClinicData.setSystemConfig({
             defaultClinicSystem: "new"
           });
-        }} className={cn("px-4 py-2 rounded-xl text-sm border", clinicSystem === "new" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-700 hover:bg-gray-50")}>
+        }} className={cn("px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm border whitespace-nowrap flex-shrink-0", clinicSystem === "new" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-700 hover:bg-gray-50")}>
             الواجهة الحديثة
           </button>
           <button onClick={async () => {
@@ -363,16 +362,13 @@ export default function DentistHub() {
           await sharedClinicData.setSystemConfig({
             defaultClinicSystem: "old"
           });
-        }} className={cn("px-4 py-2 rounded-xl text-sm border", clinicSystem === "old" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-700 hover:bg-gray-50")}>
+        }} className={cn("px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm border whitespace-nowrap flex-shrink-0", clinicSystem === "old" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-700 hover:bg-gray-50")}>
             الواجهة القديمة
           </button>
         </div>
-        <div className="flex items-center gap-2">
-          <Link to="/clinic" className="bg-green-50 hover:bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm">
-            فتح النظام الحديث
-          </Link>
-          <Link to="/clinic_old" className="bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm">
-            فتح النظام القديم
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Link to={clinicSystem === "new" ? "/clinic" : "/clinic_old"} className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm text-center whitespace-nowrap">
+            فتح نظام الإدارة
           </Link>
         </div>
       </div>
