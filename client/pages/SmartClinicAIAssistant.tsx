@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SmartClinicSubNav from "@/components/SmartClinicSubNav";
 import {
   Bot,
   MessageCircle,
@@ -418,24 +419,21 @@ const SmartClinicAIAssistant: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50" dir="rtl">
+      <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
+        {/* Sub Navigation */}
+        <SmartClinicSubNav />
+
+        {/* Header */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Link
-                to="/dentist-hub"
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ArrowLeft className="w-5 h-5 text-gray-600" />
-              </Link>
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">
-                  المساعد الذكي - العيادة الذكية
+                <h1 className="text-2xl font-bold text-gray-900">
+                  المساعد الذكي
                 </h1>
                 <p className="text-sm text-gray-600">
                   متاح للمساعدة على مدار الساعة
@@ -461,15 +459,17 @@ const SmartClinicAIAssistant: React.FC = () => {
               <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Settings className="w-5 h-5 text-gray-600" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <button 
+                onClick={() => window.location.reload()}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
                 <RefreshCw className="w-5 h-5 text-gray-600" />
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Quick Actions Panel */}
           <div className="lg:col-span-1 order-2 lg:order-1">

@@ -70,7 +70,8 @@ export default function DentistHubSubHeader() {
   return (
     <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
       <div className="px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2 overflow-x-auto h-14">
+        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto h-14 scrollbar-hide"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {(pathname.startsWith("/dentist-hub/profile")
             ? tabs.filter((t) => t.key !== "clinic")
             : tabs
@@ -82,7 +83,7 @@ export default function DentistHubSubHeader() {
                 key={item.key}
                 to={item.path}
                 className={cn(
-                  "flex items-center gap-2 px-3 py-2 rounded-xl text-sm whitespace-nowrap transition-colors",
+                  "flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl text-xs sm:text-sm whitespace-nowrap transition-colors flex-shrink-0",
                   active
                     ? "bg-blue-50 text-blue-700 border border-blue-200"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
@@ -90,11 +91,11 @@ export default function DentistHubSubHeader() {
               >
                 <Icon
                   className={cn(
-                    "w-4 h-4",
+                    "w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0",
                     active ? "text-blue-600" : "text-gray-500",
                   )}
                 />
-                <span>{item.label}</span>
+                <span className="hidden sm:inline">{item.label}</span>
               </Link>
             );
           })}
