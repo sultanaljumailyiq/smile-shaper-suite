@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SmartClinicSubNav from "@/components/SmartClinicSubNav";
+import { useAIDentalAssistant } from "@/hooks/useAIDentalAssistant";
+import { clinicDataIntegration } from "@/services/clinicDataIntegration";
 import {
   Bot,
   MessageCircle,
@@ -91,7 +93,14 @@ const SmartClinicAIAssistant: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedClinic, setSelectedClinic] = useState("clinic-1");
   const [searchQuery, setSearchQuery] = useState("");
+  const [clinicData, setClinicData] = useState<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const { sendMessage, isLoading: aiLoading } = useAIDentalAssistant({
+    clinicData,
+    agentType: 'clinic',
+    preferredModel: 'gemini-2.5-flash'
+  });
 
   // Mock clinic data
   const clinics = [
@@ -240,6 +249,17 @@ const SmartClinicAIAssistant: React.FC = () => {
   };
 
   useEffect(() => {
+    // Load clinic data
+    const loadClinicData = async () => {
+      try {
+        const data = await clinicDataIntegration.getIntegratedData();
+        setClinicData(data);
+      } catch (error) {
+        console.error('Failed to load clinic data:', error);
+      }
+    };
+    loadClinicData();
+
     // Welcome message
     setMessages([
       {
@@ -252,13 +272,13 @@ const SmartClinicAIAssistant: React.FC = () => {
         id: "intro",
         type: "assistant",
         content:
-          "أنا المساعد الذكي المتخصص في إدارة العيادات الذكية. يمكنني مساعدتك في جميع جوانب إدارة عيادتك من المواعيد إلى التقارير المالية ومتابعة المختبر مع إمكانيات الذكاء الاصطناعي المتقدمة. \n\nاختر العيادة من القائمة أعلاه وابدأ المحادثة!",
+          "أنا المساعد الذكي المتخصص في إدارة العيادات الذكية مدعوم بتقنية Google Gemini 🤖. يمكنني مساعدتك في جميع جوانب إدارة عيادتك من المواعيد إلى التقارير المالية ومتابعة المختبر. \n\nاختر العيادة من القائمة أعلاه وابدأ المحادثة!",
         timestamp: new Date(),
         suggestions: [
           "عرض لوحة القيادة",
           "مواعيد اليوم",
           "إحصائيات العيادة",
-          "إعدادات الذكاء الاصطناعي",
+          "تقرير مالي شامل",
         ],
         actions: [
           {
@@ -295,8 +315,23 @@ const SmartClinicAIAssistant: React.FC = () => {
     setCurrentMessage("");
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Use real AI with Gemini
+      const response = await sendMessage(messageToProcess);
+      
+      if (response?.response) {
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          type: "assistant",
+          content: response.response,
+          timestamp: new Date(),
+          suggestions: ["مواعيد اليوم", "التقرير المالي", "طلبات المختبر"],
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      }
+    } catch (error) {
+      console.error('AI Error:', error);
+      // Fallback to generated response
       const response = generateResponse(messageToProcess);
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -306,10 +341,10 @@ const SmartClinicAIAssistant: React.FC = () => {
         suggestions: response.suggestions,
         actions: response.actions,
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const generateResponse = (message: string) => {

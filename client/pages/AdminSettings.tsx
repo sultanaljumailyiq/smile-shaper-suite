@@ -121,7 +121,8 @@ export default function AdminSettings() {
     paymentGateway: "stripe",
     smsProvider: "twilio",
     emailProvider: "sendgrid",
-    defaultAIModel: "gemini-2.5-flash"
+    defaultAIModel: "gemini-2.5-flash",
+    preferredAIProvider: "gemini" // gemini or openai
   });
 
   // AI Agents Management
@@ -528,7 +529,27 @@ export default function AdminSettings() {
                     <p className="text-xs text-gray-500">استخدم لتحليل الصور والتقارير الطبية</p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="ai-model">نموذج الذكاء الاصطناعي الافتراضي</Label>
+                    <Label htmlFor="ai-provider">مزود الذكاء الاصطناعي المفضل</Label>
+                    <Select 
+                      value={apiSettings.preferredAIProvider} 
+                      onValueChange={(value) => setApiSettings({ ...apiSettings, preferredAIProvider: value })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="gemini">Google Gemini (مجاني حتى 6 أكتوبر 2025)</SelectItem>
+                        <SelectItem value="openai">OpenAI (مدفوع)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-gray-500">
+                      {apiSettings.preferredAIProvider === 'gemini' 
+                        ? '✨ نماذج Gemini مجانية الآن!' 
+                        : '⚠️ OpenAI مدفوع ويتطلب رصيد'}
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="ai-model">نموذج الذكاء الاصطناعي</Label>
                     <Select 
                       value={apiSettings.defaultAIModel} 
                       onValueChange={(value) => setApiSettings({ ...apiSettings, defaultAIModel: value })}
@@ -537,13 +558,25 @@ export default function AdminSettings() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash (مجاني - موصى به)</SelectItem>
-                        <SelectItem value="gemini-2.5-pro">Gemini 2.5 Pro (مجاني)</SelectItem>
-                        <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
-                        <SelectItem value="gpt-4o">GPT-4O</SelectItem>
+                        {apiSettings.preferredAIProvider === 'gemini' ? (
+                          <>
+                            <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash (موصى به)</SelectItem>
+                            <SelectItem value="gemini-2.5-pro">Gemini 2.5 Pro (أقوى)</SelectItem>
+                            <SelectItem value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite (أسرع)</SelectItem>
+                          </>
+                        ) : (
+                          <>
+                            <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
+                            <SelectItem value="gpt-4o">GPT-4O</SelectItem>
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
-                    <p className="text-xs text-gray-500">نماذج Gemini مجانية حتى 6 أكتوبر 2025</p>
+                    <p className="text-xs text-gray-500">
+                      {apiSettings.preferredAIProvider === 'gemini' 
+                        ? 'Gemini 2.5 Flash متوازن بين السرعة والجودة' 
+                        : 'GPT-4O Mini أسرع وأرخص من GPT-4O'}
+                    </p>
                   </div>
                 </CardContent>
               </Card>

@@ -7,13 +7,15 @@ interface UseAIDentalAssistantProps {
   clinicId?: string;
   agentType?: 'clinic' | 'patient' | 'diagnosis' | 'workflow';
   customInstructions?: string;
+  preferredModel?: string; // e.g., 'gemini-2.5-flash', 'gpt-4o-mini'
 }
 
 export const useAIDentalAssistant = ({ 
   clinicData, 
   clinicId,
   agentType = 'clinic',
-  customInstructions 
+  customInstructions,
+  preferredModel = 'gemini-2.5-flash'
 }: UseAIDentalAssistantProps = {}) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -35,7 +37,8 @@ export const useAIDentalAssistant = ({
           imageData,
           analysisType,
           agentType: overrideAgentType || agentType,
-          customInstructions
+          customInstructions,
+          preferredModel
         }
       });
 

@@ -69,7 +69,8 @@ export default function PatientAIAssistant() {
         body: {
           message: inputValue || "قم بتحليل هذه الصورة وقدم نصائح صحية",
           agentType: 'patient',
-          imageData: uploadedImage
+          imageData: uploadedImage,
+          preferredModel: 'gemini-2.5-flash' // Using free Gemini model
         }
       });
 
@@ -138,7 +139,7 @@ export default function PatientAIAssistant() {
           </div>
           <div className="flex-1">
             <h2 className="text-2xl font-bold">مساعدك الصحي الذكي</h2>
-            <p className="text-green-100">متخصص في صحة الفم والأسنان</p>
+            <p className="text-green-100">مدعوم بتقنية Google Gemini 2.5</p>
           </div>
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5" />
@@ -158,7 +159,7 @@ export default function PatientAIAssistant() {
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center">
             <Sparkles className="w-5 h-5 mx-auto mb-1" />
-            <div className="text-xs">AI متقدم</div>
+            <div className="text-xs">Google Gemini</div>
           </div>
         </div>
       </div>
