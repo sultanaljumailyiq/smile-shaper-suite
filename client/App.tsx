@@ -35,7 +35,7 @@ import PaymentMethods from "./pages/PaymentMethods";
 import Peripherals from "./pages/Peripherals";
 import PatientDetail from "./pages/PatientDetail";
 import LandingPage from "./pages/LandingPage";
-import Community from "./pages/Community";
+// import Community from "./pages/Community";
 import Jobs from "./pages/Jobs";
 import JobsNew from "./pages/JobsNew";
 import JobsSimple from "./pages/JobsSimple";
@@ -70,9 +70,9 @@ import SystemAdminDashboard from "./pages/SystemAdminDashboard";
 import ProductDetail from "./pages/ProductDetail";
 import AllCategories from "./pages/AllCategories";
 import CommunityJobsAdmin from "./pages/CommunityJobsAdmin";
-import CommunityGroups from "./pages/CommunityGroups";
-import CommunityExperts from "./pages/CommunityExperts";
-import CommunityEvents from "./pages/CommunityEvents";
+// import CommunityGroups from "./pages/CommunityGroups";
+// import CommunityExperts from "./pages/CommunityExperts";
+// import CommunityEvents from "./pages/CommunityEvents";
 import SupplierOrders from "./pages/supplier/SupplierOrders";
 import SupplierStore from "./pages/supplier/SupplierStore";
 import SupplierCustomers from "./pages/supplier/SupplierCustomers";
@@ -96,7 +96,17 @@ import ClinicBooking from "./pages/ClinicBooking";
 import ModernAppointmentBooking from "./pages/ModernAppointmentBooking";
 import SimplifiedAppointmentBooking from "./pages/SimplifiedAppointmentBooking";
 import IntegratedDentistProfile from "./pages/IntegratedDentistProfile";
-import CommunityEducationHub from "./pages/CommunityEducationHub";
+import CommunityLayout from "./pages/community/CommunityLayout";
+import Feed from "./pages/community/Feed";
+import Topics from "./pages/community/Topics";
+import Cases from "./pages/community/Cases";
+import Learn from "./pages/community/Learn";
+import Events from "./pages/community/Events";
+import Groups from "./pages/community/Groups";
+import Experts from "./pages/community/Experts";
+import Profile from "./pages/community/Profile";
+import CourseDetail from "./pages/community/CourseDetail";
+// import CommunityEducationHub from "./pages/CommunityEducationHub";
 import ModernMedicalServices from "./pages/ModernMedicalServices";
 import BookingShowcase from "./components/BookingShowcase";
 import ClinicAdmin from "./pages/ClinicAdmin";
@@ -172,26 +182,21 @@ const App = () => (
                               path="/patient-landing"
                               element={<PatientLandingPage />}
                             />
-                            <Route
-                              path="/community"
-                              element={<CommunityEducationHub />}
-                            />
-                            <Route
-                              path="/community-old"
-                              element={<Community />}
-                            />
-                            <Route
-                              path="/community/groups"
-                              element={<CommunityGroups />}
-                            />
-                            <Route
-                              path="/community/experts"
-                              element={<CommunityExperts />}
-                            />
-                            <Route
-                              path="/community/events"
-                              element={<CommunityEvents />}
-                            />
+                            <Route path="/community/*" element={<CommunityLayout />}>
+                              <Route index element={<Feed />} />
+                              <Route path="topics" element={<Topics />} />
+                              <Route path="cases" element={<Cases />} />
+                              <Route path="learn" element={<Learn />} />
+                              <Route path="events" element={<Events />} />
+                              <Route path="groups" element={<Groups />} />
+                              <Route path="experts" element={<Experts />} />
+                              <Route path="courses/:id" element={<CourseDetail />} />
+                              <Route path="profile/:id?" element={<Profile />} />
+                            </Route>
+                            {/* legacy community route removed */}
+                            {/* replaced by nested /community/groups */}
+                            {/* replaced by nested /community/experts */}
+                            {/* replaced by nested /community/events */}
                             <Route path="/education" element={<Education />} />
                             <Route
                               path="/education/models"
